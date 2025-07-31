@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATG Real-time Dashboard</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .status-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .status-dot.offline {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .tanks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .tank-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .tank-card.online {
+            border-left: 5px solid #4ade80;
+        }
+
+        .tank-card.offline {
+            border-left: 5px solid #ef4444;
+            opacity: 0.7;
+        }
+
+        .tank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tank-number {
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tank-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tank-status.online {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .tank-status.offline {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tank-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .data-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .data-unit {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-left: 5px;
+        }
+
+        .volume-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+        }
+
+        .volume-fill.low {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        .volume-fill.critical {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+
+        .last-update {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-status {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(74, 222, 128, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: rgba(239, 68, 68, 0.9);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            opacity: 0.7;
+            font-size: 1.2rem;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #4ade80;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⛽ ATG Real-time Dashboard</h1>
+            <p>Automatic Tank Gauge Monitoring System</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot" id="connectionDot"></div>
+                <span id="connectionStatus">Connecting...</span>
+            </div>
+            <div class="status-item">
+                <span id="atgStatus">ATG Status: Unknown</span>
+            </div>
+            <div class="status-item">
+                <span id="lastUpdate">No updates yet</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-start" onclick="startATG()">🚀 Start ATG</button>
+            <button class="btn btn-stop" onclick="stopATG()">⏹️ Stop ATG</button>
+            <button class="btn btn-status" onclick="getATGStatus()">📊 Get Status</button>
+        </div>
+
+        <div id="tanksContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Connect to WebSocket
+        const socket = io('http://localhost:3001');
+        let lastTankData = {};
+        
+        // Connection status
+        socket.on('connect', () => {
+            console.log('✅ Connected to ATG server');
+            document.getElementById('connectionStatus').textContent = 'Connected to ATG';
+            document.getElementById('connectionDot').classList.remove('offline');
+            showNotification('Connected to ATG server', 'success');
+            
+            // Get initial ATG status
+            getATGStatus();
+            getCurrentTankData();
+        });
+
+        socket.on('disconnect', () => {
+            console.log('❌ Disconnected from ATG server');
+            document.getElementById('connectionStatus').textContent = 'Disconnected';
+            document.getElementById('connectionDot').classList.add('offline');
+            showNotification('Disconnected from ATG server', 'error');
+        });
+
+        // ATG tank data updates
+        socket.on('tankData', (data) => {
+            console.log('⛽ ATG Tank data received:', data);
+            updateTankDisplay(data);
+            updateLastUpdate();
+            
+            // Show notification for significant changes
+            if (hasSignificantChange(data)) {
+                showNotification('Tank levels updated', 'info');
+            }
+        });
+
+        // ATG control functions
+        async function startATG() {
+            try {
+                showNotification('Starting ATG monitoring...', 'info');
+                const response = await fetch('http://localhost:3001/api/tanks/atg/start', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${getToken()}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showNotification('ATG monitoring started', 'success');
+                    getATGStatus();
+                } else {
+                    showNotification('Failed to start ATG: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error starting ATG:', error);
+                showNotification('Error starting ATG monitoring', 'error');
+            }
+        }
+
+        async function stopATG() {
+            try {
+                showNotification('Stopping ATG monitoring...', 'info');
+                const response = await fetch('http://localhost:3001/api/tanks/atg/stop', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${getToken()}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showNotification('ATG monitoring stopped', 'success');
+                    getATGStatus();
+                } else {
+                    showNotification('Failed to stop ATG: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error stopping ATG:', error);
+                showNotification('Error stopping ATG monitoring', 'error');
+            }
+        }
+
+        async function getATGStatus() {
+            try {
+                const response = await fetch('http://localhost:3001/api/tanks/atg/status', {
+                    headers: {
+                        'Authorization': `Bearer ${getToken()}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    const status = result.data.status;
+                    document.getElementById('atgStatus').textContent = 
+                        `ATG: ${status.isMonitoring ? 'Monitoring' : 'Stopped'} | ${status.simulationMode ? 'Simulation' : 'Hardware'}`;
+                    console.log('📊 ATG Status:', status);
+                } else {
+                    document.getElementById('atgStatus').textContent = 'ATG Status: Error';
+                }
+            } catch (error) {
+                console.error('Error getting ATG status:', error);
+                document.getElementById('atgStatus').textContent = 'ATG Status: Error';
+            }
+        }
+
+        async function getCurrentTankData() {
+            try {
+                const response = await fetch('http://localhost:3001/api/tanks/current/data', {
+                    headers: {
+                        'Authorization': `Bearer ${getToken()}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    updateTankDisplay(result.data.tanks);
+                } else {
+                    console.error('Failed to get current tank data:', result.message);
+                }
+            } catch (error) {
+                console.error('Error getting current tank data:', error);
+            }
+        }
+
+        function updateTankDisplay(tanks) {
+            const container = document.getElementById('tanksContainer');
+            
+            if (!tanks || tanks.length === 0) {
+                container.innerHTML = '<div class="empty-state">⛽ No tank data available<br>Start ATG monitoring to see real-time data</div>';
+                return;
+            }
+            
+            container.innerHTML = '<div class="tanks-grid"></div>';
+            const grid = container.querySelector('.tanks-grid');
+            
+            tanks.forEach(tank => {
+                const tankCard = createTankCard(tank);
+                grid.appendChild(tankCard);
+            });
+            
+            lastTankData = tanks;
+        }
+
+        function createTankCard(tank) {
+            const card = document.createElement('div');
+            card.className = `tank-card ${tank.status || 'offline'}`;
+            card.id = `tank-${tank.tankNumber || tank.tank_number}`;
+            
+            const tankNumber = tank.tank_number || tank.tankNumber || 'Unknown';
+            const totalVolume = tank.total_volume || tank.totalVolume || 0;
+            const oilVolume = tank.oil_volume || tank.oilVolume || 0;
+            const waterVolume = tank.water_volume || tank.waterVolume || 0;
+            const temperature = tank.temperature || 0;
+            const productName = tank.product_name || 'Unknown Product';
+            const status = tank.status || 'offline';
+            
+            // Calculate percentage for volume bar
+            const capacity = 10000; // Assume 10,000L capacity
+            const percentage = Math.min((totalVolume / capacity) * 100, 100);
+            
+            // Determine volume level class
+            let volumeClass = '';
+            if (percentage < 20) volumeClass = 'critical';
+            else if (percentage < 40) volumeClass = 'low';
+            
+            card.innerHTML = `
+                <div class="tank-header">
+                    <div class="tank-number">Tank ${tankNumber}</div>
+                    <div class="tank-status ${status}">${status}</div>
+                </div>
+                
+                <div class="tank-data">
+                    <div class="data-item">
+                        <div class="data-label">Total Volume</div>
+                        <div class="data-value">${totalVolume.toFixed(1)}<span class="data-unit">L</span></div>
+                        <div class="volume-bar">
+                            <div class="volume-fill ${volumeClass}" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Oil Volume</div>
+                        <div class="data-value">${oilVolume.toFixed(1)}<span class="data-unit">L</span></div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Water Volume</div>
+                        <div class="data-value">${waterVolume.toFixed(1)}<span class="data-unit">L</span></div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Temperature</div>
+                        <div class="data-value">${temperature.toFixed(1)}<span class="data-unit">°C</span></div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Product</div>
+                        <div class="data-value" style="font-size: 1.1rem;">${productName}</div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Capacity</div>
+                        <div class="data-value">${percentage.toFixed(1)}<span class="data-unit">%</span></div>
+                    </div>
+                </div>
+                
+                <div class="last-update">
+                    Last reading: ${formatTime(new Date())}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function hasSignificantChange(newData) {
+            if (!lastTankData || lastTankData.length === 0) return true;
+            
+            // Check for significant volume changes (>10L)
+            for (const newTank of newData) {
+                const newTankNumber = newTank.tank_number || newTank.tankNumber;
+                const oldTank = lastTankData.find(t => {
+                    const oldTankNumber = t.tank_number || t.tankNumber;
+                    return oldTankNumber === newTankNumber;
+                });
+                
+                if (oldTank) {
+                    const oldVolume = oldTank.total_volume || oldTank.totalVolume || 0;
+                    const newVolume = newTank.total_volume || newTank.totalVolume || 0;
+                    
+                    if (Math.abs(newVolume - oldVolume) > 10) {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification show ${type}`;
+            
+            setTimeout(() => {
+                notification.className = 'notification';
+            }, 3000);
+        }
+
+        function updateLastUpdate() {
+            document.getElementById('lastUpdate').textContent = `Last update: ${formatTime(new Date())}`;
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        function getToken() {
+            // For demo purposes, you might want to implement proper token management
+            // For now, return empty string (you'll need to login first)
+            return localStorage.getItem('authToken') || '';
+        }
+
+        // Auto-refresh every 30 seconds if no real-time data
+        setInterval(() => {
+            if (document.getElementById('connectionStatus').textContent.includes('Connected')) {
+                getCurrentTankData();
+            }
+        }, 30000);
+
+        console.log('⛽ ATG Real-time Dashboard initialized');
+        console.log('📡 WebSocket connected to: http://localhost:3001');
+        console.log('🔗 ATG API Base: http://localhost:3001/api/tanks');
+    </script>
+</body>
+</html>
