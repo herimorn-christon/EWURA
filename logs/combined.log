@@ -19149,3 +19149,1718 @@
 2025-07-31 17:12:36 [INFO]: Retrieved 2 managers for EWURA registration
 2025-07-31 17:12:36 [INFO]: HTTP Request
 2025-07-31 17:21:25 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 09:54:50 [INFO]: ✅ Database connection pool created
+2025-08-01 09:54:50 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 09:54:50 [INFO]: ✅ Database schema initialized
+2025-08-01 09:54:50 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 09:54:50 [INFO]: ✅ Default data seeded
+2025-08-01 09:54:50 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 09:54:50 [INFO]: ✅ Socket Service initialized
+2025-08-01 09:54:50 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 09:54:50 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 09:54:50 [INFO]: ✅ ATG simulation started
+2025-08-01 09:54:50 [INFO]: ✅ EWURA Service initialized
+2025-08-01 09:54:50 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:54 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:55 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:55 [INFO]: HTTP Request
+2025-08-01 10:00:56 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:56 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:57 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:00:59 [INFO]: HTTP Request
+2025-08-01 10:01:00 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:00 [INFO]: HTTP Request
+2025-08-01 10:01:07 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:07 [INFO]: HTTP Request
+2025-08-01 10:01:07 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:07 [INFO]: HTTP Request
+2025-08-01 10:01:07 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:07 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:07 [INFO]: HTTP Request
+2025-08-01 10:01:07 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:08 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:08 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:09 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:13 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:14 [INFO]: HTTP Request
+2025-08-01 10:01:15 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:15 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:15 [INFO]: HTTP Request
+2025-08-01 10:01:15 [INFO]: HTTP Request
+2025-08-01 10:01:15 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:15 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:15 [INFO]: HTTP Request
+2025-08-01 10:01:15 [INFO]: HTTP Request
+2025-08-01 10:01:16 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:16 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:16 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:16 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:16 [INFO]: HTTP Request
+2025-08-01 10:01:16 [INFO]: HTTP Request
+2025-08-01 10:01:16 [INFO]: HTTP Request
+2025-08-01 10:01:16 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:16 [INFO]: HTTP Request
+2025-08-01 10:01:16 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:17 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:18 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:20 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:21 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:21 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:32 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:33 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:33 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:34 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:35 [INFO]: HTTP Request
+2025-08-01 10:01:36 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:36 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:36 [INFO]: HTTP Request
+2025-08-01 10:01:36 [INFO]: HTTP Request
+2025-08-01 10:01:36 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:36 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:36 [INFO]: HTTP Request
+2025-08-01 10:01:36 [INFO]: HTTP Request
+2025-08-01 10:01:37 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:37 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:37 [INFO]: HTTP Request
+2025-08-01 10:01:37 [INFO]: HTTP Request
+2025-08-01 10:01:37 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:37 [INFO]: HTTP Request
+2025-08-01 10:01:37 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:37 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:39 [INFO]: HTTP Request
+2025-08-01 10:01:41 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:41 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:01:41 [INFO]: HTTP Request
+2025-08-01 10:01:41 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:41 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:01:41 [INFO]: HTTP Request
+2025-08-01 10:01:46 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:01:46 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:01:46 [INFO]: HTTP Request
+2025-08-01 10:02:18 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:02:20 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:02:22 [INFO]: [EWURA] Response from EWURA:
+2025-08-01 10:02:22 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:02:22 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:02:22 [INFO]: HTTP Request
+2025-08-01 10:02:23 [INFO]: [EWURA] Response from EWURA:
+2025-08-01 10:02:23 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:02:23 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:02:23 [INFO]: HTTP Request
+2025-08-01 10:04:07 [INFO]: ✅ Database connection pool created
+2025-08-01 10:04:07 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:04:07 [INFO]: ✅ Database schema initialized
+2025-08-01 10:04:07 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:04:07 [INFO]: ✅ Default data seeded
+2025-08-01 10:04:07 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:04:07 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:04:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:08 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:04:08 [INFO]: ✅ ATG simulation started
+2025-08-01 10:04:08 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:04:08 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:04:11 [INFO]: ✅ Database connection pool created
+2025-08-01 10:04:11 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:04:11 [INFO]: ✅ Database schema initialized
+2025-08-01 10:04:11 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:04:11 [INFO]: ✅ Default data seeded
+2025-08-01 10:04:11 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:04:11 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:04:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:11 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:04:11 [INFO]: ✅ ATG simulation started
+2025-08-01 10:04:11 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:04:11 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:04:14 [INFO]: ✅ Database connection pool created
+2025-08-01 10:04:14 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:04:14 [INFO]: ✅ Database schema initialized
+2025-08-01 10:04:14 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:04:14 [INFO]: ✅ Default data seeded
+2025-08-01 10:04:14 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:04:14 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:04:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:14 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:04:14 [INFO]: ✅ ATG simulation started
+2025-08-01 10:04:14 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:04:14 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:04:29 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:04:29 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:04:29 [INFO]: HTTP Request
+2025-08-01 10:04:35 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:04:35 [INFO]: [EWURA] Sent XML:
+2025-08-01 10:04:36 [INFO]: [EWURA] Status:
+2025-08-01 10:04:36 [INFO]: [EWURA] Response from EWURA:
+2025-08-01 10:04:36 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:04:36 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:04:36 [INFO]: HTTP Request
+2025-08-01 10:07:16 [INFO]: ✅ Database connection pool created
+2025-08-01 10:07:16 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:07:16 [INFO]: ✅ Database schema initialized
+2025-08-01 10:07:16 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:07:16 [INFO]: ✅ Default data seeded
+2025-08-01 10:07:16 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:07:16 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:07:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:07:16 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:07:16 [INFO]: ✅ ATG simulation started
+2025-08-01 10:07:16 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:07:16 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:07:40 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:07:40 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:07:40 [INFO]: HTTP Request
+2025-08-01 10:07:48 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:07:48 [INFO]: [EWURA] Sent XML:
+2025-08-01 10:07:49 [INFO]: [EWURA] Status:
+2025-08-01 10:07:49 [INFO]: [EWURA] Response from EWURA:
+2025-08-01 10:07:49 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:07:49 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:07:49 [INFO]: HTTP Request
+2025-08-01 10:10:38 [INFO]: ✅ Database connection pool created
+2025-08-01 10:10:38 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:10:38 [INFO]: ✅ Database schema initialized
+2025-08-01 10:10:38 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:10:38 [INFO]: ✅ Default data seeded
+2025-08-01 10:10:38 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:10:38 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:10:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:10:38 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:10:38 [INFO]: ✅ ATG simulation started
+2025-08-01 10:10:38 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:10:38 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:10:40 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 10:10:44 [INFO]: ✅ Database connection pool created
+2025-08-01 10:10:44 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:10:44 [INFO]: ✅ Database schema initialized
+2025-08-01 10:10:44 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:10:44 [INFO]: ✅ Default data seeded
+2025-08-01 10:10:44 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:10:44 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:10:44 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:10:44 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:10:44 [INFO]: ✅ ATG simulation started
+2025-08-01 10:10:44 [INFO]: ✅ EWURA Service initialized
+2025-08-01 10:10:44 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:16:24 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:16:24 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:16:24 [INFO]: HTTP Request
+2025-08-01 10:16:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:16:34 [INFO]: EWURA registration data retrieved for manager: System Administrator
+2025-08-01 10:16:34 [INFO]: HTTP Request
+2025-08-01 10:18:09 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:09 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:09 [INFO]: HTTP Request
+2025-08-01 10:18:10 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:10 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:10 [INFO]: HTTP Request
+2025-08-01 10:18:11 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:11 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:11 [INFO]: HTTP Request
+2025-08-01 10:18:37 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:37 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:37 [INFO]: HTTP Request
+2025-08-01 10:18:38 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:38 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:38 [INFO]: HTTP Request
+2025-08-01 10:18:52 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:52 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:52 [INFO]: HTTP Request
+2025-08-01 10:18:57 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:18:57 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:18:57 [INFO]: HTTP Request
+2025-08-01 10:19:03 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:19:03 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:19:03 [INFO]: HTTP Request
+2025-08-01 10:19:49 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:19:49 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:19:49 [INFO]: HTTP Request
+2025-08-01 10:19:56 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:19:56 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:19:56 [INFO]: HTTP Request
+2025-08-01 10:20:12 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:12 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:20:12 [INFO]: HTTP Request
+2025-08-01 10:20:12 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:12 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:20:12 [INFO]: HTTP Request
+2025-08-01 10:20:28 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:28 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:20:28 [INFO]: HTTP Request
+2025-08-01 10:20:28 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:28 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:20:28 [INFO]: HTTP Request
+2025-08-01 10:20:34 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:34 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:20:34 [INFO]: HTTP Request
+2025-08-01 10:20:43 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:20:44 [INFO]: [EWURA] Sent XML:
+2025-08-01 10:20:46 [INFO]: [EWURA] Status: 200 OK
+2025-08-01 10:20:46 [INFO]: [EWURA] Response from EWURA:
+2025-08-01 10:20:46 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:20:46 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:20:46 [INFO]: HTTP Request
+2025-08-01 10:26:53 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 10:30:58 [INFO]: ✅ Database connection pool created
+2025-08-01 10:30:58 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:30:58 [INFO]: ✅ Database schema initialized
+2025-08-01 10:30:58 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:30:58 [INFO]: ✅ Default data seeded
+2025-08-01 10:30:58 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:30:58 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:30:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:30:58 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:30:58 [INFO]: ✅ ATG simulation started
+2025-08-01 10:30:58 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 10:30:58 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:31:10 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:31:10 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:31:10 [INFO]: HTTP Request
+2025-08-01 10:31:10 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:31:10 [INFO]: Retrieved 2 managers for EWURA registration
+2025-08-01 10:31:10 [INFO]: HTTP Request
+2025-08-01 10:31:19 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:31:19 [INFO]: EWURA registration data retrieved for manager: Claude Matemu
+2025-08-01 10:31:19 [INFO]: HTTP Request
+2025-08-01 10:31:50 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:31:51 [INFO]: [EWURA] Sending registration XML to:
+2025-08-01 10:31:51 [INFO]: [EWURA] XML Length:
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [INFO]: HTTP Request
+2025-08-01 10:32:33 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 10:35:26 [INFO]: ✅ Database connection pool created
+2025-08-01 10:35:26 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:35:26 [INFO]: ✅ Database schema initialized
+2025-08-01 10:35:26 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:35:26 [INFO]: ✅ Default data seeded
+2025-08-01 10:35:26 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:35:26 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:35:26 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:35:26 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:35:26 [INFO]: ✅ ATG simulation started
+2025-08-01 10:35:26 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 10:35:26 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:35:41 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:35:42 [INFO]: HTTP Request
+2025-08-01 10:36:35 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 10:37:57 [INFO]: ✅ Database connection pool created
+2025-08-01 10:37:57 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:37:57 [INFO]: ✅ Database schema initialized
+2025-08-01 10:37:57 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:37:57 [INFO]: ✅ Default data seeded
+2025-08-01 10:37:57 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:37:57 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:37:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:37:57 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:37:57 [INFO]: ✅ ATG simulation started
+2025-08-01 10:37:57 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 10:37:57 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:38:04 [INFO]: AUTH DEBUG - User object:
+2025-08-01 10:38:05 [INFO]: EWURA station registration XML sent for: ADVATECH FILLING STATION
+2025-08-01 10:38:05 [INFO]: EWURA registration submitted for manager: d383e03f-7dec-4b62-bf84-e9e5e2e868ad
+2025-08-01 10:38:05 [INFO]: HTTP Request
+2025-08-01 10:38:17 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 10:49:10 [INFO]: ✅ Database connection pool created
+2025-08-01 10:49:10 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:49:10 [INFO]: ✅ Database schema initialized
+2025-08-01 10:49:10 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:49:10 [INFO]: ✅ Default data seeded
+2025-08-01 10:49:10 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:49:10 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:49:10 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:49:10 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:49:10 [INFO]: ✅ ATG simulation started
+2025-08-01 10:50:55 [INFO]: ✅ Database connection pool created
+2025-08-01 10:50:55 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:50:55 [INFO]: ✅ Database schema initialized
+2025-08-01 10:50:55 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:50:55 [INFO]: ✅ Default data seeded
+2025-08-01 10:50:55 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:50:55 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:50:55 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:50:55 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:50:55 [INFO]: ✅ ATG simulation started
+2025-08-01 10:51:17 [INFO]: ✅ Database connection pool created
+2025-08-01 10:51:17 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:51:17 [INFO]: ✅ Database schema initialized
+2025-08-01 10:51:17 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:51:17 [INFO]: ✅ Default data seeded
+2025-08-01 10:51:17 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:51:17 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:51:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:51:17 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:51:17 [INFO]: ✅ ATG simulation started
+2025-08-01 10:53:45 [INFO]: ✅ Database connection pool created
+2025-08-01 10:53:45 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 10:53:45 [INFO]: ✅ Database schema initialized
+2025-08-01 10:53:45 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 10:53:45 [INFO]: ✅ Default data seeded
+2025-08-01 10:53:45 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 10:53:45 [INFO]: ✅ Socket Service initialized
+2025-08-01 10:53:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:53:45 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 10:53:45 [INFO]: ✅ ATG simulation started
+2025-08-01 10:53:45 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 10:53:45 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 10:59:05 [INFO]: HTTP Request
+2025-08-01 11:19:00 [INFO]: ✅ Database connection pool created
+2025-08-01 11:19:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:19:00 [INFO]: ✅ Database schema initialized
+2025-08-01 11:19:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:19:00 [INFO]: ✅ Default data seeded
+2025-08-01 11:19:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:19:00 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:19:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:19:00 [INFO]: ✅ ATG simulation started
+2025-08-01 11:19:00 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:19:00 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:19:34 [INFO]: ✅ Database connection pool created
+2025-08-01 11:19:34 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:19:34 [INFO]: ✅ Database schema initialized
+2025-08-01 11:19:34 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:19:34 [INFO]: ✅ Default data seeded
+2025-08-01 11:19:34 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:19:34 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:19:34 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:34 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:19:34 [INFO]: ✅ ATG simulation started
+2025-08-01 11:19:34 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:19:34 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:19:45 [INFO]: ✅ Database connection pool created
+2025-08-01 11:19:45 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:19:45 [INFO]: ✅ Database schema initialized
+2025-08-01 11:19:45 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:19:45 [INFO]: ✅ Default data seeded
+2025-08-01 11:19:45 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:19:45 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:19:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:45 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:19:45 [INFO]: ✅ ATG simulation started
+2025-08-01 11:19:45 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:19:45 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:35:13 [INFO]: ✅ Database connection pool created
+2025-08-01 11:35:13 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:35:13 [INFO]: ✅ Database schema initialized
+2025-08-01 11:35:13 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:35:13 [INFO]: ✅ Default data seeded
+2025-08-01 11:35:13 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:35:13 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:35:13 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:35:13 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:35:13 [INFO]: ✅ ATG simulation started
+2025-08-01 11:35:38 [INFO]: ✅ Database connection pool created
+2025-08-01 11:35:38 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:35:38 [INFO]: ✅ Database schema initialized
+2025-08-01 11:35:38 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:35:38 [INFO]: ✅ Default data seeded
+2025-08-01 11:35:38 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:35:38 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:35:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:35:38 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:35:38 [INFO]: ✅ ATG simulation started
+2025-08-01 11:36:54 [INFO]: ✅ Database connection pool created
+2025-08-01 11:36:54 [INFO]: ✅ Database connection pool created
+2025-08-01 11:36:54 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:36:54 [INFO]: ✅ Database schema initialized
+2025-08-01 11:36:54 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:36:54 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:36:54 [INFO]: ✅ Database schema initialized
+2025-08-01 11:36:54 [INFO]: ✅ Default data seeded
+2025-08-01 11:36:54 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:36:54 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:36:54 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:36:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:54 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:36:54 [INFO]: ✅ ATG simulation started
+2025-08-01 11:36:54 [INFO]: ✅ Default data seeded
+2025-08-01 11:36:54 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:36:54 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:36:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:54 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:36:54 [INFO]: ✅ ATG simulation started
+2025-08-01 11:36:58 [INFO]: ✅ Database connection pool created
+2025-08-01 11:36:58 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:36:58 [INFO]: ✅ Database schema initialized
+2025-08-01 11:36:58 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:36:58 [INFO]: ✅ Default data seeded
+2025-08-01 11:36:58 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:36:58 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:36:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:58 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:36:58 [INFO]: ✅ ATG simulation started
+2025-08-01 11:36:58 [INFO]: ✅ Database connection pool created
+2025-08-01 11:36:58 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:36:58 [INFO]: ✅ Database schema initialized
+2025-08-01 11:36:58 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:36:58 [INFO]: ✅ Default data seeded
+2025-08-01 11:36:58 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:36:58 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:36:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:58 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:36:58 [INFO]: ✅ ATG simulation started
+2025-08-01 11:36:58 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:37:01 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:01 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:01 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:01 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:01 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:01 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:01 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:01 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:01 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:01 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:01 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:01 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:01 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:01 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:01 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:01 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:01 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:01 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:04 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:04 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:04 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:04 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:04 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:04 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:04 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:04 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:04 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:05 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:05 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:05 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:05 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:05 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:05 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:05 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:05 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:05 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:05 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:08 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:08 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:08 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:08 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:08 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:08 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:08 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:08 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:08 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:08 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:08 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:08 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:08 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:08 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:08 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:08 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:08 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:08 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:11 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:11 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:11 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:11 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:11 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:11 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:11 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:11 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:11 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:11 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:37:11 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:11 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:11 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:11 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:11 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:11 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:11 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:11 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:11 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:14 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:14 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:14 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:14 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:14 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:14 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:14 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:14 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:14 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:14 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:14 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:14 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:14 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:14 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:14 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:14 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:14 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:14 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:16 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:16 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:16 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:16 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:16 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:16 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:16 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:16 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:16 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:16 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:37:16 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:16 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:16 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:16 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:16 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:16 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:16 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:16 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:16 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:19 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:19 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:19 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:19 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:19 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:19 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:19 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:19 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:19 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:19 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:19 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:19 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:19 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:19 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:19 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:19 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:19 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:19 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:24 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:24 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:24 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:24 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:24 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:24 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:24 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:37:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:24 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:24 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:24 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:24 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:38 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:38 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:38 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:38 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:38 [INFO]: ✅ Database connection pool created
+2025-08-01 11:37:38 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:38 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:38 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:38 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:38 [INFO]: ✅ ATG simulation started
+2025-08-01 11:37:38 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:37:38 [INFO]: ✅ Database schema initialized
+2025-08-01 11:37:38 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:37:38 [INFO]: ✅ Default data seeded
+2025-08-01 11:37:38 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:37:38 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:37:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:38 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:37:38 [INFO]: ✅ ATG simulation started
+2025-08-01 11:38:57 [INFO]: ✅ Database connection pool created
+2025-08-01 11:38:57 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:38:57 [INFO]: ✅ Database schema initialized
+2025-08-01 11:38:57 [INFO]: ✅ Database connection pool created
+2025-08-01 11:38:57 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:38:57 [INFO]: ✅ Default data seeded
+2025-08-01 11:38:57 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:38:57 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:38:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:38:57 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:38:57 [INFO]: ✅ ATG simulation started
+2025-08-01 11:38:57 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:38:57 [INFO]: ✅ Database schema initialized
+2025-08-01 11:38:57 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:38:57 [INFO]: ✅ Default data seeded
+2025-08-01 11:38:57 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:38:57 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:38:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:38:57 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:38:57 [INFO]: ✅ ATG simulation started
+2025-08-01 11:39:01 [INFO]: ✅ Database connection pool created
+2025-08-01 11:39:01 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:39:01 [INFO]: ✅ Database schema initialized
+2025-08-01 11:39:01 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:39:01 [INFO]: ✅ Default data seeded
+2025-08-01 11:39:01 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:39:01 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:39:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:39:01 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:39:01 [INFO]: ✅ ATG simulation started
+2025-08-01 11:39:02 [INFO]: ✅ Database connection pool created
+2025-08-01 11:39:02 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:39:02 [INFO]: ✅ Database schema initialized
+2025-08-01 11:39:02 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:39:02 [INFO]: ✅ Default data seeded
+2025-08-01 11:39:02 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:39:02 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:39:02 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:39:02 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:39:02 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:31 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:32 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:32 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:32 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:32 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:32 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:32 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:32 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:32 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:32 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:32 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:32 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:32 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:32 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:32 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:32 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:32 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:32 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:32 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:32 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:37 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:37 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:37 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:37 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:37 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:37 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:37 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:37 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:37 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:37 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:37 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:37 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:37 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:37 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:37 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:37 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:37 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:37 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:51 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:51 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:51 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:51 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:51 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:51 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:51 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:51 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:51 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:51 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:51 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:51 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:51 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:51 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:51 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:51 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:51 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:51 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:51 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:51 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:56 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:56 [INFO]: ✅ Database connection pool created
+2025-08-01 11:40:56 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:56 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:56 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:56 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:56 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:56 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:56 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:56 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:56 [INFO]: ✅ ATG simulation started
+2025-08-01 11:40:56 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:40:56 [INFO]: ✅ Database schema initialized
+2025-08-01 11:40:56 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:40:56 [INFO]: ✅ Default data seeded
+2025-08-01 11:40:56 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:40:56 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:40:56 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:56 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:40:56 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:00 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:00 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:00 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:00 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:00 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:00 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:00 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:00 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:00 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:00 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:29 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:29 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:29 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:29 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:29 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:29 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:29 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:29 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:29 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:29 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:29 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:29 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:43:29 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:43:29 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:29 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:29 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:29 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:29 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:29 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:29 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:29 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:29 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:35 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:35 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:35 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:35 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:35 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:35 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:35 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:35 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:35 [INFO]: ✅ ATG simulation started
+2025-08-01 11:43:35 [INFO]: ✅ Database connection pool created
+2025-08-01 11:43:35 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:43:35 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:43:35 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:43:35 [INFO]: ✅ Database schema initialized
+2025-08-01 11:43:35 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:43:35 [INFO]: ✅ Default data seeded
+2025-08-01 11:43:35 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:43:35 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:43:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:35 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:43:35 [INFO]: ✅ ATG simulation started
+2025-08-01 11:44:57 [INFO]: ✅ Database connection pool created
+2025-08-01 11:44:57 [INFO]: ✅ Database connection pool created
+2025-08-01 11:44:57 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:44:57 [INFO]: ✅ Database schema initialized
+2025-08-01 11:44:57 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:44:57 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:44:57 [INFO]: ✅ Database schema initialized
+2025-08-01 11:44:57 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:44:57 [INFO]: ✅ Default data seeded
+2025-08-01 11:44:57 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:44:57 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:44:57 [INFO]: ✅ Default data seeded
+2025-08-01 11:44:57 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:44:57 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:44:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:44:57 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:44:57 [INFO]: ✅ ATG simulation started
+2025-08-01 11:44:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:44:57 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:44:57 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:00 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:00 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:00 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:00 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:00 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:00 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:00 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:00 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:00 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:00 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:04 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:04 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:04 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:04 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:04 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:04 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:04 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:04 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:04 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:04 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:04 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:04 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:04 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:04 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:04 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:04 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:04 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:04 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:07 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:07 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:07 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:07 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:07 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:07 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:07 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:07 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:07 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:07 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:07 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:07 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:07 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:07 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:07 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:07 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:07 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:07 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:07 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:07 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:11 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:11 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:11 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:11 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:11 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:11 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:11 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:11 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:11 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:11 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:11 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:11 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:11 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:11 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:11 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:11 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:11 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:11 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:17 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:17 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:17 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:17 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:17 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:17 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:17 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:17 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:17 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:17 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:17 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:17 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:17 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:17 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:17 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:17 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:17 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:17 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:21 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:21 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:21 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:21 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:21 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:21 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:21 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:21 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:21 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:21 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:21 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:21 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:21 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:21 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:45:21 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:21 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:21 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:21 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:21 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:21 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:21 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:24 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:24 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:24 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:24 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:24 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:24 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:24 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:24 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:24 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:24 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:27 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:27 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:27 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:27 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:27 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:27 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:27 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:27 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:27 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:27 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:27 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:27 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:27 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:27 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:27 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:27 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:27 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:27 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:27 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:27 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:31 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:31 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:31 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:31 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:31 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:31 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:31 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:31 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:31 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:31 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:31 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:31 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:31 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:31 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:31 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:31 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:31 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:31 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:31 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:31 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:35 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:35 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:35 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:35 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:35 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:35 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:35 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:35 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:35 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:35 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:35 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:35 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:35 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:35 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:35 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:35 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:35 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:35 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:39 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:39 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:39 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:39 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:39 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:39 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:39 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:39 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:39 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:39 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:39 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:39 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:39 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:39 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:39 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:39 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:39 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:39 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:39 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:39 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:39 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:45:42 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:42 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:42 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:42 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:42 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:42 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:42 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:42 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:42 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:42 [INFO]: ✅ ATG simulation started
+2025-08-01 11:45:42 [INFO]: ✅ Database connection pool created
+2025-08-01 11:45:42 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:45:42 [INFO]: ✅ Database schema initialized
+2025-08-01 11:45:42 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:45:42 [INFO]: ✅ Default data seeded
+2025-08-01 11:45:42 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:45:42 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:45:42 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:42 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:45:42 [INFO]: ✅ ATG simulation started
+2025-08-01 11:46:02 [INFO]: ✅ Database connection pool created
+2025-08-01 11:46:02 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:46:02 [INFO]: ✅ Database schema initialized
+2025-08-01 11:46:02 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:46:02 [INFO]: ✅ Default data seeded
+2025-08-01 11:46:02 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:46:02 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:46:02 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:46:02 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:46:02 [INFO]: ✅ ATG simulation started
+2025-08-01 11:48:59 [INFO]: ✅ Database connection pool created
+2025-08-01 11:48:59 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:48:59 [INFO]: ✅ Database schema initialized
+2025-08-01 11:48:59 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:48:59 [INFO]: ✅ Database connection pool created
+2025-08-01 11:48:59 [INFO]: ✅ Default data seeded
+2025-08-01 11:48:59 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:48:59 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:48:59 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:48:59 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:48:59 [INFO]: ✅ ATG simulation started
+2025-08-01 11:48:59 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:48:59 [INFO]: ✅ Database schema initialized
+2025-08-01 11:48:59 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:48:59 [INFO]: ✅ Default data seeded
+2025-08-01 11:48:59 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:48:59 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:48:59 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:48:59 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:48:59 [INFO]: ✅ ATG simulation started
+2025-08-01 11:49:14 [INFO]: ✅ Database connection pool created
+2025-08-01 11:49:14 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:49:14 [INFO]: ✅ Database schema initialized
+2025-08-01 11:49:14 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:49:14 [INFO]: ✅ Default data seeded
+2025-08-01 11:49:14 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:49:14 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:49:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:49:14 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:49:14 [INFO]: ✅ ATG simulation started
+2025-08-01 11:49:14 [INFO]: ✅ Database connection pool created
+2025-08-01 11:49:14 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:49:14 [INFO]: ✅ Database schema initialized
+2025-08-01 11:49:14 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:49:14 [INFO]: ✅ Default data seeded
+2025-08-01 11:49:14 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:49:14 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:49:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:49:14 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:49:14 [INFO]: ✅ ATG simulation started
+2025-08-01 11:51:33 [INFO]: ✅ Database connection pool created
+2025-08-01 11:51:33 [INFO]: ✅ Database connection pool created
+2025-08-01 11:51:33 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:51:33 [INFO]: ✅ Database schema initialized
+2025-08-01 11:51:33 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:51:33 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:51:33 [INFO]: ✅ Default data seeded
+2025-08-01 11:51:33 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:51:33 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:51:33 [INFO]: ✅ Database schema initialized
+2025-08-01 11:51:33 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:51:33 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:51:33 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:51:33 [INFO]: ✅ ATG simulation started
+2025-08-01 11:51:33 [INFO]: ✅ Default data seeded
+2025-08-01 11:51:33 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:51:33 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:51:33 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:51:33 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:51:33 [INFO]: ✅ ATG simulation started
+2025-08-01 11:54:45 [INFO]: ✅ Database connection pool created
+2025-08-01 11:54:45 [INFO]: ✅ Database connection pool created
+2025-08-01 11:54:45 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:54:45 [INFO]: ✅ Database schema initialized
+2025-08-01 11:54:45 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:54:45 [INFO]: ✅ Default data seeded
+2025-08-01 11:54:45 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:54:45 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:54:45 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:54:45 [INFO]: ✅ Database schema initialized
+2025-08-01 11:54:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:45 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:54:45 [INFO]: ✅ ATG simulation started
+2025-08-01 11:54:45 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:54:45 [INFO]: ✅ Default data seeded
+2025-08-01 11:54:45 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:54:45 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:54:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:45 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:54:45 [INFO]: ✅ ATG simulation started
+2025-08-01 11:54:45 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:54:45 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:54:53 [INFO]: ✅ Database connection pool created
+2025-08-01 11:54:53 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:54:53 [INFO]: ✅ Database schema initialized
+2025-08-01 11:54:53 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:54:53 [INFO]: ✅ Default data seeded
+2025-08-01 11:54:53 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:54:53 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:54:53 [INFO]: ✅ Database connection pool created
+2025-08-01 11:54:53 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:53 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:54:53 [INFO]: ✅ ATG simulation started
+2025-08-01 11:54:53 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 11:54:53 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 11:54:53 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 11:54:53 [INFO]: ✅ Database schema initialized
+2025-08-01 11:54:53 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 11:54:53 [INFO]: ✅ Default data seeded
+2025-08-01 11:54:53 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 11:54:53 [INFO]: ✅ Socket Service initialized
+2025-08-01 11:54:53 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:53 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 11:54:53 [INFO]: ✅ ATG simulation started
+2025-08-01 12:30:43 [INFO]: ✅ Database connection pool created
+2025-08-01 12:30:43 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 12:30:43 [INFO]: ✅ Database connection pool created
+2025-08-01 12:30:43 [INFO]: ✅ Database schema initialized
+2025-08-01 12:30:43 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 12:30:43 [INFO]: ✅ Default data seeded
+2025-08-01 12:30:43 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 12:30:43 [INFO]: ✅ Socket Service initialized
+2025-08-01 12:30:43 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 12:30:43 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 12:30:43 [INFO]: ✅ ATG simulation started
+2025-08-01 12:30:43 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 12:30:43 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 12:30:43 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 12:30:43 [INFO]: ✅ Database schema initialized
+2025-08-01 12:30:43 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 12:30:43 [INFO]: ✅ Default data seeded
+2025-08-01 12:30:43 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 12:30:43 [INFO]: ✅ Socket Service initialized
+2025-08-01 12:30:43 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 12:30:43 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-01 12:30:43 [INFO]: ✅ ATG simulation started
+2025-08-01 14:43:34 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 14:43:43 [INFO]: ✅ Database connection pool created
+2025-08-01 14:43:43 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 14:43:43 [INFO]: ✅ Database schema initialized
+2025-08-01 14:43:43 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 14:43:43 [INFO]: ✅ Default data seeded
+2025-08-01 14:43:43 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 14:43:43 [INFO]: ✅ Socket Service initialized
+2025-08-01 14:43:43 [INFO]: ✅ ATG Serial connection established
+2025-08-01 14:43:43 [INFO]: ✅ ATG Service initialized
+2025-08-01 14:43:43 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 14:43:43 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 14:46:01 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 14:46:07 [INFO]: ✅ Database connection pool created
+2025-08-01 14:46:07 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 14:46:07 [INFO]: ✅ Database schema initialized
+2025-08-01 14:46:07 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 14:46:07 [INFO]: ✅ Default data seeded
+2025-08-01 14:46:07 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 14:46:07 [INFO]: ✅ Socket Service initialized
+2025-08-01 14:46:07 [INFO]: ✅ ATG Serial connection established
+2025-08-01 14:46:07 [INFO]: ✅ ATG Service initialized
+2025-08-01 14:46:07 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 14:46:07 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 14:46:18 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 14:46:24 [INFO]: ✅ Database connection pool created
+2025-08-01 14:46:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 14:46:24 [INFO]: ✅ Database schema initialized
+2025-08-01 14:46:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 14:46:24 [INFO]: ✅ Default data seeded
+2025-08-01 14:46:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 14:46:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 14:46:24 [INFO]: ✅ ATG Serial connection established
+2025-08-01 14:46:24 [INFO]: ✅ ATG Service initialized
+2025-08-01 14:46:24 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 14:46:24 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 15:44:22 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 15:45:54 [INFO]: ✅ Database connection pool created
+2025-08-01 15:45:54 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 15:45:54 [INFO]: ✅ Database schema initialized
+2025-08-01 15:45:54 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 15:45:54 [INFO]: ✅ Default data seeded
+2025-08-01 15:45:54 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 15:45:55 [INFO]: ✅ Socket Service initialized
+2025-08-01 15:45:55 [INFO]: ✅ ATG Serial connection established
+2025-08-01 15:45:55 [INFO]: ✅ ATG Service initialized
+2025-08-01 15:45:55 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 15:45:55 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 15:55:23 [INFO]: Client connected: kUyxS0zenwNdVo2GAAAB
+2025-08-01 15:55:23 [INFO]: HTTP Request
+2025-08-01 15:55:23 [INFO]: HTTP Request
+2025-08-01 15:55:53 [INFO]: HTTP Request
+2025-08-01 15:56:23 [INFO]: HTTP Request
+2025-08-01 15:56:53 [INFO]: HTTP Request
+2025-08-01 15:57:23 [INFO]: HTTP Request
+2025-08-01 15:57:53 [INFO]: HTTP Request
+2025-08-01 15:58:06 [WARN]: ATG Serial connection closed
+2025-08-01 15:58:17 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 15:58:17 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 15:58:17 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 15:58:18 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 15:58:24 [INFO]: ✅ Database connection pool created
+2025-08-01 15:58:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 15:58:24 [INFO]: ✅ Database schema initialized
+2025-08-01 15:58:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 15:58:24 [INFO]: ✅ Default data seeded
+2025-08-01 15:58:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 15:58:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 15:58:24 [INFO]: ✅ ATG Serial connection established
+2025-08-01 15:58:24 [INFO]: ✅ ATG Service initialized
+2025-08-01 15:58:24 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 15:58:24 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 15:58:47 [ERROR]: ⏰ Forced shutdown after timeout
+2025-08-01 15:58:47 [INFO]: Client connected: ugzUJU1iBm5Bgz2DAAAB
+2025-08-01 15:58:47 [INFO]: HTTP Request
+2025-08-01 15:58:47 [INFO]: HTTP Request
+2025-08-01 15:58:53 [INFO]: HTTP Request
+2025-08-01 15:59:23 [INFO]: HTTP Request
+2025-08-01 15:59:53 [INFO]: HTTP Request
+2025-08-01 16:00:23 [INFO]: HTTP Request
+2025-08-01 16:00:35 [INFO]: HTTP Request
+2025-08-01 16:00:53 [INFO]: HTTP Request
+2025-08-01 16:01:24 [INFO]: ✅ Database connection pool created
+2025-08-01 16:01:24 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:01:24 [INFO]: ✅ Database schema initialized
+2025-08-01 16:01:24 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:01:24 [INFO]: ✅ Default data seeded
+2025-08-01 16:01:24 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:01:24 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:01:24 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:01:24 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:01:24 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:01:24 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:01:25 [INFO]: Client connected: Rez4VOBB8mGrQZQ1AAAB
+2025-08-01 16:01:25 [INFO]: HTTP Request
+2025-08-01 16:01:25 [INFO]: HTTP Request
+2025-08-01 16:01:36 [INFO]: ✅ Database connection pool created
+2025-08-01 16:01:36 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:01:36 [INFO]: ✅ Database schema initialized
+2025-08-01 16:01:36 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:01:36 [INFO]: ✅ Default data seeded
+2025-08-01 16:01:36 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:01:36 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:01:36 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:01:36 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:01:36 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:01:36 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:01:36 [INFO]: Client connected: U4c3f6-sl5cvKlmaAAAB
+2025-08-01 16:01:36 [INFO]: HTTP Request
+2025-08-01 16:01:36 [INFO]: HTTP Request
+2025-08-01 16:01:53 [INFO]: HTTP Request
+2025-08-01 16:02:23 [INFO]: HTTP Request
+2025-08-01 16:02:53 [INFO]: HTTP Request
+2025-08-01 16:03:23 [INFO]: HTTP Request
+2025-08-01 16:03:53 [INFO]: HTTP Request
+2025-08-01 16:03:58 [INFO]: Client disconnected: U4c3f6-sl5cvKlmaAAAB
+2025-08-01 16:11:22 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 16:11:31 [INFO]: ✅ Database connection pool created
+2025-08-01 16:11:31 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:11:31 [INFO]: ✅ Database schema initialized
+2025-08-01 16:11:31 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:11:31 [INFO]: ✅ Default data seeded
+2025-08-01 16:11:31 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:11:31 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:11:31 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:11:31 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:11:31 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:11:31 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:12:33 [INFO]: ✅ Database connection pool created
+2025-08-01 16:12:33 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:12:33 [INFO]: ✅ Database schema initialized
+2025-08-01 16:12:33 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:12:33 [INFO]: ✅ Default data seeded
+2025-08-01 16:12:33 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:12:33 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:12:33 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:12:33 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:12:33 [INFO]: ✅ ATG monitoring started
+2025-08-01 16:12:33 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:12:33 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:12:37 [INFO]: ✅ Database connection pool created
+2025-08-01 16:12:37 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:12:37 [INFO]: ✅ Database schema initialized
+2025-08-01 16:12:37 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:12:37 [INFO]: ✅ Default data seeded
+2025-08-01 16:12:37 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:12:37 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:12:37 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:12:37 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:12:37 [INFO]: ✅ ATG monitoring started
+2025-08-01 16:12:37 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:12:37 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:12:39 [INFO]: ✅ Database connection pool created
+2025-08-01 16:12:39 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:12:39 [INFO]: ✅ Database schema initialized
+2025-08-01 16:12:39 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:12:39 [INFO]: ✅ Default data seeded
+2025-08-01 16:12:39 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:12:39 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:12:39 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:12:39 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:12:39 [INFO]: ✅ ATG monitoring started
+2025-08-01 16:12:39 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:12:39 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:12:43 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-01 16:12:48 [INFO]: ✅ Database connection pool created
+2025-08-01 16:12:48 [INFO]: ✅ Database schema initialized successfully
+2025-08-01 16:12:48 [INFO]: ✅ Database schema initialized
+2025-08-01 16:12:48 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-01 16:12:48 [INFO]: ✅ Default data seeded
+2025-08-01 16:12:48 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-01 16:12:48 [INFO]: ✅ Socket Service initialized
+2025-08-01 16:12:48 [INFO]: ✅ ATG Serial connection established
+2025-08-01 16:12:48 [INFO]: ✅ ATG Service initialized
+2025-08-01 16:12:48 [INFO]: ✅ ATG monitoring started
+2025-08-01 16:12:48 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-01 16:12:48 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-01 16:27:32 [INFO]: 🔄 Graceful shutdown initiated...

@@ -3967,3 +3967,770 @@
 2025-07-31 17:00:20 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
 2025-07-31 17:00:23 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
 2025-07-31 17:00:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 09:54:50 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:04:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:07:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:10:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:10:44 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:30:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:31:51 [ERROR]: FetchError: request to http://196.41.86.25:8081/api/v1/RegisterRetailStationRecords failed, reason: connect ECONNREFUSED 196.41.86.25:8081
+    at ClientRequest.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/node-fetch/lib/index.js:1501:11)
+    at ClientRequest.emit (node:events:524:28)
+    at emitErrorEvent (node:_http_client:101:11)
+    at Socket.socketErrorListener (node:_http_client:504:5)
+    at Socket.emit (node:events:524:28)
+    at emitErrorNT (node:internal/streams/destroy:169:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-08-01 10:35:26 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:35:42 [ERROR]: ReferenceError: Cannot access 'targetEndpoint' before initialization
+    at EWURAServiceClass.sendToEWURA (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:130:57)
+    at EWURAServiceClass.registerStation (file:///home/herimorn/EwuraReal/project/project/src/services/EWURAService.js:373:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitEWURARegistrationWithManager (file:///home/herimorn/EwuraReal/project/project/src/controllers/EWURAController.js:293:27)
+2025-08-01 10:37:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:49:10 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:49:10 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 10:50:55 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:50:55 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 10:51:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 10:51:17 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 10:53:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:34 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:19:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:35:13 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:35:13 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:35:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:35:38 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:36:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:54 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:36:54 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:36:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:58 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:36:58 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:36:58 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:01 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:01 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:04 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:05 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:05 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:08 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:08 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:08 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:11 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:11 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:14 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:14 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:16 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:16 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:19 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:19 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:24 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:24 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:38 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:37:38 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:37:38 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:38:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:38:57 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:38:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:38:57 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:39:01 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:39:02 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:39:02 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:39:02 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:32 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:32 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:32 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:32 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:37 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:37 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:51 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:51 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:51 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:51 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:56 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:56 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:40:56 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:40:56 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:43:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:00 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:43:00 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:43:29 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:29 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:29 [ERROR]: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+2025-08-01 11:43:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:43:35 [ERROR]: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+2025-08-01 11:44:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:44:57 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:44:57 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:44:57 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:00 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:00 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:04 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:04 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:07 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:07 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:07 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:07 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:11 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:11 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:11 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:17 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:17 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:17 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:21 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:21 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:21 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:21 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:24 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:24 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:24 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:27 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:27 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:27 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:27 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:31 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:31 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:31 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:31 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:35 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:35 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:35 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:39 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:39 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:39 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:39 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:42 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:42 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:45:42 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:45:42 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:46:02 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:46:02 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:48:59 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:48:59 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:48:59 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:48:59 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:49:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:49:14 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:49:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:49:14 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:51:33 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:51:33 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:51:33 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:51:33 [ERROR]: TypeError: Router.use() requires a middleware function but got a undefined
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/router/index.js:469:13)
+    at Function.<anonymous> (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:227:21)
+    at Array.forEach (<anonymous>)
+    at Function.use (/home/herimorn/EwuraReal/project/project/node_modules/express/lib/application.js:224:7)
+    at setupRoutes (file:///home/herimorn/EwuraReal/project/project/src/server.js:216:7)
+    at startServer (file:///home/herimorn/EwuraReal/project/project/src/server.js:291:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-08-01 11:54:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:45 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:45 [ERROR]: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+2025-08-01 11:54:53 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:53 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 11:54:53 [ERROR]: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+2025-08-01 12:30:43 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 12:30:43 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-01 12:30:43 [ERROR]: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+2025-08-01 15:58:47 [ERROR]: ⏰ Forced shutdown after timeout

@@ -267,6 +267,7 @@ async function initializeServices() {
     // Initialize ATG service
     console.log('🔄 Initializing ATG service...');
     await ATGService.initialize();
+    await ATGService.startMonitoring(); // <-- Add this line after initialization
     console.log('✅ ATG service initialized');
     
     // Initialize EWURA service

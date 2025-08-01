@@ -86,6 +86,7 @@ export class AuthController {
     }
   }
 
+  
   static async login(req, res, next) {
     try {
       const { deviceSerial, password } = req.body;
