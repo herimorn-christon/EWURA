@@ -6,32 +6,24 @@ import { logger } from '../utils/logger.js';  // Import your logger here
 
 export const receiveTransaction = async (req, res) => {
   try {
-    console.log('📥 Received transaction data:', req.body);
+    // 🔐 API Key Check
+    const apiKey = req.headers['api-key'];
+    const expectedApiKey = process.env.API_KEY || 'a9f0c2b3d8e14e1b9f10a2c6f4e748c1d8f2b3e9a4d1c7b2f9e0d1a4e2f3c5a6';
 
-    // Optional: Validate required fields
-    const requiredFields = [
-      'station_id',
-      'product_id',
-      'user_id',
-      'transaction_date',
-      'transaction_time',
-      'volume',
-      'unit_price',
-      'total_amount'
-    ];
-
-    const missingFields = requiredFields.filter(field => !(field in req.body));
-
-    if (missingFields.length > 0) {
-      return res.status(400).json({
-        message: '🚫 Missing required fields',
-        missing: missingFields
-      });
+    if (!apiKey) {
+      return res.status(401).json({ message: '🚫 Missing API key in headers' });
     }
 
-    // Respond without inserting
+    if (apiKey !== expectedApiKey) {
+      return res.status(403).json({ message: '🚫 Invalid API key' });
+    }
+
+    // ✅ Log received data (not inserting)
+    console.log('📥 Received transaction payload:', JSON.stringify(req.body, null, 2));
+    logger.info('📥 Transaction payload received', req.body);
+
     return res.status(200).json({
-      message: '✅ Transaction received (not inserted)',
+      message: '✅ Transaction data received (not inserted)',
       received: req.body
     });
   } catch (error) {
@@ -39,6 +31,53 @@ export const receiveTransaction = async (req, res) => {
     res.status(500).json({ message: '❌ Failed to receive transaction', error: error.message });
   }
 };
+
+// export const receiveTransaction = async (req, res) => {
+//   try {
+//     const apiKey = 'a9f0c2b3d8e14e1b9f10a2c6f4e748c1d8f2b3e9a4d1c7b2f9e0d1a4e2f3c5a6';
+//     const expectedApiKey = process.env.API_KEY || 'a9f0c2b3d8e14e1b9f10a2c6f4e748c1d8f2b3e9a4d1c7b2f9e0d1a4e2f3c5a6';
+
+//     if (!apiKey) {
+//       return res.status(401).json({ message: '🚫 Missing API key in headers' });
+//     }
+
+//     if (apiKey !== expectedApiKey) {
+//       return res.status(403).json({ message: '🚫 Invalid API key' });
+//     }
+
+//     const { EwuraLicenseNo, Transactions } = req.body;
+
+//     const formattedTransactions = Transactions.map(tx => ({
+//       station_license: EwuraLicenseNo,
+//       pump: tx.Pump,
+//       nozzle: tx.Nozzle,
+//       volume: parseFloat(tx.Volume),
+//       price: parseFloat(tx.Price),
+//       amount: parseFloat(tx.Amount),
+//       transaction_id: tx.Transaction,
+//       discount_amount: parseFloat(tx.DiscountAmount),
+//       total_volume: parseFloat(tx.TotalVolume),
+//       total_amount: parseFloat(tx.TotalAmount),
+//       customer_name: tx.CustomerName,
+//       fuel_grade_name: tx.FuelGradeName,
+//       efd_serial_number: tx.EfdSerialNumber,
+//       datetime_start: tx.DateTimeStart,
+//       datetime_end: tx.DateTimeEnd
+//     }));
+
+//     await transactionModel.insertMany(formattedTransactions);
+
+//     logger.info(`✅ Received and inserted ${formattedTransactions.length} transaction(s) for ${EwuraLicenseNo}`);
+
+//     return res.status(200).json({
+//       message: '✅ Transactions received and inserted',
+//       inserted: formattedTransactions.length
+//     });
+//   } catch (error) {
+//     logger.error('❌ Error receiving transaction:', error);
+//     res.status(500).json({ message: '❌ Failed to receive transaction', error: error.message });
+//   }
+// };
 
 
 export const getTransactions = async (req, res) => {

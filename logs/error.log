@@ -4792,3 +4792,25 @@
     at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
     at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
 2025-08-14 16:49:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:15:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:37:43 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:39:04 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:43:42 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:44:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:47:51 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:48:23 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:55:33 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:56:49 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:57:37 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:57:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:58:47 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:59:14 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 12:59:16 [ERROR]: Database query error:
+2025-08-15 12:59:16 [ERROR]: error: column "station_license" of relation "sales_transactions" does not exist
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.insertMany (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/transactionModel.js:67:5)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:40:5)
+2025-08-15 13:01:16 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-15 13:02:12 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0

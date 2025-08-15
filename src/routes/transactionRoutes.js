@@ -1,4 +1,3 @@
-// src/routes/transactionRoutes.js
 import express from 'express';
 import {
   receiveTransaction,
