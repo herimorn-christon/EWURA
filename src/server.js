@@ -9,7 +9,7 @@ console.log('✅ Environment config loaded');
 let express, helmet, cors, compression, rateLimit, createServer, Server, swaggerJsdoc, swaggerUi;
 let logger, corsConfig, rateLimitConfig, swaggerOptions;
 let dbManager, RedisManager, ATGService, SocketService, EWURAService;
-let authRoutes, userRoutes, stationRoutes, tankRoutes, productRoutes, reportRoutes, ewuraRoutes, analyticsRoutes, locationRoutes, taxpayerRoutes;
+let authRoutes, userRoutes, stationRoutes, tankRoutes, productRoutes, reportRoutes, ewuraRoutes, analyticsRoutes, locationRoutes, taxpayerRoutes, transactionRoutes;
 let errorHandler, notFoundHandler, requestLogger, healthCheck;
 
 try {
@@ -120,6 +120,10 @@ try {
 
 try {
   console.log('🔄 Loading route modules...');
+  transactionRoutes = (await import('./routes/transactionRoutes.js')).default;
+  console.log('✅ Transaction routes loaded');
+
+  console.log('🔄 Loading route modules...');
   authRoutes = (await import('./routes/authRoutes.js')).default;
   console.log('✅ Auth routes loaded');
   
@@ -218,6 +222,7 @@ function setupRoutes() {
   app.use('/api/analytics', analyticsRoutes);
   app.use('/api/locations', locationRoutes);
   app.use('/api/taxpayers', taxpayerRoutes);
+  app.use('/api/transactions', transactionRoutes);
 
   // Root endpoint
   app.get('/', (req, res) => {

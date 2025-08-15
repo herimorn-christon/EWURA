@@ -20864,3 +20864,132 @@
 2025-08-01 16:12:48 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
 2025-08-01 16:12:48 [INFO]: 🚀 Gas Station Management Server started successfully
 2025-08-01 16:27:32 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-14 10:37:18 [INFO]: ✅ Database connection pool created
+2025-08-14 10:37:19 [INFO]: ✅ Database schema initialized successfully
+2025-08-14 10:37:19 [INFO]: ✅ Database schema initialized
+2025-08-14 10:37:19 [INFO]: ✅ Default admin user created successfully
+2025-08-14 10:37:19 [INFO]: ✅ Default data seeded successfully
+2025-08-14 10:37:19 [INFO]: ✅ Default data seeded
+2025-08-14 10:37:19 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-14 10:37:19 [INFO]: ✅ Socket Service initialized
+2025-08-14 10:37:19 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-14 10:37:19 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-14 10:37:19 [INFO]: ✅ ATG simulation started
+2025-08-14 10:37:19 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-14 10:37:19 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-14 11:02:55 [INFO]: 🔄 Graceful shutdown initiated...
+2025-08-14 11:03:00 [INFO]: ✅ Database connection pool created
+2025-08-14 11:03:00 [INFO]: ✅ Database schema initialized successfully
+2025-08-14 11:03:00 [INFO]: ✅ Database schema initialized
+2025-08-14 11:03:00 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-14 11:03:00 [INFO]: ✅ Default data seeded
+2025-08-14 11:03:00 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-14 11:03:00 [INFO]: ✅ Socket Service initialized
+2025-08-14 11:03:00 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-14 11:03:00 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-14 11:03:00 [INFO]: ✅ ATG simulation started
+2025-08-14 11:03:00 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-14 11:03:00 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-14 11:40:57 [INFO]: HTTP Request
+2025-08-14 11:42:22 [INFO]: HTTP Request
+2025-08-14 11:43:20 [INFO]: HTTP Request
+2025-08-14 16:16:31 [INFO]: ✅ Database connection pool created
+2025-08-14 16:16:31 [INFO]: ✅ Database schema initialized successfully
+2025-08-14 16:16:31 [INFO]: ✅ Database schema initialized
+2025-08-14 16:16:31 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-14 16:16:31 [INFO]: ✅ Default data seeded
+2025-08-14 16:16:31 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-14 16:16:31 [INFO]: ✅ Socket Service initialized
+2025-08-14 16:16:31 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-14 16:16:31 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-14 16:16:31 [INFO]: ✅ ATG simulation started
+2025-08-14 16:16:31 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-14 16:16:31 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-14 16:20:11 [INFO]: HTTP Request
+2025-08-14 16:21:11 [ERROR]: Database query error:
+2025-08-14 16:21:11 [ERROR]: error: invalid input syntax for type uuid: "1"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:6:20)
+2025-08-14 16:21:11 [INFO]: HTTP Request
+2025-08-14 16:22:32 [ERROR]: Database query error:
+2025-08-14 16:22:32 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:6:20)
+2025-08-14 16:22:32 [INFO]: HTTP Request
+2025-08-14 16:25:01 [INFO]: ✅ Database connection pool created
+2025-08-14 16:25:01 [INFO]: ✅ Database schema initialized successfully
+2025-08-14 16:25:01 [INFO]: ✅ Database schema initialized
+2025-08-14 16:25:01 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-14 16:25:01 [INFO]: ✅ Default data seeded
+2025-08-14 16:25:01 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-14 16:25:01 [INFO]: ✅ Socket Service initialized
+2025-08-14 16:25:02 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-14 16:25:02 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-14 16:25:02 [INFO]: ✅ ATG simulation started
+2025-08-14 16:25:02 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-14 16:25:02 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-14 16:25:25 [INFO]: Received transaction data:
+2025-08-14 16:25:25 [ERROR]: Database query error:
+2025-08-14 16:25:25 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:25:25 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:25:25 [INFO]: HTTP Request
+2025-08-14 16:44:08 [INFO]: Received transaction data:
+2025-08-14 16:44:08 [ERROR]: Database query error:
+2025-08-14 16:44:08 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:44:08 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:44:08 [INFO]: HTTP Request
+2025-08-14 16:44:42 [INFO]: Received transaction data:
+2025-08-14 16:44:42 [ERROR]: Database query error:
+2025-08-14 16:44:42 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:44:42 [ERROR]: error: insert or update on table "sales_transactions_2025" violates foreign key constraint "sales_transactions_product_id_fkey"
+    at /home/dtito19/Projects/Office/Ewura_NPGIS/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async DatabaseManagerClass.query (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/database/DatabaseManager.js:62:22)
+    at async TransactionModel.create (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/models/BaseModel.js:81:22)
+    at async receiveTransaction (file:///home/dtito19/Projects/Office/Ewura_NPGIS/backend/src/controllers/transactionController.js:12:20)
+2025-08-14 16:44:42 [INFO]: HTTP Request
+2025-08-14 16:49:54 [INFO]: ✅ Database connection pool created
+2025-08-14 16:49:54 [INFO]: ✅ Database schema initialized successfully
+2025-08-14 16:49:54 [INFO]: ✅ Database schema initialized
+2025-08-14 16:49:54 [INFO]: ✅ Data already exists in table "countries", skipping seeding.
+2025-08-14 16:49:54 [INFO]: ✅ Default data seeded
+2025-08-14 16:49:54 [INFO]: ✅ Redis disabled, using in-memory cache
+2025-08-14 16:49:54 [INFO]: ✅ Socket Service initialized
+2025-08-14 16:49:54 [ERROR]: Error: Error: No such file or directory, cannot open /dev/ttyUSB0
+2025-08-14 16:49:54 [WARN]: ⚠️ ATG hardware not available, running in simulation mode
+2025-08-14 16:49:54 [INFO]: ✅ ATG simulation started
+2025-08-14 16:49:54 [INFO]: ✅ EWURA Service initialized in PRODUCTION mode
+2025-08-14 16:49:54 [INFO]: 🚀 Gas Station Management Server started successfully
+2025-08-14 16:50:04 [INFO]: HTTP Request
+2025-08-14 17:08:29 [INFO]: HTTP Request
