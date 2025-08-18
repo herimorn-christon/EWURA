@@ -8,8 +8,11 @@ console.log('✅ Environment config loaded');
 // Wrap imports in try-catch to identify failing imports
 let express, helmet, cors, compression, rateLimit, createServer, Server, swaggerJsdoc, swaggerUi;
 let logger, corsConfig, rateLimitConfig, swaggerOptions;
-let dbManager, RedisManager, ATGService, SocketService, EWURAService;
-let authRoutes, userRoutes, stationRoutes, tankRoutes, productRoutes, reportRoutes, ewuraRoutes, analyticsRoutes, locationRoutes, taxpayerRoutes, transactionRoutes;
+let dbManager, RedisManager, socketService, nfppService, npgisService, EWURAService;
+let interfaceManager;
+let authRoutes, userRoutes, stationRoutes, tankRoutes, productRoutes, reportRoutes,
+    ewuraRoutes, analyticsRoutes, locationRoutes, taxpayerRoutes, transactionRoutes,
+    interfaceRoutes, interfaceTypeRoutes; // <-- added interfaceRoutes here
 let errorHandler, notFoundHandler, requestLogger, healthCheck;
 
 try {
@@ -73,6 +76,7 @@ try {
 
 try {
   console.log('🔄 Loading service modules...');
+  
   const dbManagerModule = await import('./database/DatabaseManager.js');
   dbManager = dbManagerModule.dbManager;
   console.log('✅ Database manager loaded');
@@ -81,13 +85,23 @@ try {
   RedisManager = redisManagerModule.RedisManager;
   console.log('✅ Redis manager loaded');
   
-  const atgServiceModule = await import('./services/ATGService.js');
-  ATGService = atgServiceModule.ATGService;
-  console.log('✅ ATG service loaded');
-  
   const socketServiceModule = await import('./services/SocketService.js');
-  SocketService = socketServiceModule.SocketService;
+  socketService = socketServiceModule.socketService;
   console.log('✅ Socket service loaded');
+  
+  // Load interface services
+  const nfppServiceModule = await import('./services/NFPPService.js');
+  nfppService = nfppServiceModule.nfppService;
+  console.log('✅ NFPP service loaded');
+  
+  const npgisServiceModule = await import('./services/NPGISService.js');
+  npgisService = npgisServiceModule.npgisService;
+  console.log('✅ NPGIS service loaded');
+  
+  // Load interface manager
+  const interfaceManagerModule = await import('./services/InterfaceManager.js');
+  interfaceManager = interfaceManagerModule.interfaceManager; // assign to outer var (was const)
+  console.log('✅ Interface manager loaded');
   
   const ewuraServiceModule = await import('./services/EWURAService.js');
   EWURAService = ewuraServiceModule.EWURAService;
@@ -120,10 +134,7 @@ try {
 
 try {
   console.log('🔄 Loading route modules...');
-  transactionRoutes = (await import('./routes/transactionRoutes.js')).default;
-  console.log('✅ Transaction routes loaded');
-
-  console.log('🔄 Loading route modules...');
+  
   authRoutes = (await import('./routes/authRoutes.js')).default;
   console.log('✅ Auth routes loaded');
   
@@ -135,6 +146,10 @@ try {
   
   tankRoutes = (await import('./routes/tankRoutes.js')).default;
   console.log('✅ Tank routes loaded');
+  
+  const interfaceRoutesModule = await import('./routes/interfaceRoutes.js');
+  interfaceRoutes = interfaceRoutesModule.default; // <-- assign to outer var
+  console.log('✅ Interface routes loaded');
   
   productRoutes = (await import('./routes/productRoutes.js')).default;
   console.log('✅ Product routes loaded');
@@ -153,7 +168,14 @@ try {
   
   taxpayerRoutes = (await import('./routes/taxpayerRoutes.js')).default;
   console.log('✅ Taxpayer routes loaded');
-  
+
+  // New: import transactions and interface-types routes (avoid undefined Router.use errors)
+  transactionRoutes = (await import('./routes/transactionRoutes.js')).default;
+  console.log('✅ Transaction routes loaded');
+
+  interfaceTypeRoutes = (await import('./routes/interfaceTypeRoutes.js')).default;
+  console.log('✅ Interface type routes loaded');
+
 } catch (error) {
   console.error('❌ Error loading route modules:', error);
   process.exit(1);
@@ -200,7 +222,7 @@ function configureMiddleware() {
 // Setup routes
 function setupRoutes() {
   console.log('🛣️ Setting up routes...');
-  
+
   // API Documentation
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
     explorer: true,
@@ -211,18 +233,34 @@ function setupRoutes() {
   // Health check endpoint
   app.get('/health', healthCheck);
 
-  // API Routes
-  app.use('/api/auth', authRoutes);
-  app.use('/api/users', userRoutes);
-  app.use('/api/stations', stationRoutes);
-  app.use('/api/tanks', tankRoutes);
-  app.use('/api/products', productRoutes);
-  app.use('/api/ewura', ewuraRoutes);
-  app.use('/api/reports', reportRoutes);
-  app.use('/api/analytics', analyticsRoutes);
-  app.use('/api/locations', locationRoutes);
-  app.use('/api/taxpayers', taxpayerRoutes);
-  app.use('/api/transactions', transactionRoutes);
+  // helper to safely register routes
+  const registerRoute = (prefix, routeModule) => {
+    if (!routeModule) {
+      console.warn(`⚠️ Skipping route registration for ${prefix} — module is undefined`);
+      return;
+    }
+    if (typeof routeModule === 'function' || routeModule?.stack) {
+      app.use(prefix, routeModule);
+      console.log(`✅ Registered route ${prefix}`);
+    } else {
+      console.warn(`⚠️ Route module for ${prefix} is not a valid Express router/middleware`);
+    }
+  };
+
+  // API Routes (guarded)
+  registerRoute('/api/auth', authRoutes);
+  registerRoute('/api/users', userRoutes);
+  registerRoute('/api/stations', stationRoutes);
+  registerRoute('/api/tanks', tankRoutes);
+  registerRoute('/api/interface', interfaceRoutes);
+  registerRoute('/api/products', productRoutes);
+  registerRoute('/api/ewura', ewuraRoutes);
+  registerRoute('/api/reports', reportRoutes);
+  registerRoute('/api/analytics', analyticsRoutes);
+  registerRoute('/api/locations', locationRoutes);
+  registerRoute('/api/taxpayers', taxpayerRoutes);
+  registerRoute('/api/transactions', transactionRoutes);
+  registerRoute('/api/interface-types', interfaceTypeRoutes);
 
   // Root endpoint
   app.get('/', (req, res) => {
@@ -251,38 +289,46 @@ function configureErrorHandling() {
 
 // Initialize services
 async function initializeServices() {
+  logger.info('🔄 Initializing services...');
+
   try {
-    console.log('🔄 Initializing services...');
-    
     // Initialize database
-    console.log('🔄 Initializing database...');
+    logger.info('🔄 Initializing database...');
     await dbManager.initialize();
-    console.log('✅ Database initialized');
+    logger.info('✅ Database initialized');
     
     // Initialize Redis
-    console.log('🔄 Initializing Redis...');
+    logger.info('🔄 Initializing Redis...');
     await RedisManager.initialize();
-    console.log('✅ Redis initialized');
+    logger.info('✅ Redis initialized');
     
-    // Initialize Socket service
-    console.log('🔄 Initializing Socket service...');
-    SocketService.initialize(io);
-    console.log('✅ Socket service initialized');
+    // Initialize interface manager
+    logger.info('🔄 Initializing Interface Manager...');
+    await interfaceManager.initialize();
+    await interfaceManager.initializeServices();
+    logger.info('✅ Interface Manager initialized');
     
-    // Initialize ATG service
-    console.log('🔄 Initializing ATG service...');
-    await ATGService.initialize();
-    await ATGService.startMonitoring(); // <-- Add this line after initialization
-    console.log('✅ ATG service initialized');
+    // Initialize NFPP service
+    logger.info('🔄 Starting NFPP monitoring...');
+    try {
+      await nfppService.startMonitoring();
+      logger.info('✅ NFPP monitoring started');
+    } catch (nfppError) {
+      logger.warn('⚠️ NFPP monitoring failed to start:', nfppError);
+    }
     
-    // Initialize EWURA service
-    console.log('🔄 Initializing EWURA service...');
-    await EWURAService.initialize();
-    console.log('✅ EWURA service initialized');
-    
+    // Start NPGIS monitoring
+    logger.info('🔄 Starting NPGIS monitoring...');
+    try {
+      await npgisService.startMonitoring();
+      logger.info('✅ NPGIS monitoring started');
+    } catch (npgisError) {
+      logger.warn('⚠️ NPGIS monitoring failed to start:', npgisError);
+    }
+
+    logger.info('✅ All services initialized');
   } catch (error) {
-    console.error('❌ Service initialization failed:', error);
-    logger.error('❌ Service initialization failed:', error);
+    logger.error('❌ Critical service initialization failed:', { error });
     throw error;
   }
 }
@@ -332,9 +378,29 @@ async function gracefulShutdown() {
     console.log('🔄 HTTP server closed');
     
     try {
-      await ATGService.stop();
+      if (socketService?.stop) {
+        await socketService.stop();
+        console.log('✅ Socket service stopped');
+      }
+      
+      if (interfaceManager?.stopAllMonitoring) {
+        await interfaceManager.stopAllMonitoring();
+        console.log('✅ Interface monitoring stopped');
+      }
+      
+      if (nfppService?.stop) {
+        await nfppService.stop();
+        console.log('✅ NFPP service stopped');
+      }
+      
+      if (npgisService?.stop) {
+        await npgisService.stop();
+        console.log('✅ NPGIS service stopped');
+      }
+      
       await RedisManager.close();
       await dbManager.close();
+      
       console.log('✅ All services stopped gracefully');
       logger.info('✅ Server shutdown completed');
       process.exit(0);
@@ -344,13 +410,6 @@ async function gracefulShutdown() {
       process.exit(1);
     }
   });
-  
-  // Force shutdown after 30 seconds
-  setTimeout(() => {
-    console.error('⏰ Forced shutdown after timeout');
-    logger.error('⏰ Forced shutdown after timeout');
-    process.exit(1);
-  }, 30000);
 }
 
 // Handle process signals

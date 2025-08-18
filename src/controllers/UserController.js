@@ -105,37 +105,25 @@ export class UserController {
         }
       }
       
+      // Get station's interface type
       if (stationId) {
-        const stationExists = await dbManager.query('SELECT id FROM stations WHERE id = $1', [stationId]);
-        if (stationExists.rows.length === 0) {
+        const stationResult = await dbManager.query(`
+          SELECT interface_type_id 
+          FROM stations 
+          WHERE id = $1
+        `, [stationId]);
+
+        if (stationResult.rows.length === 0) {
           return ApiResponse.error(res, 'Selected station does not exist', 400);
         }
+
+        // Use station's interface type
+        userData.interface_type_id = stationResult.rows[0].interface_type_id;
       }
-      
-      // Get role ID if roleCode is provided
-      let userRoleId = null;
-      if (roleCode) {
-        const role = await userRoleModel.findByCode(roleCode);
-        if (!role) {
-          return ApiResponse.error(res, 'Invalid role code', 400);
-        }
-        userRoleId = role.id;
-      }
-      
-      // Create user data
-      const userData = {
-        device_serial: deviceSerial,
-        email,
-        username,
-        password,
-        first_name: firstName,
-        last_name: lastName,
-        phone,
-        user_role_id: userRoleId,
-        station_id: stationId,
-        interface_type_id: interfaceTypeId
-      };
-      
+
+      // Remove interface_type_id from direct user input since it comes from station
+      delete userData.interface_type_id;
+
       const user = await userModel.createUser(userData);
       
       // Get user with role details
@@ -213,6 +201,25 @@ export class UserController {
         }
       }
       
+      // If station is being updated, get its interface type
+      if (stationId) {
+        const stationResult = await dbManager.query(`
+          SELECT interface_type_id 
+          FROM stations 
+          WHERE id = $1
+        `, [stationId]);
+
+        if (stationResult.rows.length === 0) {
+          return ApiResponse.error(res, 'Selected station does not exist', 400);
+        }
+
+        // Update interface type to match station
+        updateData.interface_type_id = stationResult.rows[0].interface_type_id;
+      }
+
+      // Remove manual interface type update since it's derived from station
+      delete updateData.interface_type_id;
+
       const user = await userModel.update(id, updateData);
       if (!user) {
         return ApiResponse.notFound(res, 'User not found');

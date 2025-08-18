@@ -7,7 +7,7 @@ export class TaxpayerController {
   static async getAllTaxpayers(req, res, next) {
     try {
       const { isActive, businessType } = req.query;
-      
+      console.log('TaxpayerController.getAllTaxpayers - Query params:', req.query);
       const filters = {};
       if (isActive !== undefined) filters.isActive = isActive === 'true';
       if (businessType) filters.businessType = businessType;

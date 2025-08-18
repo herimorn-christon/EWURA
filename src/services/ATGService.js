@@ -2,7 +2,7 @@ import { SerialPort } from 'serialport';
 import { DelimiterParser } from '@serialport/parser-delimiter';
 import { logger } from '../utils/logger.js';
 import { DatabaseManager } from '../database/DatabaseManager.js';
-import { SocketService } from './SocketService.js';
+import { socketService } from './SocketService.js';
 
 // ATG Delimiter Parser
 class ATGDelimiterParser extends DelimiterParser {
@@ -28,13 +28,17 @@ class ATGServiceClass {
     this.port = null;
     this.parser = null;
     this.monitoringInterval = null;
-    this.commandInterval = 5000; // 5 seconds
+    this.hourlyStorageInterval = null; // NEW: For hourly storage
+    this.commandInterval = 5000; // 5 seconds for real-time updates
+    this.storageInterval = 3600000; // 1 hour = 3600000ms
     this.maxRetries = 5;
     this.ieee754Cache = new Map();
     this.maxCacheSize = 1000;
     this.pendingRequests = new Map();
     this.requestId = 0;
     this.dataHandler = null;
+    this.lastStoredTime = null; // Track last storage time
+    this.latestTankData = new Map(); // Store latest data for each tank
   }
 
   async initialize() {
@@ -95,6 +99,10 @@ class ATGServiceClass {
           });
           
           this.isConnected = true;
+          
+          // Store initial reading immediately upon connection
+          this.storeInitialReading();
+          
           resolve();
         });
       });
@@ -127,29 +135,31 @@ class ATGServiceClass {
       tanks.forEach(tank => {
         if (tank.status === 'online') {
           console.log(`📊 Tank ${tank.tankNumber}: ${tank.totalVolume}L, ${tank.temperature}°C, Status: ${tank.status}`);
+          // Store latest data for each tank (for hourly storage)
+          this.latestTankData.set(tank.tankNumber, tank);
         } else {
           console.log(`⚠️ Tank ${tank.tankNumber}: Status: ${tank.status}`);
         }
       });
-      
-      // Save to database
-      for (const tank of tanks) {
-        if (tank.status === 'online') {
-          console.log(`💾 [ATGService] Saving tank ${tank.tankNumber} reading to database...`);
-          await this.saveTankReading(tank);
-          console.log(`✅ [ATGService] Tank ${tank.tankNumber} reading saved successfully`);
-        }
-      }
 
-      // Emit to connected clients
+      // Always emit real-time data to WebSocket clients
       console.log('📡 [ATGService] Emitting tank data to WebSocket clients...');
-      SocketService.emit('tankData', tanks);
+      socketService.emitToInterface({
+        stationId: this.stationId || 'none',
+        interfaceCode: 'CONSOLE', 
+        event: 'tankData',
+        payload: {
+          tanks: tanks,
+          stationId: this.stationId,
+          timestamp: new Date().toISOString()
+        }
+      });
       console.log('✅ [ATGService] Tank data emitted to clients');
       
       logger.debug(`✅ Processed ${tanks.filter(t => t.status === 'online').length} online tanks`);
     } catch (error) {
-      console.error('❌ [ATGService] Error handling ATG data:', error);
-      logger.error('Error handling ATG data:', error);
+      logger.error('❌ [ATGService] Error handling ATG data:', error);
+      throw error;
     }
   }
 
@@ -217,8 +227,8 @@ class ATGServiceClass {
         const numFieldsHex = resultString.substring(23, 25);
         const numFields = parseInt(numFieldsHex, 16);
         
-        // Use the CORRECTED timestamp parsing
-        const timestampFormatted = this.parseTimestamp(timestamp);
+        // Use CURRENT timestamp instead of ATG timestamp (which seems incorrect)
+        const timestampFormatted = new Date().toISOString().replace('T', ' ').slice(0, 19);
         
         // Parse float values
         const floatValues = [];
@@ -233,7 +243,8 @@ class ATGServiceClass {
         
         // Create tank object with both naming conventions
         const tank = {
-          timestamp: timestampFormatted,
+          timestamp: timestampFormatted, // Use current timestamp
+          atg_timestamp: this.parseATGTimestamp(timestamp), // Keep ATG timestamp for reference
           tank_number: tankNumber, // Database format
           tankNumber, // Frontend format
           totalVolume: Math.round((floatValues[0] || 0) * 10) / 10,
@@ -256,7 +267,8 @@ class ATGServiceClass {
         // Add detailed logging
         console.log('\n=== [ATGService] Tank Data Details ===');
         console.log(`🏷️ Tank Number: ${tank.tankNumber}`);
-        console.log(`🕐 Timestamp: ${tank.timestamp}`);
+        console.log(`🕐 Current Timestamp: ${tank.timestamp}`);
+        console.log(`🕐 ATG Timestamp: ${tank.atg_timestamp}`);
         console.log(`📊 Total Volume: ${tank.totalVolume} L`);
         console.log(`🛢️ TC Volume: ${tank.tcVolume} L`);
         console.log(`📏 Ullage: ${tank.ullage} L`);
@@ -279,75 +291,22 @@ class ATGServiceClass {
     }
   }
 
-  // CORRECTED timestamp parsing method based on your working code
-  parseTimestamp(timestamp) {
+  // Parse ATG timestamp for reference (but use current time for storage)
+  parseATGTimestamp(timestamp) {
     try {
-      console.log('🕐 [ATGService] Raw timestamp input:', timestamp);
-      
-      // Based on your clarification:
-      // ATG shows: 2025-07-03 12:16
-      // Raw timestamp: '0100250703'
-      // Today is: day(03) month(07) year(2025)
+      console.log('🕐 [ATGService] Raw ATG timestamp input:', timestamp);
       
       if (timestamp.length >= 10) {
-        // Try different interpretations since the format seems non-standard
-        
-        // Since your ATG shows 2025-07-03 and raw is '0100250703'
-        // Let me try a manual mapping approach
-        // For now, let's use current date with the time components that make sense
-        
-        const now = new Date();
-        const currentYear = 2025; // We know it should be 2025
-        const currentMonth = 7;   // We know it should be July (07)
-        const currentDay = 3;     // We know it should be day 3
-        
-        // Extract what looks like time components
-        // From '0100250703', if we assume the last 4 digits are time: 0703 = 07:03
-        const extractedHour = parseInt(timestamp.slice(-4, -2)) || 0;   // 07
-        const extractedMinute = parseInt(timestamp.slice(-2)) || 0;     // 03
-        
-        console.log('🔍 [ATGService] Manual extraction approach:', {
-          year: currentYear,
-          month: currentMonth, 
-          day: currentDay,
-          hour: extractedHour,
-          minute: extractedMinute
-        });
-        
-        // Use the manually determined values
-        const year = currentYear;
-        const month = currentMonth;
-        const day = currentDay;
-        const hour = extractedHour;
-        const minute = extractedMinute;
-        
-        // Validate and fix components
-        const validYear = year;
-        const validMonth = Math.max(1, Math.min(12, month));
-        const validDay = Math.max(1, Math.min(31, day));
-        const validHour = Math.max(0, Math.min(23, hour));
-        const validMinute = Math.max(0, Math.min(59, minute));
-
-        // Format with proper padding
-        const timestampFormatted = `${validYear}-${validMonth.toString().padStart(2, '0')}-${validDay.toString().padStart(2, '0')} ${validHour.toString().padStart(2, '0')}:${validMinute.toString().padStart(2, '0')}:00`;
-
-        console.log('✅ [ATGService] CORRECTED timestamp parsing:', {
-          raw: timestamp,
-          extractedTime: { hour: extractedHour, minute: extractedMinute },
-          validatedValues: { validYear, validMonth, validDay, validHour, validMinute },
-          formatted: timestampFormatted
-        });
-
-        return timestampFormatted;
+        // Try to extract meaningful components from ATG timestamp
+        // But since it's unreliable, we'll just return it as reference
+        return `ATG_RAW: ${timestamp}`;
       }
       
-      // Fallback to current time if parsing fails
-      console.log('⚠️ [ATGService] Timestamp parsing failed, using current time');
-      return new Date().toISOString().replace('T', ' ').slice(0, 19);
+      return 'ATG_INVALID';
       
     } catch (error) {
-      console.error('❌ [ATGService] Error parsing timestamp:', error);
-      return new Date().toISOString().replace('T', ' ').slice(0, 19);
+      console.error('❌ [ATGService] Error parsing ATG timestamp:', error);
+      return 'ATG_ERROR';
     }
   }
 
@@ -376,6 +335,53 @@ class ATGServiceClass {
     }
   }
 
+  // NEW: Store initial reading immediately upon connection
+  async storeInitialReading() {
+    console.log('🔄 [ATGService] Storing initial reading upon connection...');
+    this.lastStoredTime = new Date();
+    
+    // Send command to get initial data
+    setTimeout(async () => {
+      if (this.isConnected) {
+        await this.sendCommand();
+        // Wait a bit for response, then store
+        setTimeout(() => {
+          this.storeLatestReadings();
+        }, 2000);
+      }
+    }, 1000);
+  }
+
+  // NEW: Store latest readings to database
+  async storeLatestReadings() {
+    try {
+      console.log('\n=== [ATGService] HOURLY STORAGE ===');
+      console.log('💾 [ATGService] Storing latest tank readings to database...');
+      console.log('🕐 [ATGService] Storage time:', new Date().toISOString());
+      
+      if (this.latestTankData.size === 0) {
+        console.log('⚠️ [ATGService] No tank data available for storage');
+        return;
+      }
+
+      for (const [tankNumber, tankData] of this.latestTankData) {
+        if (tankData.status === 'online') {
+          console.log(`💾 [ATGService] Storing tank ${tankNumber} reading...`);
+          await this.saveTankReading(tankData);
+          console.log(`✅ [ATGService] Tank ${tankNumber} stored successfully`);
+        }
+      }
+
+      this.lastStoredTime = new Date();
+      console.log('✅ [ATGService] Hourly storage completed at:', this.lastStoredTime.toISOString());
+      console.log('===============================\n');
+      
+    } catch (error) {
+      console.error('❌ [ATGService] Error in hourly storage:', error);
+      logger.error('Error in hourly storage:', error);
+    }
+  }
+
   async saveTankReading(tankData) {
     try {
       console.log(`\n=== [ATGService] Saving Tank Data to Database ===`);
@@ -391,8 +397,7 @@ class ATGServiceClass {
         waterHeight: tankData.waterHeight,
         temperature: tankData.temperature
       });
-      console.log('================================================\n');
-      
+
       // First find or create the tank
       let tankResult = await DatabaseManager.query(
         'SELECT id FROM tanks WHERE tank_number = $1',
@@ -402,7 +407,6 @@ class ATGServiceClass {
       let tankId;
       if (tankResult.rows.length === 0) {
         console.log(`🔄 [ATGService] Tank ${tankData.tankNumber} not found, creating new tank...`);
-        // Create tank if it doesn't exist
         const createResult = await DatabaseManager.query(`
           INSERT INTO tanks (tank_number, capacity, is_active)
           VALUES ($1, 10000, true)
@@ -415,13 +419,25 @@ class ATGServiceClass {
         console.log(`✅ [ATGService] Found existing tank with ID: ${tankId}`);
       }
 
-      // Insert tank reading
-      console.log(`💾 [ATGService] Inserting tank reading for tank ${tankData.tankNumber}...`);
+      // Insert or update tank reading with UPSERT
+      console.log(`💾 [ATGService] Upserting tank reading for tank ${tankData.tankNumber}...`);
       await DatabaseManager.query(`
         INSERT INTO tank_readings (
           tank_id, reading_timestamp, total_volume, oil_volume, water_volume,
-          tc_volume, ullage, oil_height, water_height, temperature
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+          tc_volume, ullage, oil_height, water_height, temperature,
+          reading_type, interface_source
+        )
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'REAL_TIME', 'CONSOLE')
+        ON CONFLICT (tank_id, reading_timestamp)
+        DO UPDATE SET
+          total_volume = EXCLUDED.total_volume,
+          oil_volume = EXCLUDED.oil_volume,
+          water_volume = EXCLUDED.water_volume,
+          tc_volume = EXCLUDED.tc_volume,
+          ullage = EXCLUDED.ullage,
+          oil_height = EXCLUDED.oil_height,
+          water_height = EXCLUDED.water_height,
+          temperature = EXCLUDED.temperature
       `, [
         tankId,
         tankData.timestamp,
@@ -434,40 +450,70 @@ class ATGServiceClass {
         tankData.waterHeight,
         tankData.temperature
       ]);
-      console.log(`✅ [ATGService] Tank reading inserted successfully for tank ${tankData.tankNumber}`);
+
+      console.log(`✅ [ATGService] Tank reading upserted successfully for tank ${tankData.tankNumber}`);
 
       // Update tank current level
       console.log(`🔄 [ATGService] Updating tank ${tankData.tankNumber} current level...`);
       await DatabaseManager.query(`
         UPDATE tanks 
-        SET current_level = $1, temperature = $2, last_reading_at = $3
-        WHERE id = $4
-      `, [tankData.totalVolume, tankData.temperature, tankData.timestamp, tankId]);
+        SET current_level = $1, temperature = $2, last_reading_at = NOW()
+        WHERE id = $3
+      `, [tankData.totalVolume, tankData.temperature, tankId]);
+      
       console.log(`✅ [ATGService] Tank ${tankData.tankNumber} current level updated to ${tankData.totalVolume}L`);
 
     } catch (error) {
       console.error(`❌ [ATGService] Error saving tank ${tankData.tankNumber}:`, error.message);
       logger.error('Error saving tank reading:', error);
+      throw error;
     }
   }
 
   async startSimulation() {
     if (this.simulationMode && !this.isMonitoring) {
       this.isMonitoring = true;
+      
       console.log('🔄 [ATGService] Starting ATG simulation mode...');
+      
+      // Real-time simulation (every 5 seconds)
       this.monitoringInterval = setInterval(async () => {
         console.log('⛽ [ATGService] Generating simulated tank data...');
         const simulatedData = this.generateSimulatedTankData();
+        
         console.log('⛽ [ATGService] Simulated tank data generated:');
         simulatedData.forEach(tank => {
           console.log(`📊 Tank ${tank.tankNumber}: ${tank.totalVolume}L, ${tank.temperature}°C, Status: ${tank.status}`);
+          // Store latest data for hourly storage
+          this.latestTankData.set(tank.tankNumber, tank);
         });
-        // DO NOT SAVE TO DATABASE
-        // Just emit to clients
+        
+        // Emit to connected clients using emitToInterface
         console.log('📡 [ATGService] Emitting simulated tank data to WebSocket clients...');
-        SocketService.emit('tankData', simulatedData);
+        socketService.emitToInterface({
+          stationId: this.stationId || 'none',
+          interfaceCode: 'CONSOLE',
+          event: 'tankData',
+          payload: {
+            tanks: simulatedData,
+            stationId: this.stationId,
+            timestamp: new Date().toISOString()
+          }
+        });
         console.log('✅ [ATGService] Simulated tank data emitted to clients');
+        
       }, this.commandInterval);
+      
+      // Hourly storage for simulation
+      this.hourlyStorageInterval = setInterval(() => {
+        this.storeLatestReadings();
+      }, this.storageInterval);
+      
+      // Store initial reading
+      setTimeout(() => {
+        this.storeLatestReadings();
+      }, 5000);
+      
       console.log('✅ [ATGService] ATG simulation started successfully');
       logger.info('✅ ATG simulation started');
     }
@@ -518,11 +564,20 @@ class ATGServiceClass {
       await this.startSimulation();
     } else {
       this.isMonitoring = true;
+      
+      // Real-time monitoring (every 5 seconds)
       this.monitoringInterval = setInterval(async () => {
         await this.sendCommand();
       }, this.commandInterval);
       
+      // Hourly storage (every 1 hour)
+      this.hourlyStorageInterval = setInterval(() => {
+        this.storeLatestReadings();
+      }, this.storageInterval);
+      
       logger.info('✅ ATG monitoring started');
+      console.log('✅ [ATGService] Real-time monitoring: every 5 seconds');
+      console.log('✅ [ATGService] Database storage: every 1 hour');
     }
   }
 
@@ -532,10 +587,16 @@ class ATGServiceClass {
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
       this.monitoringInterval = null;
-      this.isMonitoring = false;
-      console.log('✅ [ATGService] ATG monitoring stopped');
-      logger.info('✅ ATG monitoring stopped');
     }
+    
+    if (this.hourlyStorageInterval) {
+      clearInterval(this.hourlyStorageInterval);
+      this.hourlyStorageInterval = null;
+    }
+    
+    this.isMonitoring = false;
+    console.log('✅ [ATGService] ATG monitoring stopped');
+    logger.info('✅ ATG monitoring stopped');
   }
 
   async sendCommand() {
@@ -563,36 +624,135 @@ class ATGServiceClass {
     }
   }
 
-  async getCurrentTankData() {
+  async getCurrentTankData({ stationId = null, interfaceCode = null } = {}) {
     try {
-      console.log('📊 [ATGService] Getting current tank data from database...');
+      console.log('📊 [ATGService] Getting current tank data...');
+      console.log('🏢 Station ID:', stationId || 'all');
+      console.log('🔌 Interface:', interfaceCode || 'any');
       
-      const result = await DatabaseManager.query(`
-        SELECT DISTINCT ON (t.tank_number) 
-          t.tank_number,
-          tr.total_volume,
-          tr.oil_volume,
-          tr.water_volume,
-          tr.tc_volume,
-          tr.ullage,
-          tr.oil_height,
-          tr.water_height,
-          tr.temperature,
-          tr.reading_timestamp,
-          p.name as product_name,
-          p.color as product_color
+      const params = [];
+      let where = 't.is_active = true';
+
+      if (stationId) {
+        params.push(stationId);
+        where += ` AND t.station_id = $${params.length}`;
+        console.log('🔍 Filtering by station:', stationId);
+      }
+
+      // Build interface filter SQL
+      const ifaceFilterSql = interfaceCode
+        ? `WHERE tr.tank_id = t.id AND tr.interface_source = $${params.length + 1}
+           ORDER BY tr.reading_timestamp DESC LIMIT 1`
+        : `WHERE tr.tank_id = t.id 
+           ORDER BY tr.reading_timestamp DESC LIMIT 1`;
+
+      if (interfaceCode) {
+        params.push(String(interfaceCode).toUpperCase());
+        console.log('🔍 Filtering by interface:', interfaceCode);
+      }
+
+      const sql = `
+        SELECT
+          t.id, t.station_id, t.tank_number, t.capacity,
+          t.current_level, t.temperature, t.last_reading_at,
+          p.name AS product_name, p.color AS product_color,
+          tr.reading_timestamp, tr.total_volume, tr.oil_volume, tr.water_volume,
+          tr.tc_volume, tr.ullage, tr.oil_height, tr.water_height, tr.interface_source
         FROM tanks t
-        LEFT JOIN tank_readings tr ON t.id = tr.tank_id
-        LEFT JOIN products p ON t.product_id = p.id
-        WHERE t.is_active = true
-        ORDER BY t.tank_number, tr.reading_timestamp DESC
-      `);
-      
-      console.log(`✅ [ATGService] Retrieved ${result.rows.length} tank records from database`);
+        LEFT JOIN products p ON p.id = t.product_id
+        LEFT JOIN LATERAL (
+          SELECT reading_timestamp, total_volume, oil_volume, water_volume,
+                 tc_volume, ullage, oil_height, water_height, interface_source
+          FROM tank_readings tr
+          ${ifaceFilterSql}
+        ) tr ON true
+        WHERE ${where}
+        ORDER BY t.tank_number::int NULLS LAST, t.tank_number
+      `;
+
+      console.log('🔍 Executing query with params:', params);
+      const result = await DatabaseManager.query(sql, params);
+      console.log(`✅ Retrieved ${result.rows.length} tank records`);
+
+      // Add detailed logging for debugging
+      result.rows.forEach(tank => {
+        console.log(`📊 Tank ${tank.tank_number}:`, {
+          volume: tank.total_volume,
+          interface: tank.interface_source,
+          lastReading: tank.reading_timestamp
+        });
+      });
+
       return result.rows;
     } catch (error) {
       console.error('❌ [ATGService] Error getting current tank data:', error);
       logger.error('Error getting current tank data:', error);
+      throw error;
+    }
+  }
+
+  // NEW: Get tank readings for specific period
+  async getTankReadingsForPeriod(tankId, startDate, endDate, limit = 100) {
+    try {
+      const query = `
+        SELECT 
+          tr.*,
+          t.tank_number,
+          p.name as product_name
+        FROM tank_readings tr
+        JOIN tanks t ON tr.tank_id = t.id
+        LEFT JOIN products p ON t.product_id = p.id
+        WHERE tr.tank_id = $1
+          AND tr.reading_timestamp BETWEEN $2 AND $3
+        ORDER BY tr.reading_timestamp DESC
+        LIMIT $4
+      `;
+      
+      const result = await DatabaseManager.query(query, [tankId, startDate, endDate, limit]);
+      return result.rows;
+    } catch (error) {
+      logger.error('Error getting tank readings for period:', error);
+      throw error;
+    }
+  }
+
+  // NEW: Get daily tank summary
+  async getDailyTankSummary(date, stationId = null) {
+    try {
+      let query = `
+        SELECT 
+          t.tank_number,
+          t.capacity,
+          p.name as product_name,
+          s.name as station_name,
+          COUNT(tr.id) as reading_count,
+          AVG(tr.total_volume) as avg_volume,
+          MIN(tr.total_volume) as min_volume,
+          MAX(tr.total_volume) as max_volume,
+          AVG(tr.temperature) as avg_temperature,
+          MIN(tr.temperature) as min_temperature,
+          MAX(tr.temperature) as max_temperature
+        FROM tanks t
+        LEFT JOIN tank_readings tr ON t.id = tr.tank_id 
+          AND DATE(tr.reading_timestamp) = $1
+        LEFT JOIN products p ON t.product_id = p.id
+        LEFT JOIN stations s ON t.station_id = s.id
+        WHERE t.is_active = true
+      `;
+      
+      const params = [date];
+      
+      if (stationId) {
+        query += ` AND t.station_id = $2`;
+        params.push(stationId);
+      }
+      
+      query += ` GROUP BY t.id, t.tank_number, t.capacity, p.name, s.name ORDER BY t.tank_number`;
+      
+      const result = await DatabaseManager.query(query, params);
+      return result.rows;
+    } catch (error) {
+      logger.error('Error getting daily tank summary:', error);
       throw error;
     }
   }
@@ -603,6 +763,8 @@ class ATGServiceClass {
       isMonitoring: this.isMonitoring,
       simulationMode: this.simulationMode,
       cacheSize: this.ieee754Cache.size,
+      lastStoredTime: this.lastStoredTime,
+      latestDataCount: this.latestTankData.size,
       lastUpdate: new Date().toISOString()
     };
     

@@ -31,6 +31,20 @@ const router = express.Router();
  */
 router.get('/', authenticate, authorize(['stations.view']), StationController.getAllStations);
 
+/**
+ * @swagger
+ * /api/stations/accessible:
+ *   get:
+ *     tags: [Stations]
+ *     summary: Get stations accessible to current user
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Accessible stations retrieved successfully
+ */
+router.get('/accessible', authenticate, StationController.getAccessibleStations);
+
 router.get('/:id', validateUUID('id'), authenticate, authorize(['stations.view']), StationController.getStationById);
 router.post('/', authenticate, authorize(['stations.create']), validateCreateStation, StationController.createStation);
 router.put('/:id', validateUUID('id'), authenticate, authorize(['stations.update']), validateUpdateStation, StationController.updateStation);

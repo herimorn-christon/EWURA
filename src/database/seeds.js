@@ -84,9 +84,7 @@ export async function seedDefaultData(pool) {
     await pool.query(`
       INSERT INTO interface_types (code, name, description) VALUES 
       ('NFPP', 'NFPP Interface', 'National Fuel Price Platform Interface'),
-      ('NPGIS', 'NPGIS Interface', 'National Petroleum GIS Interface'),
-      ('EFPPO', 'EFPPO Interface', 'Electronic Fuel Pricing and Point of Sale'),
-      ('PTS', 'PTS Interface', 'Petroleum Transaction System')
+      ('NPGIS', 'NPGIS Interface', 'National Petroleum GIS Interface')
       ON CONFLICT (code) DO NOTHING
     `);
 

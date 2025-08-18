@@ -117,6 +117,7 @@ export async function initializeSchema(pool) {
         coordinates POINT,
         ewura_license_no VARCHAR(50),
         operational_hours JSONB,
+        api_key VARCHAR(100) UNIQUE,  -- Added api_key column
         interface_type_id UUID REFERENCES interface_types(id),
         is_active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT NOW(),
@@ -242,6 +243,14 @@ export async function initializeSchema(pool) {
         tank_id UUID REFERENCES tanks(id),
         product_id UUID REFERENCES products(id),
         user_id UUID REFERENCES users(id),
+        
+        nozzle INTEGER,
+        transaction_id VARCHAR(100),
+        datetime_start TIMESTAMP,
+        datetime_end TIMESTAMP,
+        efd_serial_number VARCHAR(100),
+        fuel_grade_name VARCHAR(100),
+        
         transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
         transaction_time TIME NOT NULL DEFAULT CURRENT_TIME,
         volume DECIMAL(10,3) NOT NULL,
@@ -252,6 +261,11 @@ export async function initializeSchema(pool) {
         receipt_number VARCHAR(100),
         customer_name VARCHAR(200),
         card_description VARCHAR(100),
+        
+        interface_source VARCHAR(20),
+        sent_to_ewura BOOLEAN DEFAULT FALSE,
+        ewura_sent_at TIMESTAMP,
+        
         created_at TIMESTAMP DEFAULT NOW(),
         PRIMARY KEY (id, transaction_date)
       ) PARTITION BY RANGE (transaction_date)
@@ -310,6 +324,16 @@ export async function initializeSchema(pool) {
     await pool.query('CREATE INDEX IF NOT EXISTS idx_tanks_station ON tanks(station_id)');
     await pool.query('CREATE INDEX IF NOT EXISTS idx_tank_readings_tank_time ON tank_readings(tank_id, reading_timestamp DESC)');
     await pool.query('CREATE INDEX IF NOT EXISTS idx_sales_station_date ON sales_transactions(station_id, transaction_date)');
+    await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_sales_transaction_id 
+      ON sales_transactions(station_id, transaction_id) 
+      WHERE transaction_id IS NOT NULL
+    `);
+    await pool.query(`
+      CREATE INDEX IF NOT EXISTS idx_stations_api_key 
+      ON stations(api_key)
+      WHERE api_key IS NOT NULL
+    `);
 
     logger.info('✅ Database schema initialized successfully');
   } catch (error) {

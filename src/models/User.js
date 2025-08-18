@@ -1,4 +1,6 @@
 import { BaseModel } from './BaseModel.js';
+import { DatabaseManager } from '../database/DatabaseManager.js';
+import { logger } from '../utils/logger.js';
 import bcrypt from 'bcrypt';
 
 export class User extends BaseModel {
@@ -25,17 +27,27 @@ export class User extends BaseModel {
 
   async findByDeviceSerial(deviceSerial) {
     try {
-      const query = `
-        SELECT u.*, ur.code as role_code, ur.name as role_name, ur.permissions,
-               s.name as station_name, s.code as station_code
+      const result = await DatabaseManager.query(`
+        SELECT 
+          u.*,
+          ur.code as role_code,
+          ur.name as role_name,
+          ur.permissions as role_permissions,
+          s.name as station_name,
+          s.code as station_code,
+          s.interface_type_id,
+          it.code as interface_code,
+          it.name as interface_name
         FROM users u
         LEFT JOIN user_roles ur ON u.user_role_id = ur.id
         LEFT JOIN stations s ON u.station_id = s.id
+        LEFT JOIN interface_types it ON s.interface_type_id = it.id
         WHERE u.device_serial = $1 AND u.is_active = true
-      `;
-      const result = await this.db.query(query, [deviceSerial]);
-      return result.rows[0] || null;
+      `, [deviceSerial]);
+
+      return result.rows[0];
     } catch (error) {
+      logger.error('Error finding user by device serial:', error);
       throw error;
     }
   }

@@ -50,6 +50,15 @@ export class StationController {
         interfaceTypeId 
       } = req.body;
       
+      // Validate required fields
+      if (!interfaceTypeId) {
+        return ApiResponse.badRequest(res, 'Interface type is required');
+      }
+      
+      if (!code || !name || !taxpayerId) {
+        return ApiResponse.badRequest(res, 'Code, name and taxpayer ID are required');
+      }
+
       // Map camelCase to snake_case for database
       const stationData = {
         code,
@@ -89,6 +98,22 @@ export class StationController {
         isActive 
       } = req.body;
       
+      // Check if station exists before update
+      const existingStation = await stationModel.findById(id);
+      if (!existingStation) {
+        return ApiResponse.notFound(res, 'Station not found');
+      }
+
+      // Stricter interface type validation
+      if (!interfaceTypeId && !existingStation.interface_type_id) {
+        return ApiResponse.badRequest(res, 'Interface type is required');
+      }
+
+      // Prevent setting interface type to null/empty
+      if (interfaceTypeId === null || interfaceTypeId === '') {
+        return ApiResponse.badRequest(res, 'Interface type cannot be empty or null');
+      }
+      
       // Map camelCase to snake_case for database
       const updateData = {};
       if (code) updateData.code = code;
@@ -99,13 +124,20 @@ export class StationController {
       if (ewuraLicenseNo) updateData.ewura_license_no = ewuraLicenseNo;
       if (operationalHours) updateData.operational_hours = operationalHours;
       if (coordinates) updateData.coordinates = coordinates;
-      if (interfaceTypeId) updateData.interface_type_id = interfaceTypeId;
-      if (isActive !== undefined) updateData.is_active = isActive;
-      
-      const station = await stationModel.update(id, updateData);
-      if (!station) {
-        return ApiResponse.notFound(res, 'Station not found');
+      if (interfaceTypeId) {
+        // Additional validation to ensure interfaceTypeId is a valid UUID
+        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(interfaceTypeId)) {
+          return ApiResponse.badRequest(res, 'Invalid interface type ID format');
+        }
+        updateData.interface_type_id = interfaceTypeId;
       }
+      if (isActive !== undefined) updateData.is_active = isActive;
+
+      // Add validation at database level
+      const station = await stationModel.update(id, {
+        ...updateData,
+        interface_type_id: interfaceTypeId || existingStation.interface_type_id
+      });
       
       logger.info(`Station updated: ${station.name}`);
       ApiResponse.updated(res, { station });
@@ -144,6 +176,64 @@ export class StationController {
       ApiResponse.success(res, { summary });
     } catch (error) {
       logger.error('Get station summary error:', error);
+      next(error);
+    }
+  }
+
+  static async getAccessibleStations(req, res, next) {
+    try {
+      const userId = req.user.id;
+      const isAdmin = req.user.role === 'admin' || req.user.role_code === 'ADMIN';
+      console.log('User ID:', userId, 'Is Admin:', isAdmin);
+
+      // Accept same filters as getAllStations
+      const { isActive, regionId, includeInactive } = req.query;
+      const filters = {};
+      if (isActive !== undefined) filters.isActive = isActive === 'true';
+      if (regionId) filters.regionId = regionId;
+
+      let stations = [];
+
+      if (isAdmin) {
+        // Admin: reuse the general model method and allow an "includeInactive" override
+        if (includeInactive === 'true') {
+          // remove isActive filter so model returns both active & inactive
+          delete filters.isActive;
+        }
+        stations = await stationModel.getStationsWithDetails(filters);
+        console.log('Admin stations (model) returned:', stations.length, stations.map(s => s.id));
+
+        // Fallback only if model returned unexpectedly few results
+        if (!stations || stations.length < 1) {
+          const { DatabaseManager } = await import('../database/DatabaseManager.js');
+          const result = await DatabaseManager.query(`
+            SELECT s.id, s.name, s.code, s.is_active,
+                   it.code AS interface_code, it.name AS interface_type_name
+            FROM stations s
+            LEFT JOIN interface_types it ON s.interface_type_id = it.id
+            ORDER BY s.name
+          `, []);
+          stations = result.rows;
+          console.log('Fallback DB query returned:', stations.length, stations.map(s => s.id));
+        }
+      } else {
+        // Regular users: only stations assigned to the user
+        stations = await stationModel.getAccessibleStations(userId);
+        console.log('Accessible stations for user returned:', stations.length, stations.map(s => s.id));
+      }
+
+      ApiResponse.success(res, { 
+        stations: stations.map(station => ({
+          id: station.id,
+          name: station.name,
+          code: station.code,
+          interface_code: station.interface_code,
+          interface_name: station.interface_name || station.interface_type_name,
+          is_active: station.is_active
+        }))
+      });
+    } catch (error) {
+      logger.error('Get accessible stations error:', error);
       next(error);
     }
   }
