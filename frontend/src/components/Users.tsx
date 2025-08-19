@@ -105,17 +105,16 @@ const Users: React.FC = () => {
       return;
     }
 
+    // Only validate station if not admin
+    if (newUser.roleCode !== 'ADMIN' && !newUser.stationId) {
+      alert('Station selection is required for non-admin users');
+      return;
+    }
+
     try {
       await apiService.createUser({
-        deviceSerial: newUser.deviceSerial,
-        email: newUser.email,
-        username: newUser.username,
-        password: newUser.password,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        phone: newUser.phone,
-        roleCode: newUser.roleCode,
-        stationId: newUser.stationId, // <-- add this
+        ...newUser,
+        stationId: newUser.roleCode === 'ADMIN' ? null : newUser.stationId,
       });
       setShowUserModal(false);
       setNewUser({
@@ -346,8 +345,12 @@ const Users: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{user.station_name || 'N/A'}</div>
-                    <div className="text-xs text-gray-500">{user.station_code || 'N/A'}</div>
+                    <div className="text-sm text-gray-900">
+                      {user.role_code === 'ADMIN' ? 'No Station' : (user.station_name || 'N/A')}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {user.role_code === 'ADMIN' ? '-' : (user.station_code || 'N/A')}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
                     <div className="flex justify-end space-x-2">
@@ -532,25 +535,27 @@ const Users: React.FC = () => {
                 )}
 
                 {/* Station selection - always show the select field */}
-                <div>
-                  <label className="block text-sm font-medium text-black mb-1">
-                    Station
-                  </label>
-                  <select
-                    name="stationId"
-                    value={newUser.stationId || ""}
-                    onChange={e => setNewUser({ ...newUser, stationId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                    required
-                  >
-                    <option value="">Select Station</option>
-                    {stations.map(station => (
-                      <option key={station.id} value={station.id}>
-                        {station.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                {newUser.roleCode !== 'ADMIN' && (
+                  <div>
+                    <label className="block text-sm font-medium text-black mb-1">
+                      Station
+                    </label>
+                    <select
+                      name="stationId"
+                      value={newUser.stationId || ""}
+                      onChange={e => setNewUser({ ...newUser, stationId: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      required={newUser.roleCode !== 'ADMIN'}
+                    >
+                      <option value="">Select Station</option>
+                      {stations.map(station => (
+                        <option key={station.id} value={station.id}>
+                          {station.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
             </div>
 

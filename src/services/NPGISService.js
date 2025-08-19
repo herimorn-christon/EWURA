@@ -332,35 +332,76 @@ export class NPGISService extends BaseInterfaceService {
       logger.info(`[${this.interfaceCode}] Processing transaction data for station ${station?.code || 'UNKNOWN'}`);
 
       const apiKey = providedApiKey || null;
-      const globalKey = process.env.API_KEY || null;
 
       // If no station passed, resolve one:
       if (!station) {
-        // 1) try to find station by provided api key
+        // 1) Try to find non-admin station by provided api key
         if (apiKey) {
-          const byKey = await DatabaseManager.query('SELECT * FROM stations WHERE api_key = $1 AND is_active = true LIMIT 1', [apiKey]);
+          const byKey = await DatabaseManager.query(`
+            SELECT s.* 
+            FROM stations s
+            LEFT JOIN users u ON s.id = u.station_id
+            LEFT JOIN user_roles r ON u.user_role_id = r.id
+            WHERE s.api_key = $1 
+            AND s.is_active = true
+            AND NOT EXISTS (
+              SELECT 1 FROM users u2 
+              JOIN user_roles r2 ON u2.user_role_id = r2.id
+              WHERE u2.station_id = s.id 
+              AND r2.code = 'ADMIN'
+            )
+            LIMIT 1
+          `, [apiKey]);
+
           if (byKey?.rows?.[0]) {
             station = byKey.rows[0];
-            logger.info(`[${this.interfaceCode}] Resolved station by api_key: ${station.code}`);
+            logger.info(`[${this.interfaceCode}] Resolved non-admin station by api_key: ${station.code}`);
           }
         }
 
-        // 2) fallback to first active station
+        // 2) Fallback to first active non-admin station
         if (!station) {
-          const r2 = await DatabaseManager.query('SELECT * FROM stations WHERE is_active = true ORDER BY created_at LIMIT 1', []);
-          if (r2?.rows?.[0]) {
-            station = r2.rows[0];
-            logger.info(`[${this.interfaceCode}] Using first active station: ${station.code}`);
+          const nonAdminStation = await DatabaseManager.query(`
+            SELECT s.* 
+            FROM stations s
+            WHERE s.is_active = true 
+            AND NOT EXISTS (
+              SELECT 1 FROM users u 
+              JOIN user_roles r ON u.user_role_id = r.id
+              WHERE u.station_id = s.id 
+              AND r.code = 'ADMIN'
+            )
+            ORDER BY s.created_at 
+            LIMIT 1
+          `);
+
+          if (nonAdminStation?.rows?.[0]) {
+            station = nonAdminStation.rows[0];
+            logger.info(`[${this.interfaceCode}] Using first active non-admin station: ${station.code}`);
           }
+        }
+      } else {
+        // Verify provided station is not an admin station
+        const adminCheck = await DatabaseManager.query(`
+          SELECT 1
+          FROM users u
+          JOIN user_roles r ON u.user_role_id = r.id
+          WHERE u.station_id = $1 
+          AND r.code = 'ADMIN'
+        `, [station.id]);
+
+        if (adminCheck?.rows?.length > 0) {
+          logger.warn(`[${this.interfaceCode}] Skipping admin station ${station.code}`);
+          return { count: 0 };
         }
       }
 
       if (!station) {
-        logger.warn(`[${this.interfaceCode}] No station could be resolved for incoming transaction`);
+        logger.warn(`[${this.interfaceCode}] No non-admin station could be resolved for incoming transaction`);
         return { count: 0 };
       }
 
-      // Only use provided transactions, don't auto-generate
+      // Process transactions
       let txs = Array.isArray(transactionData?.transactions) ? transactionData.transactions : [];
       
       if (!txs || txs.length === 0) {
@@ -410,6 +451,9 @@ export class NPGISService extends BaseInterfaceService {
     }
   }
 
+
+
+  
   _generateSimulatedTransactions(count = 5) {
     const now = new Date();
     return Array.from({ length: count }).map((_, i) => ({

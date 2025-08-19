@@ -7,7 +7,9 @@ export class StationController {
     try {
       const { isActive, regionId } = req.query;
       
-      const filters = {};
+      const filters = {
+        excludeAdminStations: true // Add this flag
+      };
       if (isActive !== undefined) filters.isActive = isActive === 'true';
       if (regionId) filters.regionId = regionId;
       
@@ -183,43 +185,33 @@ export class StationController {
   static async getAccessibleStations(req, res, next) {
     try {
       const userId = req.user.id;
-      const isAdmin = req.user.role === 'admin' || req.user.role_code === 'ADMIN';
-      console.log('User ID:', userId, 'Is Admin:', isAdmin);
+      // Get role from user_roles table
+      const roleQuery = await DatabaseManager.query(`
+        SELECT r.code as role_code, r.name as role_name
+        FROM users u
+        JOIN user_roles r ON u.user_role_id = r.id
+        WHERE u.id = $1
+      `, [userId]);
+      
+      const isAdmin = roleQuery.rows[0]?.role_code === 'ADMIN';
+      console.log('User ID:', userId, 'Role:', roleQuery.rows[0]?.role_code);
 
-      // Accept same filters as getAllStations
       const { isActive, regionId, includeInactive } = req.query;
-      const filters = {};
+      const filters = {
+        excludeAdminStations: true
+      };
       if (isActive !== undefined) filters.isActive = isActive === 'true';
       if (regionId) filters.regionId = regionId;
 
       let stations = [];
 
       if (isAdmin) {
-        // Admin: reuse the general model method and allow an "includeInactive" override
         if (includeInactive === 'true') {
-          // remove isActive filter so model returns both active & inactive
           delete filters.isActive;
         }
         stations = await stationModel.getStationsWithDetails(filters);
-        console.log('Admin stations (model) returned:', stations.length, stations.map(s => s.id));
-
-        // Fallback only if model returned unexpectedly few results
-        if (!stations || stations.length < 1) {
-          const { DatabaseManager } = await import('../database/DatabaseManager.js');
-          const result = await DatabaseManager.query(`
-            SELECT s.id, s.name, s.code, s.is_active,
-                   it.code AS interface_code, it.name AS interface_type_name
-            FROM stations s
-            LEFT JOIN interface_types it ON s.interface_type_id = it.id
-            ORDER BY s.name
-          `, []);
-          stations = result.rows;
-          console.log('Fallback DB query returned:', stations.length, stations.map(s => s.id));
-        }
       } else {
-        // Regular users: only stations assigned to the user
-        stations = await stationModel.getAccessibleStations(userId);
-        console.log('Accessible stations for user returned:', stations.length, stations.map(s => s.id));
+        stations = await stationModel.getAccessibleStations(userId, true);
       }
 
       ApiResponse.success(res, { 
@@ -229,7 +221,9 @@ export class StationController {
           code: station.code,
           interface_code: station.interface_code,
           interface_name: station.interface_name || station.interface_type_name,
-          is_active: station.is_active
+          is_active: station.is_active,
+          role_code: station.role_code,
+          role_name: station.role_name
         }))
       });
     } catch (error) {

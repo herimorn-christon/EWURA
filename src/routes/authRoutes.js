@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
+import { authenticate, generateToken, logout } from '../middleware/auth.js';
 import { AuthController } from '../controllers/AuthController.js';
-import { validateRegister, validateLogin } from '../middleware/validation.js';
-import { authenticate } from '../middleware/auth.js';
+import { validateRegister } from '../middleware/validation.js';
 
-const router = express.Router();
+const router = Router();
 
 /**
  * @swagger
@@ -192,7 +192,7 @@ router.post('/register', validateRegister, AuthController.register);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/login', validateLogin, AuthController.login);
+router.post('/login', AuthController.login);
 
 /**
  * @swagger
@@ -217,7 +217,7 @@ router.post('/login', validateLogin, AuthController.login);
  *                   type: string
  *                   example: Logout successful
  */
-router.post('/logout', authenticate, AuthController.logout);
+router.post('/logout', authenticate, logout);
 
 /**
  * @swagger
@@ -248,7 +248,7 @@ router.post('/logout', authenticate, AuthController.logout);
  *                   type: string
  *                   example: Token refreshed successfully
  */
-router.post('/refresh', authenticate, AuthController.refreshToken);
+router.post('/refresh-token', AuthController.refreshToken);
 
 /**
  * @swagger

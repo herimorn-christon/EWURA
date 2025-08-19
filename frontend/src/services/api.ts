@@ -522,6 +522,36 @@ class ApiService {
     });
   }
 
+  async getReports(params?: any) {
+    const query = params ? `?${new URLSearchParams(params)}` : '';
+    return this.request(`/reports${query}`);
+  }
+
+  // EWURA Registration Methods
+  async getManagers() {
+    return this.request('/users/managers');
+  }
+
+  async getEwuraRegistrationData(managerId: string) {
+    return this.request(`/ewura/registration-data/${managerId}`);
+  }
+
+  async registerWithManager(managerId: string, data: { tranId: string; brandName: string; receiptCode: string }) {
+    return this.request(`/ewura/register-with-manager/${managerId}`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async getEwuraSubmissionHistory(params?: any) {
+    const query = params ? `?${new URLSearchParams(params)}` : '';
+    return this.request(`/ewura/history${query}`);
+  }
+
+  async validateEwuraCertificate() {
+    return this.request('/ewura/certificate/validate');
+  }
+
   async changePassword(currentPassword: string, newPassword: string) {
     return this.request('/auth/change-password', {
       method: 'POST', // <-- Change to POST if backend expects POST
@@ -666,12 +696,11 @@ class ApiService {
     return this.request(`/tanks/${tankId}/readings/period?startDate=${encodeURIComponent(startDate)}&endDate=${encodeURIComponent(endDate)}`);
   }
 
-  // Interface Types
+  // New Interface & Monitoring Methods
   async getInterfaceTypes() {
     return this.request('/interface-types');
   }
 
-  // Unified Interface Methods
   async getCurrentTankDataUnified(params?: any) {
     const query = params ? `?${new URLSearchParams(params)}` : '';
     return this.request(`/interface/tanks/current${query}`);
@@ -684,32 +713,12 @@ class ApiService {
     interfaceCode?: string;
   }) {
     const queryParams = new URLSearchParams();
-    
     if (params?.date) queryParams.append('date', params.date);
     if (params?.limit) queryParams.append('limit', params.limit);
     if (params?.stationId) queryParams.append('stationId', params.stationId);
     if (params?.interfaceCode) queryParams.append('interfaceCode', params.interfaceCode);
 
-    return this.request<{
-      transactions: Array<{
-        id: string;
-        transaction_id: string;
-        station_id: string;
-        pump_id?: string;
-        volume: number;
-        unit_price: number;
-        total_amount: number;
-        transaction_date: string;
-        transaction_time: string;
-        interface_source: string;
-        customer_name?: string;
-        fuel_grade_name?: string;
-        station?: {
-          name: string;
-          code: string;
-        };
-      }>;
-    }>('GET', `/interface/transactions${queryParams.toString() ? `?${queryParams.toString()}` : ''}`);
+    return this.request(`/interface/transactions${queryParams.toString() ? `?${queryParams.toString()}` : ''}`);
   }
 
   async getAccessibleStations() {
@@ -743,7 +752,7 @@ class ApiService {
     return this.request(`/interface/status${query}`);
   }
 
-  // Station API Key Management
+  // Station API Key Management (New)
   async getStationApiKey(stationId: string) {
     return this.request(`/stations/${stationId}/api-key`);
   }
@@ -751,6 +760,47 @@ class ApiService {
   async regenerateStationApiKey(stationId: string) {
     return this.request(`/stations/${stationId}/regenerate-api-key`, {
       method: 'POST'
+    });
+  }
+
+  // Analytics Methods (New)
+  async detectAnomalies(data: { stationId?: string; date?: string }) {
+    return this.request('/analytics/anomalies/detect', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async getRefillEvents(params?: any) {
+    const query = params ? `?${new URLSearchParams(params)}` : '';
+    return this.request(`/analytics/refills${query}`);
+  }
+
+  async getDailyLossAnalysis(params?: any) {
+    const query = params ? `?${new URLSearchParams(params)}` : '';
+    return this.request(`/analytics/daily-loss${query}`);
+  }
+
+  // Report Generation Methods (New)
+  async generateDailyReport(data: { stationId: string; date: string }) {
+    return this.request('/reports/daily/generate', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async exportReport(reportId: string, format: string = 'pdf') {
+    return this.request(`/reports/${reportId}/export?format=${format}`);
+  }
+
+  async getReportGenerationSettings() {
+    return this.request('/settings/report-generation');
+  }
+
+  async updateReportGenerationSettings(settings: any) {
+    return this.request('/settings/report-generation', {
+      method: 'PUT',
+      body: JSON.stringify(settings)
     });
   }
 }

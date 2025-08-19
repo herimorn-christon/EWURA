@@ -10,43 +10,50 @@ export class Station extends BaseModel {
 
   async getStationsWithDetails(filters = {}) {
     try {
+      const { isActive, regionId, excludeAdminStations } = filters;
+      
       let query = `
-        SELECT s.*, t.business_name as taxpayer_name, t.tin, t.vrn,
-               st.name as street_name, w.name as ward_name, d.name as district_name, r.name as region_name,
-               it.name as interface_type
+        SELECT s.*, 
+               it.code AS interface_code,
+               it.name AS interface_type_name,
+               r.code AS role_code,
+               r.name AS role_name
         FROM stations s
-        LEFT JOIN taxpayers t ON s.taxpayer_id = t.id
-        LEFT JOIN streets st ON s.street_id = st.id
-        LEFT JOIN wards w ON st.ward_id = w.id
-        LEFT JOIN districts d ON w.district_id = d.id
-        LEFT JOIN regions r ON d.region_id = r.id
         LEFT JOIN interface_types it ON s.interface_type_id = it.id
+        LEFT JOIN users u ON s.id = u.station_id
+        LEFT JOIN user_roles r ON u.user_role_id = r.id
+        WHERE 1=1
       `;
       
-      const conditions = [];
       const params = [];
       
-      if (filters.isActive !== undefined) {
-        // accept boolean or string 'true'
-        const isActive = filters.isActive === true || filters.isActive === 'true';
-        conditions.push(`s.is_active = $${params.length + 1}`);
+      if (isActive !== undefined) {
         params.push(isActive);
+        query += ` AND s.is_active = $${params.length}`;
       }
       
-      if (filters.regionId) {
-        conditions.push(`r.id = $${params.length + 1}`);
-        params.push(filters.regionId);
+      if (regionId) {
+        params.push(regionId);
+        query += ` AND s.region_id = $${params.length}`;
       }
       
-      if (conditions.length > 0) {
-        query += ` WHERE ${conditions.join(' AND ')}`;
+      if (excludeAdminStations) {
+        query += `
+          AND NOT EXISTS (
+            SELECT 1 FROM users u2 
+            JOIN user_roles r2 ON u2.user_role_id = r2.id
+            WHERE u2.station_id = s.id 
+            AND r2.code = 'ADMIN'
+          )
+        `;
       }
       
-      query += ` ORDER BY s.created_at DESC`;
+      query += ' ORDER BY s.name';
       
-      const result = await this.db.query(query, params);
+      const result = await DatabaseManager.query(query, params);
       return result.rows;
     } catch (error) {
+      logger.error('getStationsWithDetails error:', error);
       throw error;
     }
   }
@@ -178,23 +185,42 @@ export class Station extends BaseModel {
     }
   }
 
-  async getAccessibleStations(userId) {
-    const { rows } = await db.query(`
-      SELECT DISTINCT 
-        s.id,
-        s.name,
-        s.code,
-        s.is_active,
-        it.code as interface_code,
-        it.name as interface_type_name
-      FROM stations s
-      INNER JOIN user_stations us ON s.id = us.station_id
-      LEFT JOIN interface_types it ON s.interface_type_id = it.id
-      WHERE us.user_id = $1 AND s.is_active = true
-      ORDER BY s.name
-    `, [userId]);
-    
-    return rows;
+  async getAccessibleStations(userId, excludeAdminStations = false) {
+    try {
+      let query = `
+        SELECT DISTINCT s.*, 
+               it.code AS interface_code,
+               it.name AS interface_type_name,
+               r.code AS role_code,
+               r.name AS role_name
+        FROM stations s
+        LEFT JOIN interface_types it ON s.interface_type_id = it.id
+        LEFT JOIN users u ON s.id = u.station_id
+        LEFT JOIN user_roles r ON u.user_role_id = r.id
+        WHERE u.id = $1
+      `;
+      
+      const params = [userId];
+      
+      if (excludeAdminStations) {
+        query += `
+          AND NOT EXISTS (
+            SELECT 1 FROM users u2 
+            JOIN user_roles r2 ON u2.user_role_id = r2.id
+            WHERE u2.station_id = s.id 
+            AND r2.code = 'ADMIN'
+          )
+        `;
+      }
+      
+      query += ' ORDER BY s.name';
+      
+      const result = await DatabaseManager.query(query, params);
+      return result.rows;
+    } catch (error) {
+      logger.error('getAccessibleStations error:', error);
+      throw error;
+    }
   }
 }
 
