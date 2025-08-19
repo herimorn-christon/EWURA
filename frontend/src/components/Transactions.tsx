@@ -8,15 +8,32 @@ interface Transaction {
   id: string;
   transaction_id: string;
   station_id: string;
+  station_code: string;
+  station_name: string;
   pump_id?: string;
-  volume: number;
-  unit_price: number;
-  total_amount: number;
+  volume: number | string;
+  tc_volume: string;
+  unit_price: number | string;
+  total_amount: number | string;
+  discount_amount: string;
   transaction_date: string;
   transaction_time: string;
   interface_source: string;
   customer_name?: string;
+  card_description?: string;
+  created_at: string;
+  efd_serial_number?: string;
+  ewura_sent_at?: string;
+  sent_to_ewura: boolean;
   fuel_grade_name?: string;
+  payment_method?: string;
+  product_code?: string;
+  product_id?: string;
+  product_name?: string;
+  receipt_number?: string;
+  tank_id?: string;
+  user_id?: string;
+  user_name?: string;
   station?: {
     name: string;
     code: string;
@@ -180,9 +197,76 @@ const Transactions: React.FC = () => {
         params.interfaceCode = selectedInterface;
       }
 
+      console.log('Fetching transactions with params:', params);
       const response = await apiService.getTransactionsUnified(params);
       
+      console.log('Transactions API response:', {
+        error: response.error,
+        message: response.message,
+        count: response.data?.transactions?.length,
+        transactions: response.data?.transactions
+      });
+      
       if (!response.error && response.data?.transactions) {
+        // Fix: Remove 'r' prefix and fix string template syntax
+        console.log('New transactions:', response.data.transactions);
+        
+        // Log individual transactions for debugging
+        response.data.transactions.forEach((tx: Transaction, index: number) => {
+          console.log(`Transaction ${index + 1}:`, {
+            // Basic Info
+            id: tx.id,
+            transaction_id: tx.transaction_id,
+            station: {
+              id: tx.station_id,
+              name: tx.station_name,
+              code: tx.station_code
+            },
+            
+            // Transaction Details
+            volume: tx.volume,
+            tc_volume: tx.tc_volume,
+            unit_price: tx.unit_price,
+            total_amount: tx.total_amount,
+            discount_amount: tx.discount_amount,
+            
+            // Product Info
+            product: {
+              id: tx.product_id,
+              code: tx.product_code,
+              name: tx.product_name,
+              grade: tx.fuel_grade_name
+            },
+            
+            // Equipment Info
+            pump_id: tx.pump_id,
+            tank_id: tx.tank_id,
+            efd_serial: tx.efd_serial_number,
+            
+            // Customer & Payment
+            customer_name: tx.customer_name,
+            payment_method: tx.payment_method,
+            card_description: tx.card_description,
+            receipt_number: tx.receipt_number,
+            
+            // Timestamps & Status
+            date: tx.transaction_date,
+            time: tx.transaction_time,
+            created_at: tx.created_at,
+            interface: tx.interface_source,
+            ewura_status: {
+              sent: tx.sent_to_ewura,
+              sent_at: tx.ewura_sent_at
+            },
+            
+            // User Info
+            user: {
+              id: tx.user_id,
+              name: tx.user_name
+            }
+          });
+        });
+
         setTransactions(response.data.transactions);
       } else {
         setTransactions([]);
