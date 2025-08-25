@@ -14,6 +14,10 @@ let authRoutes, userRoutes, stationRoutes, tankRoutes, productRoutes, reportRout
     ewuraRoutes, analyticsRoutes, locationRoutes, taxpayerRoutes, transactionRoutes,
     interfaceRoutes, interfaceTypeRoutes; // <-- added interfaceRoutes here
 let errorHandler, notFoundHandler, requestLogger, healthCheck;
+let startBackupScheduler, stopBackupScheduler; // 👈 add this
+let settingsRoutes; // 👈 add settingsRoutes
+// after loading scheduler module:
+let loadSystemSettings, toBackupSchedulerConfig;
 
 try {
   console.log('🔄 Loading basic dependencies...');
@@ -131,6 +135,25 @@ try {
   console.error('❌ Error loading middleware modules:', error);
   process.exit(1);
 }
+try {
+  console.log('🔄 Loading scheduler module...');
+  const backupSchedulerModule = await import('./services/backupScheduler.js');
+  startBackupScheduler = backupSchedulerModule.startBackupScheduler;
+  stopBackupScheduler = backupSchedulerModule.stopBackupScheduler;
+  console.log('✅ Backup scheduler module loaded');
+} catch (error) {
+  console.error('❌ Error loading scheduler module:', error);
+  process.exit(1);
+}
+try {
+  const settingsSvc = await import('./services/settingsService.js');
+  loadSystemSettings = settingsSvc.loadSystemSettings;
+  toBackupSchedulerConfig = settingsSvc.toBackupSchedulerConfig;
+  console.log('✅ Settings service loaded');
+} catch (e) {
+  console.error('❌ Error loading settings service:', e);
+  process.exit(1);
+}
 
 try {
   console.log('🔄 Loading route modules...');
@@ -143,7 +166,9 @@ try {
   
   stationRoutes = (await import('./routes/stationRoutes.js')).default;
   console.log('✅ Station routes loaded');
-  
+  settingsRoutes = (await import('./routes/settingsRoutes.js')).default;
+console.log('✅ Settings routes loaded');
+
   tankRoutes = (await import('./routes/tankRoutes.js')).default;
   console.log('✅ Tank routes loaded');
   
@@ -165,6 +190,10 @@ try {
   
   locationRoutes = (await import('./routes/locationRoutes.js')).default;
   console.log('✅ Location routes loaded');
+  // Backup routes
+const backupRoutes = (await import('./routes/backupRoutes.js')).default;
+console.log('✅ Backup routes loaded');
+
   
   taxpayerRoutes = (await import('./routes/taxpayerRoutes.js')).default;
   console.log('✅ Taxpayer routes loaded');
@@ -220,7 +249,7 @@ function configureMiddleware() {
 }
 
 // Setup routes
-function setupRoutes() {
+async function setupRoutes() {
   console.log('🛣️ Setting up routes...');
 
   // API Documentation
@@ -247,7 +276,7 @@ function setupRoutes() {
     }
   };
 
-  // API Routes (guarded)
+  // Static imports
   registerRoute('/api/auth', authRoutes);
   registerRoute('/api/users', userRoutes);
   registerRoute('/api/stations', stationRoutes);
@@ -257,10 +286,18 @@ function setupRoutes() {
   registerRoute('/api/ewura', ewuraRoutes);
   registerRoute('/api/reports', reportRoutes);
   registerRoute('/api/analytics', analyticsRoutes);
-  registerRoute('/api/locations', locationRoutes);
   registerRoute('/api/taxpayers', taxpayerRoutes);
   registerRoute('/api/transactions', transactionRoutes);
   registerRoute('/api/interface-types', interfaceTypeRoutes);
+  registerRoute('/api/settings', settingsRoutes);
+
+
+  // Dynamic imports
+  const { default: backupRoutes } = await import('./routes/backupRoutes.js');
+  registerRoute('/api/backup', backupRoutes);
+
+  const { default: locationRoutes } = await import('./routes/locationRoutes.js');
+  registerRoute('/api/locations', locationRoutes);
 
   // Root endpoint
   app.get('/', (req, res) => {
@@ -333,6 +370,43 @@ async function initializeServices() {
   }
 }
 
+// // Start server
+// async function startServer() {
+//   try {
+//     console.log('🚀 Starting Gas Station Management Server...');
+    
+//     await initializeServices();
+//     configureMiddleware();
+//     setupRoutes();
+//     configureErrorHandling();
+    
+//     // Start server
+//     server.listen(PORT, HOST, () => {
+//       console.log('🎉 =================================');
+//       console.log('🚀 Gas Station Management Server');
+//       console.log('🎉 =================================');
+//       console.log(`📡 Server running on: http://${HOST}:${PORT}`);
+//       console.log(`📚 API Documentation: http://${HOST}:${PORT}/api-docs`);
+//       console.log(`🏥 Health Check: http://${HOST}:${PORT}/health`);
+//       console.log(`🔌 WebSocket Server: ws://${HOST}:${PORT}`);
+//       console.log('🎉 =================================');
+      
+//       logger.info('🚀 Gas Station Management Server started successfully', {
+//         port: PORT,
+//         host: HOST,
+//         environment: process.env.NODE_ENV || 'development',
+//         nodeVersion: process.version
+//       });
+//     });
+    
+//   } catch (error) {
+//     console.error('❌ Failed to start server:', error);
+//     logger.error('❌ Server startup failed:', error);
+//     process.exit(1);
+//   }
+// }
+
+
 // Start server
 async function startServer() {
   try {
@@ -340,8 +414,15 @@ async function startServer() {
     
     await initializeServices();
     configureMiddleware();
-    setupRoutes();
+    await setupRoutes();     // ✅ await this so all routes are mounted
     configureErrorHandling();
+     // 🔔 start auto-backup (runs every 1 minute)
+       const sys = await loadSystemSettings();
+       const cfg = toBackupSchedulerConfig(sys);
+    if (startBackupScheduler) {
+      startBackupScheduler(logger, cfg);
+      console.log('🗓️ Auto-backup scheduler started (every 1 minute)');
+    }
     
     // Start server
     server.listen(PORT, HOST, () => {
@@ -369,47 +450,96 @@ async function startServer() {
   }
 }
 
+
+
+
+
 // Handle graceful shutdown
+let _shuttingDown = false;
+
 async function gracefulShutdown() {
+  if (_shuttingDown) return; // prevent double-invoke
+  _shuttingDown = true;
+
+  const SHUTDOWN_TIMEOUT_MS = 20000; // 20s cap for whole shutdown
+
   console.log('🔄 Graceful shutdown initiated...');
   logger.info('🔄 Graceful shutdown initiated...');
-  
-  server.close(async () => {
-    console.log('🔄 HTTP server closed');
-    
-    try {
-      if (socketService?.stop) {
-        await socketService.stop();
-        console.log('✅ Socket service stopped');
-      }
-      
-      if (interfaceManager?.stopAllMonitoring) {
-        await interfaceManager.stopAllMonitoring();
-        console.log('✅ Interface monitoring stopped');
-      }
-      
-      if (nfppService?.stop) {
-        await nfppService.stop();
-        console.log('✅ NFPP service stopped');
-      }
-      
-      if (npgisService?.stop) {
-        await npgisService.stop();
-        console.log('✅ NPGIS service stopped');
-      }
-      
-      await RedisManager.close();
-      await dbManager.close();
-      
-      console.log('✅ All services stopped gracefully');
-      logger.info('✅ Server shutdown completed');
-      process.exit(0);
-    } catch (error) {
-      console.error('❌ Error during shutdown:', error);
-      logger.error('❌ Error during shutdown:', error);
-      process.exit(1);
+
+  // 1) Stop cron/schedulers first so no new jobs start mid-shutdown
+  try {
+    if (typeof stopBackupScheduler === 'function') {
+      stopBackupScheduler();
+      console.log('✅ Backup scheduler stopped');
     }
-  });
+  } catch (e) {
+    console.warn('⚠️ Failed to stop backup scheduler:', e?.message || e);
+  }
+
+  // Helper: wrap callbacks into a timeout-capped promise
+  const withTimeout = (p, label) =>
+    Promise.race([
+      p,
+      new Promise((_, rej) =>
+        setTimeout(() => rej(new Error(`${label} timed out`)), SHUTDOWN_TIMEOUT_MS)
+      ),
+    ]);
+
+  try {
+    // 2) Stop accepting new connections (Socket.io + HTTP server)
+    if (io?.close) {
+      await withTimeout(
+        new Promise((res) => io.close(res)),
+        'Socket.io close'
+      );
+      console.log('✅ Socket.io server closed');
+    }
+
+    await withTimeout(
+      new Promise((res) => server.close(() => res())),
+      'HTTP server close'
+    );
+    console.log('🔄 HTTP server closed');
+
+    // 3) Stop background services (in order, best-effort)
+    if (socketService?.stop) {
+      await socketService.stop();
+      console.log('✅ Socket service stopped');
+    }
+
+    if (interfaceManager?.stopAllMonitoring) {
+      await interfaceManager.stopAllMonitoring();
+      console.log('✅ Interface monitoring stopped');
+    }
+
+    if (nfppService?.stop) {
+      await nfppService.stop();
+      console.log('✅ NFPP service stopped');
+    }
+
+    if (npgisService?.stop) {
+      await npgisService.stop();
+      console.log('✅ NPGIS service stopped');
+    }
+
+    // 4) Close infra (cache/db) last
+    if (RedisManager?.close) {
+      await RedisManager.close();
+      console.log('✅ Redis connection closed');
+    }
+    if (dbManager?.close) {
+      await dbManager.close();
+      console.log('✅ Database connection closed');
+    }
+
+    console.log('✅ All services stopped gracefully');
+    logger.info('✅ Server shutdown completed');
+    process.exit(0);
+  } catch (error) {
+    console.error('❌ Error during shutdown:', error);
+    logger.error('❌ Error during shutdown:', error);
+    process.exit(1);
+  }
 }
 
 // Handle process signals

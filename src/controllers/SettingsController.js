@@ -1,43 +1,46 @@
+// src/controllers/SettingsController.js
 import { DatabaseManager } from '../database/DatabaseManager.js';
 import { ApiResponse } from '../views/ApiResponse.js';
 import { logger } from '../utils/logger.js';
 
+const camelToSnake = s => String(s).replace(/([A-Z])/g, '_$1').toLowerCase();
+const snakeToCamel = s => String(s).replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+const parseJsonSafe = t => { try { return JSON.parse(t); } catch { return t; } };
+const isAdmin = u => u?.role === 'admin' || u?.role_code === 'ADMIN' || u?.user_role?.code === 'ADMIN';
+const isHHMM = s => typeof s === 'string' && /^\d{2}:\d{2}$/.test(s);
+
 export class SettingsController {
-  
-  /**
-   * Get system settings
-   */
   static async getSystemSettings(req, res, next) {
     try {
       const user = req.user;
+      if (!isAdmin(user)) return ApiResponse.forbidden(res, 'Only administrators can view system settings');
 
-      // Only admin can view system settings
-      if (user.role !== 'admin' && user.role_code !== 'ADMIN') {
-        return ApiResponse.forbidden(res, 'Only administrators can view system settings');
-      }
-
+      // With UNIQUE(category,key), there should be only one row per pair.
+      // Still, we’ll sort by updated_at desc to be safe and pick first.
       const result = await DatabaseManager.query(`
         SELECT category, key, value, description, updated_at
         FROM system_settings
-        ORDER BY category, key
+        ORDER BY category, key, updated_at DESC, id DESC
       `);
 
-      // Group settings by category
-      const settings = result.rows.reduce((acc, row) => {
-        if (!acc[row.category]) {
-          acc[row.category] = {};
-        }
-        
-        try {
-          acc[row.category][row.key] = JSON.parse(row.value);
-        } catch {
-          acc[row.category][row.key] = row.value;
-        }
-        
-        return acc;
-      }, {});
+      const latest = {};
+      for (const row of result.rows) {
+        const cat = row.category;
+        const k = row.key;
+        if (!latest[cat]) latest[cat] = {};
+        if (latest[cat][k] === undefined) latest[cat][k] = parseJsonSafe(row.value);
+      }
 
-      // Provide defaults if no settings exist
+      // Convert snake_case -> camelCase
+      const norm = {};
+      for (const [cat, kv] of Object.entries(latest)) {
+        const camCat = snakeToCamel(cat);
+        norm[camCat] = norm[camCat] || {};
+        for (const [k, v] of Object.entries(kv)) {
+          norm[camCat][snakeToCamel(k)] = v;
+        }
+      }
+
       const defaultSettings = {
         reportGeneration: {
           generationTime: '07:30',
@@ -45,7 +48,7 @@ export class SettingsController {
           timezone: 'Africa/Dar_es_Salaam',
           autoGenerate: true,
           autoSendToEwura: true,
-          ...settings.report_generation
+          ...(norm.reportGeneration || {}),
         },
         monitoring: {
           tankPollInterval: 10,
@@ -53,14 +56,14 @@ export class SettingsController {
           anomalyThreshold: 100,
           refillThreshold: 500,
           enableAnomalyDetection: true,
-          ...settings.monitoring
+          ...(norm.monitoring || {}),
         },
         interface: {
           npgisEnabled: true,
           nfppEnabled: true,
           simulationMode: process.env.NODE_ENV !== 'production',
           connectionTimeout: 30,
-          ...settings.interface
+          ...(norm.interface || {}),
         },
         notifications: {
           emailEnabled: true,
@@ -68,77 +71,88 @@ export class SettingsController {
           lowLevelAlerts: true,
           anomalyAlerts: true,
           systemAlerts: true,
-          ...settings.notifications
+          ...(norm.notifications || {}),
         },
         backup: {
           autoBackup: true,
           backupTime: '02:00',
           retentionDays: 30,
           backupLocation: '/backups',
-          ...settings.backup
-        }
+          ...(norm.backup || {}),
+        },
       };
 
-      ApiResponse.success(res, { settings: defaultSettings });
-    } catch (error) {
-      logger.error('Get system settings error:', error);
-      next(error);
+      return ApiResponse.success(res, { settings: defaultSettings });
+    } catch (err) {
+      logger.error('Get system settings error:', err);
+      return next(err);
     }
   }
 
-  /**
-   * Update system settings
-   */
   static async updateSystemSettings(req, res, next) {
     try {
       const user = req.user;
-      const newSettings = req.body;
+      const newSettings = req.body || {};
+      if (!isAdmin(user)) return ApiResponse.forbidden(res, 'Only administrators can update system settings');
 
-      // Only admin can update system settings
-      if (user.role !== 'admin' && user.user_role?.code !== 'ADMIN') {
-        return ApiResponse.forbidden(res, 'Only administrators can update system settings');
+      const rg = newSettings.reportGeneration || {};
+      const bk = newSettings.backup || {};
+      if (rg.generationTime && !isHHMM(rg.generationTime)) {
+        return ApiResponse.badRequest(res, 'reportGeneration.generationTime must be HH:MM');
+      }
+      if (rg.ewuraSendTime && !isHHMM(rg.ewuraSendTime)) {
+        return ApiResponse.badRequest(res, 'reportGeneration.ewuraSendTime must be HH:MM');
+      }
+      if (bk.backupTime && !isHHMM(bk.backupTime)) {
+        return ApiResponse.badRequest(res, 'backup.backupTime must be HH:MM');
       }
 
-      // Update settings by category
       for (const [category, categorySettings] of Object.entries(newSettings)) {
-        for (const [key, value] of Object.entries(categorySettings as any)) {
-          await DatabaseManager.query(`
-            INSERT INTO system_settings (category, key, value, updated_by)
-            VALUES ($1, $2, $3, $4)
+        const catSnake = camelToSnake(category);
+        for (const [key, value] of Object.entries(categorySettings)) {
+          const keySnake = camelToSnake(key);
+          await DatabaseManager.query(
+            `
+            INSERT INTO system_settings (category, key, value, description, updated_by, created_at, updated_at)
+            VALUES ($1, $2, $3, NULL, $4, NOW(), NOW())
             ON CONFLICT (category, key)
-            DO UPDATE SET 
-              value = EXCLUDED.value, 
-              updated_by = EXCLUDED.updated_by, 
+            DO UPDATE SET
+              value = EXCLUDED.value,
+              updated_by = EXCLUDED.updated_by,
               updated_at = NOW()
-          `, [
-            category.replace(/([A-Z])/g, '_$1').toLowerCase(), // Convert camelCase to snake_case
-            key.replace(/([A-Z])/g, '_$1').toLowerCase(),
-            JSON.stringify(value),
-            user.id
-          ]);
+            `,
+            [catSnake, keySnake, JSON.stringify(value), user.id]
+          );
         }
       }
 
-      logger.info(`System settings updated by user: ${user.username}`);
+      // Best-effort: reconfigure backup scheduler
+      try {
+        const { loadSystemSettings, toBackupSchedulerConfig } = await import('../services/settingsService.js');
+        const { reconfigureFromSettings } = await import('../services/backupScheduler.js');
+        const sys = await loadSystemSettings();
+        const cfg = toBackupSchedulerConfig(sys);
+        reconfigureFromSettings(logger, cfg);
+      } catch (e) {
+        logger.warn('Backup scheduler reconfigure failed:', e?.message || e);
+      }
 
-      ApiResponse.success(res, {
+      logger.info(`System settings updated by user: ${user?.username}`);
+      return ApiResponse.success(res, {
         settings: newSettings,
-        message: 'System settings updated successfully'
+        message: 'System settings updated successfully',
       });
-    } catch (error) {
-      logger.error('Update system settings error:', error);
-      next(error);
+    } catch (err) {
+      logger.error('Update system settings error:', err);
+      return next(err);
     }
   }
 
-  /**
-   * Get user profile settings
-   */
   static async getProfile(req, res, next) {
     try {
       const user = req.user;
-
-      const result = await DatabaseManager.query(`
+      const result = await DatabaseManager.query(
+        `
         SELECT 
           u.id, u.username, u.email, u.first_name, u.last_name, u.phone,
           u.device_serial, u.last_login_at, u.created_at,
@@ -148,30 +162,23 @@ export class SettingsController {
         LEFT JOIN user_roles ur ON u.user_role_id = ur.id
         LEFT JOIN stations s ON u.station_id = s.id
         WHERE u.id = $1
-      `, [user.id]);
-
-      if (result.rows.length === 0) {
-        return ApiResponse.notFound(res, 'User not found');
-      }
-
-      const profile = result.rows[0];
-
-      ApiResponse.success(res, { profile });
-    } catch (error) {
-      logger.error('Get profile error:', error);
-      next(error);
+      `,
+        [user.id]
+      );
+      if (result.rows.length === 0) return ApiResponse.notFound(res, 'User not found');
+      return ApiResponse.success(res, { profile: result.rows[0] });
+    } catch (err) {
+      logger.error('Get profile error:', err);
+      return next(err);
     }
   }
 
-  /**
-   * Update user profile
-   */
   static async updateProfile(req, res, next) {
     try {
       const user = req.user;
       const { firstName, lastName, phone, email } = req.body;
-
-      const result = await DatabaseManager.query(`
+      const result = await DatabaseManager.query(
+        `
         UPDATE users 
         SET 
           first_name = COALESCE($1, first_name),
@@ -181,86 +188,75 @@ export class SettingsController {
           updated_at = NOW()
         WHERE id = $5
         RETURNING id, username, email, first_name, last_name, phone
-      `, [firstName, lastName, phone, email, user.id]);
-
-      logger.info(`Profile updated for user: ${user.username}`);
-
-      ApiResponse.success(res, {
+      `,
+        [firstName, lastName, phone, email, user.id]
+      );
+      return ApiResponse.success(res, {
         profile: result.rows[0],
-        message: 'Profile updated successfully'
+        message: 'Profile updated successfully',
       });
-    } catch (error) {
-      logger.error('Update profile error:', error);
-      next(error);
+    } catch (err) {
+      logger.error('Update profile error:', err);
+      return next(err);
     }
   }
 
-  /**
-   * Get notification settings
-   */
   static async getNotificationSettings(req, res, next) {
     try {
       const user = req.user;
-
-      const result = await DatabaseManager.query(`
+      const result = await DatabaseManager.query(
+        `
         SELECT key, value
         FROM user_settings
         WHERE user_id = $1 AND category = 'notifications'
-      `, [user.id]);
+      `,
+        [user.id]
+      );
 
       const settings = result.rows.reduce((acc, row) => {
-        try {
-          acc[row.key] = JSON.parse(row.value);
-        } catch {
-          acc[row.key] = row.value;
-        }
+        acc[snakeToCamel(row.key)] = parseJsonSafe(row.value);
         return acc;
       }, {});
 
-      // Provide defaults
       const defaultSettings = {
         emailEnabled: true,
         smsEnabled: false,
         lowLevelAlerts: true,
         anomalyAlerts: true,
         systemAlerts: true,
-        ...settings
+        ...settings,
       };
 
-      ApiResponse.success(res, { settings: defaultSettings });
-    } catch (error) {
-      logger.error('Get notification settings error:', error);
-      next(error);
+      return ApiResponse.success(res, { settings: defaultSettings });
+    } catch (err) {
+      logger.error('Get notification settings error:', err);
+      return next(err);
     }
   }
 
-  /**
-   * Update notification settings
-   */
   static async updateNotificationSettings(req, res, next) {
     try {
       const user = req.user;
-      const newSettings = req.body;
-
-      // Update each setting
+      const newSettings = req.body || {};
       for (const [key, value] of Object.entries(newSettings)) {
-        await DatabaseManager.query(`
-          INSERT INTO user_settings (user_id, category, key, value)
-          VALUES ($1, 'notifications', $2, $3)
+        const keySnake = camelToSnake(key);
+        await DatabaseManager.query(
+          `
+          INSERT INTO user_settings (user_id, category, key, value, created_at, updated_at)
+          VALUES ($1, 'notifications', $2, $3, NOW(), NOW())
           ON CONFLICT (user_id, category, key)
           DO UPDATE SET value = EXCLUDED.value, updated_at = NOW()
-        `, [user.id, key, JSON.stringify(value)]);
+        `,
+          [user.id, keySnake, JSON.stringify(value)]
+        );
       }
-
-      logger.info(`Notification settings updated for user: ${user.username}`);
-
-      ApiResponse.success(res, {
+      return ApiResponse.success(res, {
         settings: newSettings,
-        message: 'Notification settings updated successfully'
+        message: 'Notification settings updated successfully',
       });
-    } catch (error) {
-      logger.error('Update notification settings error:', error);
-      next(error);
+    } catch (err) {
+      logger.error('Update notification settings error:', err);
+      return next(err);
     }
   }
 }

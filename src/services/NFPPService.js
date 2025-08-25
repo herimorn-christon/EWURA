@@ -269,79 +269,78 @@ export class NFPPService extends BaseInterfaceService {
     logger.info(`[${this.interfaceCode}] Starting monitoring...`);
 
     try {
-      // Check station interface type
-      const stationQuery = await DatabaseManager.query(`
-        SELECT s.*, i.code as interface_code, i.name as interface_name
-        FROM stations s 
-        LEFT JOIN interface_types i ON s.interface_type_id = i.id
-        WHERE s.id = $1 AND s.is_active = true
-      `, [this.stationId]);
+      let station = null;
 
-      let station = stationQuery?.rows?.[0]; // Changed to let since we might reassign
-      
-      if (!station) {
-        // Find first non-admin station if none specified
-        if (!this.stationId) {
-          const nonAdminStation = await DatabaseManager.query(`
-            SELECT s.*, i.code as interface_code
-            FROM stations s
-            LEFT JOIN interface_types i ON s.interface_type_id = i.id
-            WHERE s.is_active = true 
-            AND s.id NOT IN (
-              SELECT DISTINCT s2.id 
-              FROM stations s2
-              JOIN users u ON s2.id = u.station_id
-              WHERE u.role_code = 'ADMIN'
-            )
-            ORDER BY s.created_at 
-            LIMIT 1
-          `);
+      // Polling loop to check for station registration
+      const resolveStation = async () => {
+        while (!station) {
+          try {
+            const stationQuery = await DatabaseManager.query(`
+              SELECT s.*, i.code as interface_code, i.name as interface_name
+              FROM stations s 
+              LEFT JOIN interface_types i ON s.interface_type_id = i.id
+              WHERE s.is_active = true AND s.interface_type_id IS NOT NULL
+              ORDER BY s.created_at
+              LIMIT 1
+            `);
 
-          if (nonAdminStation?.rows?.[0]) {
-            station = nonAdminStation.rows[0];
-            this.stationId = station.id;
-            logger.info(`[${this.interfaceCode}] Using first non-admin station: ${station.code}`);
+            station = stationQuery?.rows?.[0];
+
+            if (!station) {
+              logger.warn(`[${this.interfaceCode}] No active station found. Retrying in 10 seconds...`);
+              await new Promise(resolve => setTimeout(resolve, 10000)); // Wait 10 seconds before retrying
+            }
+          } catch (error) {
+            logger.error(`[${this.interfaceCode}] Error during station resolution:`, error);
+            await new Promise(resolve => setTimeout(resolve, 10000)); // Wait 10 seconds before retrying
           }
         }
+      };
 
-        if (!station) {
-          logger.error(`[${this.interfaceCode}] No suitable station found`);
-          return;
+      // Start the polling loop in the background
+      resolveStation();
+
+      // Continue monitoring once a station is resolved
+      const checkStationResolved = setInterval(async () => {
+        if (station) {
+          clearInterval(checkStationResolved);
+
+          // Only proceed if station uses NFPP interface
+          if (station.interface_code !== 'NFPP') {
+            logger.info(`[${this.interfaceCode}] Station ${station.code} uses ${station.interface_code || 'unknown'} interface - skipping NFPP monitoring`);
+            return;
+          }
+
+          this.stationId = station.id;
+          this.isMonitoring = true;
+
+          logger.info(`[${this.interfaceCode}] Monitoring started for station ${station.code}`);
+
+          // Generate simulated transactions in dev mode
+          if (this.simulationMode) {
+            try {
+              const simulatedTxs = this._generateSimulatedTransactions(5);
+              await this.receiveTransactionData({ transactions: simulatedTxs }, station);
+              logger.info(`[${this.interfaceCode}] Injected ${simulatedTxs.length} simulated transactions for station ${station.code}`);
+            } catch (err) {
+              logger.error(`[${this.interfaceCode}] Failed to inject simulated transactions:`, err);
+            }
+          }
+
+          // Start monitoring loops
+          this.probeInterval = setInterval(async () => {
+            await this.probesLoop();
+          }, this.probePollSeconds * 1000);
+
+          this.transactionInterval = setInterval(async () => {
+            await this.transactionsLoop();
+          }, this.txPollMinutes * 60 * 1000);
+
+          // Start immediately
+          setTimeout(() => this.probesLoop(), 1000);
+          setTimeout(() => this.transactionsLoop(), 2000);
         }
-      }
-
-      // Only proceed if station uses NFPP interface
-      if (station.interface_code !== 'NFPP') {
-        logger.info(`[${this.interfaceCode}] Station ${station.code} uses ${station.interface_code || 'unknown'} interface - skipping NFPP monitoring`);
-        return;
-      }
-
-      this.isMonitoring = true;
-
-      // Generate simulated transactions in dev mode
-      if (this.simulationMode) {
-        try {
-          const simulatedTxs = this._generateSimulatedTransactions(5);
-          await this.receiveTransactionData({ transactions: simulatedTxs }, station);
-          logger.info(`[${this.interfaceCode}] Injected ${simulatedTxs.length} simulated transactions for station ${station.code}`);
-        } catch (err) {
-          logger.error(`[${this.interfaceCode}] Failed to inject simulated transactions:`, err);
-        }
-      }
-
-      // Start monitoring loops
-      this.probeInterval = setInterval(async () => {
-        await this.probesLoop();
-      }, this.probePollSeconds * 1000);
-
-      this.transactionInterval = setInterval(async () => {
-        await this.transactionsLoop();
-      }, this.txPollMinutes * 60 * 1000);
-
-      // Start immediately
-      setTimeout(() => this.probesLoop(), 1000);
-      setTimeout(() => this.transactionsLoop(), 2000);
-
+      }, 1000); // Check every second if the station is resolved
     } catch (error) {
       logger.error(`[${this.interfaceCode}] Error starting monitoring:`, error);
       this.isMonitoring = false;
@@ -351,7 +350,7 @@ export class NFPPService extends BaseInterfaceService {
   async stopMonitoring() {
     logger.info(`[${this.interfaceCode}] Stopping monitoring...`);
     
-    if (this.probeInterval) {
+    if (probeInterval) {
       clearInterval(this.probeInterval);
       this.probeInterval = null;
     }

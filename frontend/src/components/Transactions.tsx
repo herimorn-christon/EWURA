@@ -60,6 +60,7 @@ const Transactions: React.FC = () => {
   const { user } = useAuth();
 
   const isAdmin = user?.role === 'admin' || user?.role_code === 'ADMIN';
+  console.log('User role:', user?.role, 'Is admin:', isAdmin);
 
   useEffect(() => {
     fetchStations();
@@ -130,49 +131,124 @@ const Transactions: React.FC = () => {
       console.error('Error fetching interface types:', err);
     }
   };
+const fetchStations = async () => {
+  try {
+    const me = user || {};
+    const isAdmin = me?.role === 'admin' || me?.role_code === 'ADMIN';
+    const myStationId =
+      me?.stationId || me?.station_id || me?.station?.id || null;
 
-  const fetchStations = async () => {
-    try {
-      const response = await apiService.getAccessibleStations();
-      console.log('getAccessibleStations response raw:', response);
+    // 1) First try "accessible" list (scoped for the user)
+    let resp = await apiService.getAccessibleStations();
+    console.log('getAccessibleStations raw:', resp);
 
-      let stationList = !response.error && response.data?.stations ? response.data.stations : [];
+    let stationList =
+      !resp.error && (resp.data?.stations || resp.data)?.length
+        ? (resp.data.stations || resp.data)
+        : [];
 
-      // If admin and accessible list is small, fetch full stations list as fallback
-      if (isAdmin && (!stationList || stationList.length < 2)) {
-        try {
-          const allResp = await apiService.getStations();
-          console.log('getStations (fallback) response:', allResp);
-          if (!allResp.error && allResp.data?.stations && allResp.data.stations.length > stationList.length) {
-            stationList = allResp.data.stations;
-          }
-        } catch (err) {
-          console.warn('Fallback getStations failed:', err);
+    // 2) If admin and accessible is too small, try full list
+    if (isAdmin && stationList.length < 2) {
+      try {
+        const allResp = await apiService.getStations();
+        console.log('getStations (fallback) raw:', allResp);
+        if (!allResp.error && allResp.data?.stations?.length) {
+          stationList = allResp.data.stations;
         }
+      } catch (e) {
+        console.warn('Fallback getStations failed:', e);
       }
+    }
 
-      const normalized = stationList.map((s: any) => ({
-        id: s.id,
-        name: s.name,
-        code: s.code,
-        interface_code: s.interface_code || s.interfaceType?.code || s.interface_type_code || s.interface_type?.code || null,
-        interface_name: s.interface_name || s.interface_type_name || s.interfaceType?.name || s.interface_type?.name || null,
-        is_active: s.is_active
-      }));
+    // Helper: get id from any shape
+    const pickId = (s: any) => s?.id || s?.station_id || s?.stationId || null;
 
-      console.log('Normalized stations:', normalized);
-      setStations(normalized);
-      
-      // Set default station for non-admin users
-      if (!isAdmin && normalized.length > 0) {
+    // 3) Filtering rules
+    let filtered: any[] = [];
+
+    if (!isAdmin) {
+      // Non-admin: only their own station (if present)
+      filtered = stationList.filter((s: any) => pickId(s) === myStationId);
+      // If not present in list, try to inject a minimal entry so UI still works
+      if (!filtered.length && myStationId) {
+        const mine = stationList.find((s: any) => pickId(s) === myStationId);
+        if (mine) filtered = [mine];
+      }
+    } else {
+      // Admin: exclude "admin-related" stations
+      filtered = stationList.filter((s: any) => {
+        const sid = pickId(s);
+
+        // exclude my own station id
+        if (myStationId && sid === myStationId) return false;
+
+        // common flags/fields that indicate an admin-owned/admin-managed station
+        const adminOwnerId = s.adminId || s.admin_id || s.owner_admin_id;
+        const ownerRole =
+          (s.owner_role || s.ownerRole || s.managed_by_role || s.managedByRole || '')
+            .toString()
+            .toUpperCase();
+        const isAdminStation =
+          !!s.is_admin_station || !!s.admin_station || !!s.managed_by_admin;
+
+        if (adminOwnerId && adminOwnerId === me?.id) return false;
+        if (ownerRole === 'ADMIN') return false;
+        if (isAdminStation) return false;
+
+        return true;
+      });
+    }
+
+    console.log('Filtered stations:', filtered);
+
+    // 4) Normalize
+    const normalized = filtered.map((s: any) => ({
+      id: pickId(s),
+      name: s.name || s.station_name || '',
+      code: s.code || s.station_code || '',
+      interface_code:
+        s.interface_code ||
+        s.interfaceType?.code ||
+        s.interface_type_code ||
+        s.interface_type?.code ||
+        null,
+      interface_name:
+        s.interface_name ||
+        s.interface_type_name ||
+        s.interfaceType?.name ||
+        s.interface_type?.name ||
+        null,
+      is_active: s.is_active ?? s.active ?? true,
+    }));
+
+    console.log('Normalized stations:', normalized);
+    setStations(normalized);
+
+    // 5) Default selections
+    if (!isAdmin) {
+      // lock to the user station
+      if (normalized.length > 0) {
         setSelectedStation(normalized[0].id);
         setSelectedInterface(normalized[0].interface_code || '');
+      } else if (myStationId) {
+        // ensure something is selected if list ended empty
+        setSelectedStation(myStationId);
       }
-    } catch (error) {
-      console.error('Error fetching stations:', error);
-      toast.error('Failed to fetch stations');
+    } else {
+      // admin: keep whatever is selected; if empty and we have stations, select first
+      if (!selectedStation && normalized.length > 0) {
+        setSelectedStation(normalized[0].id);
+      }
+      if (!selectedInterface && normalized.length > 0) {
+        setSelectedInterface(normalized[0].interface_code || '');
+      }
     }
-  };
+  } catch (error) {
+    console.error('Error fetching stations:', error);
+    toast.error('Failed to fetch stations');
+  }
+};
+
 
   const fetchTransactions = async () => {
     try {

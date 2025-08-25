@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiService from "../services/api";
-import { Plus, X, Search as SearchIcon, Pencil } from "lucide-react";
+import { Plus, X, Search as SearchIcon, Pencil, Copy } from "lucide-react";
 
 interface Taxpayer {
   id?: string;
@@ -20,6 +20,7 @@ interface Taxpayer {
 }
 
 interface Station {
+  interface_type_name: ReactNode;
   id?: string;
   code: string;
   name: string;
@@ -90,6 +91,10 @@ export default function Stations() {
   const [streets, setStreets] = useState<any[]>([]);
   const [streetSearch, setStreetSearch] = useState("");
 
+  // New state for previewing station details
+  const [previewStation, setPreviewStation] = useState<Station | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
   // Fetch all data
   useEffect(() => {
     fetchStations();
@@ -153,34 +158,40 @@ export default function Stations() {
   };
 
   const fetchStations = async () => {
-    const res = await apiService.getStations();
-    console.log("Fetched stations:", res.data);
-    
-    const mapped = (res.data?.stations || []).map((s: any) => ({
-      id: s.id,
-      code: s.code,
-      name: s.name,
-      taxpayerId: s.taxpayer_id,
-      taxpayerName: s.taxpayer_name,
-      tin: s.tin,
-      vrn: s.vrn,
-      regionName: s.region_name,
-      districtName: s.district_name,
-      wardName: s.ward_name,
-      streetId: s.street_id,
-      streetName: s.street_name,
-      address: s.address,
-      ewuraLicenseNo: s.ewura_license_no,
-      interfaceType: s.interface_type,
-      interfaceTypeId: s.interface_type_id,
-      coordinates: s.coordinates,
-      isActive: s.is_active,
-      operationalHours: s.operational_hours,
-      createdAt: s.created_at,
-      updatedAt: s.updated_at
-    }));
-    
-    setStations(mapped);
+    try {
+      const res = await apiService.getStations();
+      console.log("Fetched stations:", res.data);
+
+      const mapped = (res.data?.stations || []).map((s: any) => ({
+        id: s.id,
+        code: s.code,
+        name: s.name,
+        taxpayerId: s.taxpayer_id,
+        taxpayerName: s.taxpayer_name,
+        tin: s.tin,
+        vrn: s.vrn,
+        regionName: s.region_name,
+        districtName: s.district_name,
+        wardName: s.ward_name,
+        streetId: s.street_id,
+        streetName: s.street_name,
+        address: s.address,
+        ewuraLicenseNo: s.ewura_license_no,
+        interfaceType: s.interface_type,
+        interfaceTypeId: s.interface_type_id,
+        interfaceTypeName: s.interface_type_name,
+        apiKey: s.api_key, // Ensure this field is mapped
+        coordinates: s.coordinates,
+        isActive: s.is_active,
+        operationalHours: s.operational_hours,
+        createdAt: s.created_at,
+        updatedAt: s.updated_at
+      }));
+
+      setStations(mapped);
+    } catch (error) {
+      console.error("Failed to fetch stations:", error);
+    }
   };
 
   // Update address when region, district, or ward changes
@@ -388,6 +399,24 @@ export default function Stations() {
       s.address.toLowerCase().includes(search.toLowerCase())
   );
 
+  const openPreviewModal = (station: Station) => {
+    setPreviewStation(station);
+  };
+
+  const closePreviewModal = () => {
+    setPreviewStation(null);
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
+  };
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000); // Hide toast after 3 seconds
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Station Management</h1>
@@ -426,7 +455,7 @@ export default function Stations() {
           </tr>
         </thead>
         <tbody>
-          {filteredStations.map(station => (
+          {filteredStations.map((station) => (
             <tr key={station.id}>
               <td className="px-6 py-3">{station.code}</td>
               <td className="px-6 py-3">{station.name}</td>
@@ -437,20 +466,24 @@ export default function Stations() {
                   <div className="text-xs text-gray-500">TIN: {station.tin}</div>
                 </div>
               </td>
-              <td className="px-6 py-3">{station.interfaceType}</td>
+              <td className="px-6 py-3">{station.interfaceTypeName || "N/A"}</td>
               <td className="px-6 py-3">
-                <span className={`px-2 py-1 rounded-full text-xs ${station.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                  {station.isActive ? 'Active' : 'Inactive'}
+                <span
+                  className={`px-2 py-1 rounded-full text-xs ${
+                    station.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {station.isActive ? "Active" : "Inactive"}
                 </span>
               </td>
               <td className="px-6 py-3">
                 <button
                   className="inline-flex items-center justify-center bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full p-2 transition-colors duration-150"
-                  onClick={() => openModal(station)}
-                  title="Edit"
+                  onClick={() => openPreviewModal(station)}
+                  title="View API Key"
                   type="button"
                 >
-                  <Pencil className="w-4 h-4" />
+                  <Copy className="w-4 h-4" />
                 </button>
               </td>
             </tr>
@@ -667,6 +700,70 @@ export default function Stations() {
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Preview Modal */}
+      {previewStation && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-lg relative shadow-lg">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b px-6 py-4">
+              <h3 className="text-xl font-bold">Station Details</h3>
+              <button
+                className="text-gray-500 hover:text-gray-700"
+                onClick={closePreviewModal}
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-4">
+              <div className="mb-4">
+                <strong>Station Name:</strong> {previewStation.name}
+              </div>
+              <div className="mb-4">
+                <strong>Station Code:</strong> {previewStation.code}
+              </div>
+              <div className="mb-4">
+                <strong>EWURA License:</strong> {previewStation.ewuraLicenseNo}
+              </div>
+              <div className="mb-4">
+                <strong>Interface Type:</strong> {previewStation.interfaceTypeName || "N/A"}
+              </div>
+              <div className="mb-4">
+                <strong>API Key:</strong>
+                <div className="flex items-center">
+                  <span className="mr-2">{previewStation.apiKey? 
+                  'Copy Below': "N/A"}</span>
+                  <button
+                    className="text-blue-500 hover:text-blue-700"
+                    onClick={() => copyToClipboard(previewStation.apiKey || "")}
+                  >
+                    <Copy className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end border-t px-6 py-4">
+              <button
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                onClick={closePreviewModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+          {toastMessage}
         </div>
       )}
     </div>

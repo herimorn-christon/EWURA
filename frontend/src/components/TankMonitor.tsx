@@ -106,40 +106,23 @@ const TankMonitor: React.FC = () => {
 
   const fetchStations = async () => {
     try {
-      const response = await apiService.getAccessibleStations();
-      console.log('getAccessibleStations response raw:', response);
+      const response = await apiService.getStations();
+      console.log('getStations response raw:', response);
 
-      let stationList = !response.error && response.data?.stations ? response.data.stations : [];
+      if (!response.error && response.data?.stations) {
+        let stationList = response.data.stations;
 
-      // If admin and accessible list is unexpectedly small, fetch full stations list as fallback
-      if (isAdmin && (!stationList || stationList.length < 2)) {
-        try {
-          const allResp = await apiService.getStations();
-          console.log('getStations (fallback) response:', allResp);
-          if (!allResp.error && allResp.data?.stations && allResp.data.stations.length > stationList.length) {
-            stationList = allResp.data.stations;
-          }
-        } catch (err) {
-          console.warn('Fallback getStations failed:', err);
+        // Filter out stations where the admin is the manager
+        if (isAdmin) {
+          stationList = stationList.filter((station: any) => station.adminId !== user?.id);
         }
-      }
 
-      const normalized = stationList.map((s: any) => ({
-        id: s.id,
-        name: s.name,
-        code: s.code,
-        interface_code: s.interface_code || s.interfaceType?.code || s.interface_type_code || s.interface_type?.code || null,
-        interface_name: s.interface_name || s.interface_type_name || s.interfaceType?.name || s.interface_type?.name || null,
-        is_active: s.is_active
-      }));
+        setStations(stationList);
 
-      console.log('Normalized stations:', normalized.map((s: any) => ({ id: s.id, interface_code: s.interface_code, interface_name: s.interface_name })));
-
-      setStations(normalized);
-      
-      // Set default station for non-admin users
-      if (!isAdmin && normalized.length > 0) {
-        setSelectedStation(normalized[0].id);
+        // Set the first station as default if none is selected
+        if (!selectedStation && stationList.length > 0) {
+          setSelectedStation(stationList[0].id);
+        }
       }
     } catch (error) {
       console.error('Error fetching stations:', error);

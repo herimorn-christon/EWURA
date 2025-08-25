@@ -572,4 +572,282 @@ async function createMonitoringTables(pool) {
       UNIQUE(station_id, hour_start)
     )
   `);
+
+  // Daily Reports Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS daily_reports (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      station_id UUID NOT NULL REFERENCES stations(id),
+      report_date DATE NOT NULL,
+      report_no VARCHAR(20) NOT NULL,
+      generated_at TIMESTAMP DEFAULT NOW(),
+      number_of_transactions INTEGER DEFAULT 0,
+      total_volume DECIMAL(12,2) DEFAULT 0,
+      total_amount DECIMAL(15,2) DEFAULT 0,
+      total_discount DECIMAL(12,2) DEFAULT 0,
+      interface_source VARCHAR(20),
+      tank_readings JSONB,
+      refill_events JSONB,
+      anomalies JSONB,
+      raw_data JSONB,
+      status VARCHAR(20) DEFAULT 'PENDING',
+      ewura_sent BOOLEAN DEFAULT FALSE,
+      ewura_sent_at TIMESTAMP,
+      ewura_response JSONB,
+      ewura_error TEXT,
+      ewura_retry_count INTEGER DEFAULT 0,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(station_id, report_date)
+    )
+  `);
+
+  // System Settings Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS system_settings (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      category VARCHAR(50) NOT NULL,
+      key VARCHAR(100) NOT NULL,
+      value TEXT NOT NULL,
+      description TEXT,
+      updated_by UUID REFERENCES users(id),
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(category, key)
+    )
+  `);
+
+  // User Settings Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS user_settings (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      user_id UUID NOT NULL REFERENCES users(id),
+      category VARCHAR(50) NOT NULL,
+      key VARCHAR(100) NOT NULL,
+      value TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(user_id, category, key)
+    )
+  `);
+
+  // Anomaly Alerts Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS anomaly_alerts (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      station_id UUID NOT NULL REFERENCES stations(id),
+      tank_id UUID REFERENCES tanks(id),
+      anomaly_type VARCHAR(50) NOT NULL,
+      volume_difference DECIMAL(10,2),
+      detected_at TIMESTAMP DEFAULT NOW(),
+      description TEXT,
+      acknowledged BOOLEAN DEFAULT FALSE,
+      acknowledged_by UUID REFERENCES users(id),
+      acknowledged_at TIMESTAMP,
+      resolved BOOLEAN DEFAULT FALSE,
+      resolved_by UUID REFERENCES users(id),
+      resolved_at TIMESTAMP,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+
+  // EWURA Queue Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ewura_queue (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      station_id UUID NOT NULL REFERENCES stations(id),
+      report_id UUID REFERENCES daily_reports(id),
+      submission_type VARCHAR(50) NOT NULL,
+      payload JSONB NOT NULL,
+      status VARCHAR(20) DEFAULT 'PENDING',
+      scheduled_at TIMESTAMP DEFAULT NOW(),
+      submitted_at TIMESTAMP,
+      response_data JSONB,
+      error_message TEXT,
+      retry_count INTEGER DEFAULT 0,
+      max_retries INTEGER DEFAULT 3,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+
+  // EWURA Submissions Table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ewura_submissions (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      station_id UUID REFERENCES stations(id),
+      submission_type VARCHAR(50) NOT NULL,
+      transaction_id VARCHAR(100),
+      xml_data TEXT NOT NULL,
+      response_data TEXT,
+      status VARCHAR(20) DEFAULT 'pending',
+      submitted_at TIMESTAMP DEFAULT NOW(),
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+
+  // Create indexes for performance
+  await pool.query(`
+    CREATE INDEX IF NOT EXISTS idx_daily_reports_station_date ON daily_reports(station_id, report_date);
+    CREATE INDEX IF NOT EXISTS idx_daily_reports_ewura_sent ON daily_reports(ewura_sent, status);
+    CREATE INDEX IF NOT EXISTS idx_system_settings_category ON system_settings(category);
+    CREATE INDEX IF NOT EXISTS idx_user_settings_user_category ON user_settings(user_id, category);
+    CREATE INDEX IF NOT EXISTS idx_anomaly_alerts_station_date ON anomaly_alerts(station_id, detected_at);
+    CREATE INDEX IF NOT EXISTS idx_ewura_queue_status ON ewura_queue(status, scheduled_at);
+    CREATE INDEX IF NOT EXISTS idx_ewura_submissions_station ON ewura_submissions(station_id, submission_type);
+  `);
+
+  // Insert default system settings
+ await pool.query(`
+  CREATE TABLE IF NOT EXISTS system_settings (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    category VARCHAR(50) NOT NULL,
+    key VARCHAR(100) NOT NULL,
+    value TEXT NOT NULL,            -- value must be JSON text (e.g. "07:00", true, 30)
+    description TEXT,
+    updated_by UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+  )
+`);
+
+/**
+ * Helper: convert camelCase/MixedCase -> snake_case lower in SQL.
+ * We’ll do this in a trigger, so your app can send any case.
+ */
+await pool.query(`
+  CREATE OR REPLACE FUNCTION to_snake_lower(txt TEXT)
+  RETURNS TEXT AS $$
+  BEGIN
+    -- Insert underscore before capitals, then lower
+    RETURN LOWER(REGEXP_REPLACE(txt, '([A-Z])', '_\\1', 'g'));
+  END;
+  $$ LANGUAGE plpgsql IMMUTABLE;
+`);
+
+/**
+ * BEFORE INSERT/UPDATE trigger:
+ *  - Normalize category/key -> snake_case lower
+ *  - Enforce HH:MM for *_time keys we care about
+ *  - Ensure value is valid JSON text
+ *  - Touch updated_at
+ */
+await pool.query(`
+  CREATE OR REPLACE FUNCTION normalize_system_setting()
+  RETURNS TRIGGER AS $$
+  DECLARE
+    v_json JSONB;
+    k TEXT;
+  BEGIN
+    NEW.category := to_snake_lower(TRIM(NEW.category));
+    NEW.key      := to_snake_lower(TRIM(NEW.key));
+
+    -- Validate JSON: raise if invalid
+    BEGIN
+      v_json := NEW.value::jsonb;
+    EXCEPTION WHEN others THEN
+      RAISE EXCEPTION 'system_settings.value must be valid JSON text. Got: % (category=%, key=%)', NEW.value, NEW.category, NEW.key;
+    END;
+
+    -- Enforce HH:MM for time keys we know
+    IF NEW.key IN ('generation_time','ewura_send_time','backup_time') THEN
+      -- Expect JSON string e.g. "07:30"
+      IF jsonb_typeof(v_json) <> 'string' THEN
+        RAISE EXCEPTION '%.% must be a JSON string like "07:30"', NEW.category, NEW.key;
+      END IF;
+
+      k := (v_json #>> '{}');  -- extract as text
+      IF k !~ '^[0-9]{2}:[0-9]{2}$' THEN
+        RAISE EXCEPTION '%.% must match HH:MM (e.g. "07:30"). Got: %', NEW.category, NEW.key, k;
+      END IF;
+    END IF;
+
+    -- Timestamps
+    IF TG_OP = 'INSERT' THEN
+      NEW.created_at := COALESCE(NEW.created_at, NOW());
+    END IF;
+    NEW.updated_at := NOW();
+
+    RETURN NEW;
+  END;
+  $$ LANGUAGE plpgsql;
+`);
+
+await pool.query(`DROP TRIGGER IF EXISTS trg_normalize_system_setting ON system_settings`);
+await pool.query(`
+  CREATE TRIGGER trg_normalize_system_setting
+  BEFORE INSERT OR UPDATE ON system_settings
+  FOR EACH ROW EXECUTE PROCEDURE normalize_system_setting()
+`);
+
+/**
+ * Case-insensitive uniqueness:
+ *   - You already have UNIQUE(category,key), but this one guarantees uniqueness
+ *     across any casing/spacing variations BEFORE we normalized historically.
+ *   - Keep both (the trigger normalizes new data; this index protects historical data).
+ */
+await pool.query(`
+  DO $$
+  BEGIN
+    -- backfill: normalize any historical rows to avoid CI conflicts
+    UPDATE system_settings
+    SET category = to_snake_lower(TRIM(category)),
+        key      = to_snake_lower(TRIM(key)),
+        updated_at = NOW();
+
+    -- remove exact duplicates keeping the newest
+    DELETE FROM system_settings a
+    USING system_settings b
+    WHERE a.id < b.id
+      AND a.category = b.category
+      AND a.key = b.key;
+
+  EXCEPTION WHEN OTHERS THEN
+    -- ignore if table empty
+    NULL;
+  END$$
+`);
+
+await pool.query(`
+  DO $$
+  BEGIN
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_indexes 
+      WHERE schemaname = 'public' AND indexname = 'ux_system_settings_cat_key_ci'
+    ) THEN
+      EXECUTE '
+        CREATE UNIQUE INDEX ux_system_settings_cat_key_ci
+        ON system_settings (LOWER(category), LOWER(key))
+      ';
+    END IF;
+  END$$
+`);
+
+/**
+ * Seed defaults (only if missing).
+ * NOTE: time values must be JSON strings, booleans/ints as valid JSON literals.
+ */
+await pool.query(`
+  INSERT INTO system_settings (category, key, value, description)
+  VALUES
+    ('report_generation', 'generation_time', '"07:30"', 'Daily report generation time'),
+    ('report_generation', 'ewura_send_time', '"08:00"', 'EWURA submission time'),
+    ('report_generation', 'timezone', '"Africa/Dar_es_Salaam"', 'System timezone'),
+    ('report_generation', 'auto_generate', 'true', 'Auto-generate daily reports'),
+    ('report_generation', 'auto_send_to_ewura', 'true', 'Auto-send reports to EWURA'),
+    ('monitoring', 'tank_poll_interval', '10', 'Tank polling interval in seconds'),
+    ('monitoring', 'transaction_poll_interval', '300', 'Transaction polling interval in seconds'),
+    ('monitoring', 'anomaly_threshold', '100', 'Anomaly detection threshold in liters'),
+    ('monitoring', 'refill_threshold', '500', 'Refill detection threshold in liters'),
+    ('monitoring', 'enable_anomaly_detection', 'true', 'Enable automatic anomaly detection'),
+    ('interface', 'npgis_enabled', 'true', 'Enable NPGIS interface'),
+    ('interface', 'nfpp_enabled', 'true', 'Enable NFPP interface'),
+    ('interface', 'simulation_mode', 'false', 'Enable simulation mode'),
+    ('interface', 'connection_timeout', '30', 'Interface connection timeout in seconds'),
+    ('backup', 'auto_backup', 'true', 'Enable automatic backups'),
+    ('backup', 'backup_time', '"02:00"', 'Daily backup time'),
+    ('backup', 'retention_days', '30', 'Backup retention period in days'),
+    ('backup', 'backup_location', '"/backups"', 'Filesystem path for backups')
+  ON CONFLICT (category, key) DO NOTHING
+`);
 }

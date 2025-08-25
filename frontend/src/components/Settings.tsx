@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Save, Clock, Database, Shield, Bell, Monitor, AlertTriangle, CheckCircle, RefreshCw } from 'lucide-react';
 import apiService from '../services/api';
 import { toast } from 'react-hot-toast';
@@ -47,43 +47,65 @@ const Settings: React.FC = () => {
       ewuraSendTime: '08:00',
       timezone: 'Africa/Dar_es_Salaam',
       autoGenerate: true,
-      autoSendToEwura: true
+      autoSendToEwura: true,
     },
     monitoring: {
       tankPollInterval: 10,
       transactionPollInterval: 300,
       anomalyThreshold: 100,
       refillThreshold: 500,
-      enableAnomalyDetection: true
+      enableAnomalyDetection: true,
     },
     interface: {
       npgisEnabled: true,
       nfppEnabled: true,
       simulationMode: false,
-      connectionTimeout: 30
+      connectionTimeout: 30,
     },
     notifications: {
       emailEnabled: true,
       smsEnabled: false,
       lowLevelAlerts: true,
       anomalyAlerts: true,
-      systemAlerts: true
+      systemAlerts: true,
     },
     backup: {
       autoBackup: true,
       backupTime: '02:00',
       retentionDays: 30,
-      backupLocation: '/backups'
-    }
+      backupLocation: '/backups',
+    },
   });
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState('report');
-  const [testResults, setTestResults] = useState<any>({});
+  const [reloading, setReloading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'report' | 'monitoring' | 'interface' | 'notifications' | 'backup'>('report');
+  const [testResults, setTestResults] = useState<Record<string, any>>({});
   const { user } = useAuth();
 
   const isAdmin = user?.role === 'admin' || user?.role_code === 'ADMIN';
+
+  const fetchSettings = useCallback(async () => {
+    setReloading(true);
+    try {
+      const response = await apiService.getSystemSettings(); // GET /api/settings/system
+      if (!response?.error && response?.data?.settings) {
+        setSettings(response.data.settings);
+        return true;
+      } else {
+        toast.error(response?.message || 'Failed to fetch system settings');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      toast.error('Failed to fetch system settings');
+      return false;
+    } finally {
+      setReloading(false);
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (isAdmin) {
@@ -91,21 +113,7 @@ const Settings: React.FC = () => {
     } else {
       setLoading(false);
     }
-  }, [isAdmin]);
-
-  const fetchSettings = async () => {
-    try {
-      const response = await apiService.getSystemSettings();
-      if (!response.error && response.data?.settings) {
-        setSettings(response.data.settings);
-      }
-    } catch (error) {
-      console.error('Error fetching settings:', error);
-      toast.error('Failed to fetch system settings');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [isAdmin, fetchSettings]);
 
   const handleSaveSettings = async () => {
     if (!isAdmin) {
@@ -115,11 +123,14 @@ const Settings: React.FC = () => {
 
     setSaving(true);
     try {
-      const response = await apiService.updateSystemSettings(settings);
-      if (!response.error) {
+      const response = await apiService.updateSystemSettings(settings); // PUT /api/settings/system
+      if (!response?.error) {
         toast.success('Settings saved successfully');
+        // ⤴️ Immediately refetch from server to reflect canonical values & any server-side merges
+        const ok = await fetchSettings();
+        if (ok) toast.success('Settings refreshed from server');
       } else {
-        toast.error(response.message || 'Failed to save settings');
+        toast.error(response?.message || 'Failed to save settings');
       }
     } catch (error) {
       console.error('Error saving settings:', error);
@@ -134,36 +145,36 @@ const Settings: React.FC = () => {
       const response = await apiService.getInterfaceStatus({ interfaceCode: interfaceType });
       if (!response.error && response.data?.statuses) {
         const status = response.data.statuses[interfaceType];
-        setTestResults({
-          ...testResults,
+        setTestResults((prev) => ({
+          ...prev,
           [interfaceType]: {
             success: status?.isConnected || false,
             message: status?.isConnected ? 'Connection successful' : 'Connection failed',
-            details: status
-          }
-        });
+            details: status,
+          },
+        }));
         toast.success(`${interfaceType} connection test completed`);
       }
-    } catch (error) {
-      setTestResults({
-        ...testResults,
+    } catch (error: any) {
+      setTestResults((prev) => ({
+        ...prev,
         [interfaceType]: {
           success: false,
           message: 'Connection test failed',
-          error: error.message
-        }
-      });
+          error: error?.message,
+        },
+      }));
       toast.error(`${interfaceType} connection test failed`);
     }
   };
 
   const triggerBackup = async () => {
     try {
-      const response = await apiService.createBackup();
+      const response = await apiService.createBackup(); // POST /api/backup/create
       if (!response.error) {
         toast.success('Backup created successfully');
       } else {
-        toast.error('Failed to create backup');
+        toast.error(response.message || 'Failed to create backup');
       }
     } catch (error) {
       console.error('Error creating backup:', error);
@@ -176,8 +187,8 @@ const Settings: React.FC = () => {
     { id: 'monitoring', name: 'Monitoring', icon: Monitor },
     { id: 'interface', name: 'Interfaces', icon: Database },
     { id: 'notifications', name: 'Notifications', icon: Bell },
-    { id: 'backup', name: 'Backup & Security', icon: Shield }
-  ];
+    { id: 'backup', name: 'Backup & Security', icon: Shield },
+  ] as const;
 
   if (!isAdmin) {
     return (
@@ -207,14 +218,27 @@ const Settings: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">System Settings</h1>
           <p className="text-gray-600">Configure system behavior and preferences</p>
         </div>
-        <button
-          onClick={handleSaveSettings}
-          disabled={saving}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center space-x-2 transition-colors disabled:opacity-50"
-        >
-          {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          <span>{saving ? 'Saving...' : 'Save All Settings'}</span>
-        </button>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={fetchSettings}
+            disabled={reloading}
+            className="bg-white text-gray-700 px-4 py-2 rounded-lg border hover:bg-gray-50 flex items-center space-x-2 transition-colors disabled:opacity-50"
+            title="Reload from server"
+          >
+            {reloading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+            <span>{reloading ? 'Refreshing...' : 'Reload'}</span>
+          </button>
+
+          <button
+            onClick={handleSaveSettings}
+            disabled={saving}
+            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center space-x-2 transition-colors disabled:opacity-50"
+          >
+            {saving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            <span>{saving ? 'Saving...' : 'Save All Settings'}</span>
+          </button>
+        </div>
       </div>
 
       {/* Tabs */}
@@ -243,35 +267,34 @@ const Settings: React.FC = () => {
           {activeTab === 'report' && (
             <div className="space-y-6">
               <h3 className="text-lg font-medium text-gray-900">Report Generation Settings</h3>
-              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Daily Report Generation Time
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Daily Report Generation Time</label>
                   <input
                     type="time"
                     value={settings.reportGeneration.generationTime}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      reportGeneration: { ...settings.reportGeneration, generationTime: e.target.value }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        reportGeneration: { ...prev.reportGeneration, generationTime: e.target.value },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                   <p className="text-xs text-gray-500 mt-1">Time when daily reports are automatically generated</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    EWURA Send Time
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">EWURA Send Time</label>
                   <input
                     type="time"
                     value={settings.reportGeneration.ewuraSendTime}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      reportGeneration: { ...settings.reportGeneration, ewuraSendTime: e.target.value }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        reportGeneration: { ...prev.reportGeneration, ewuraSendTime: e.target.value },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                   <p className="text-xs text-gray-500 mt-1">Time when reports are sent to EWURA</p>
@@ -281,10 +304,12 @@ const Settings: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Timezone</label>
                   <select
                     value={settings.reportGeneration.timezone}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      reportGeneration: { ...settings.reportGeneration, timezone: e.target.value }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        reportGeneration: { ...prev.reportGeneration, timezone: e.target.value },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="Africa/Dar_es_Salaam">Africa/Dar_es_Salaam (EAT)</option>
@@ -298,10 +323,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.reportGeneration.autoGenerate}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      reportGeneration: { ...settings.reportGeneration, autoGenerate: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        reportGeneration: { ...prev.reportGeneration, autoGenerate: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Auto-generate daily reports</span>
@@ -311,10 +338,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.reportGeneration.autoSendToEwura}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      reportGeneration: { ...settings.reportGeneration, autoSendToEwura: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        reportGeneration: { ...prev.reportGeneration, autoSendToEwura: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Auto-send reports to EWURA</span>
@@ -327,73 +356,73 @@ const Settings: React.FC = () => {
           {activeTab === 'monitoring' && (
             <div className="space-y-6">
               <h3 className="text-lg font-medium text-gray-900">Monitoring Settings</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Tank Poll Interval (seconds)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Tank Poll Interval (seconds)</label>
                   <input
                     type="number"
                     min="5"
                     max="300"
                     value={settings.monitoring.tankPollInterval}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, tankPollInterval: parseInt(e.target.value) }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        monitoring: { ...prev.monitoring, tankPollInterval: parseInt(e.target.value, 10) || 0 },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Transaction Poll Interval (seconds)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Transaction Poll Interval (seconds)</label>
                   <input
                     type="number"
                     min="30"
                     max="3600"
                     value={settings.monitoring.transactionPollInterval}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, transactionPollInterval: parseInt(e.target.value) }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        monitoring: { ...prev.monitoring, transactionPollInterval: parseInt(e.target.value, 10) || 0 },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Anomaly Threshold (Liters)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Anomaly Threshold (Liters)</label>
                   <input
                     type="number"
                     min="10"
                     max="1000"
                     value={settings.monitoring.anomalyThreshold}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, anomalyThreshold: parseInt(e.target.value) }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        monitoring: { ...prev.monitoring, anomalyThreshold: parseInt(e.target.value, 10) || 0 },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                   <p className="text-xs text-gray-500 mt-1">Minimum volume decrease to flag as anomaly</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Refill Threshold (Liters)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Refill Threshold (Liters)</label>
                   <input
                     type="number"
                     min="100"
                     max="5000"
                     value={settings.monitoring.refillThreshold}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, refillThreshold: parseInt(e.target.value) }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        monitoring: { ...prev.monitoring, refillThreshold: parseInt(e.target.value, 10) || 0 },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                   <p className="text-xs text-gray-500 mt-1">Minimum volume increase to detect as refill</p>
@@ -405,10 +434,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.monitoring.enableAnomalyDetection}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, enableAnomalyDetection: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        monitoring: { ...prev.monitoring, enableAnomalyDetection: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Enable automatic anomaly detection</span>
@@ -421,7 +452,7 @@ const Settings: React.FC = () => {
           {activeTab === 'interface' && (
             <div className="space-y-6">
               <h3 className="text-lg font-medium text-gray-900">Interface Settings</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                   <div className="flex items-center space-x-3">
@@ -444,10 +475,12 @@ const Settings: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={settings.interface.npgisEnabled}
-                        onChange={(e) => setSettings({
-                          ...settings,
-                          interface: { ...settings.interface, npgisEnabled: e.target.checked }
-                        })}
+                        onChange={(e) =>
+                          setSettings((prev) => ({
+                            ...prev,
+                            interface: { ...prev.interface, npgisEnabled: e.target.checked },
+                          }))
+                        }
                         className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                       />
                       <span className="ml-2 text-sm text-gray-700">Enabled</span>
@@ -476,10 +509,12 @@ const Settings: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={settings.interface.nfppEnabled}
-                        onChange={(e) => setSettings({
-                          ...settings,
-                          interface: { ...settings.interface, nfppEnabled: e.target.checked }
-                        })}
+                        onChange={(e) =>
+                          setSettings((prev) => ({
+                            ...prev,
+                            interface: { ...prev.interface, nfppEnabled: e.target.checked },
+                          }))
+                        }
                         className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                       />
                       <span className="ml-2 text-sm text-gray-700">Enabled</span>
@@ -492,9 +527,12 @@ const Settings: React.FC = () => {
                   <div className="space-y-2">
                     <h4 className="font-medium text-gray-900">Connection Test Results</h4>
                     {Object.entries(testResults).map(([interfaceType, result]: [string, any]) => (
-                      <div key={interfaceType} className={`p-3 rounded-lg border ${
-                        result.success ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
-                      }`}>
+                      <div
+                        key={interfaceType}
+                        className={`p-3 rounded-lg border ${
+                          result.success ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
+                        }`}
+                      >
                         <div className="flex items-center space-x-2">
                           {result.success ? (
                             <CheckCircle className="w-4 h-4 text-green-600" />
@@ -513,18 +551,18 @@ const Settings: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Connection Timeout (seconds)
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Connection Timeout (seconds)</label>
                     <input
                       type="number"
                       min="5"
                       max="120"
                       value={settings.interface.connectionTimeout}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        interface: { ...settings.interface, connectionTimeout: parseInt(e.target.value) }
-                      })}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          interface: { ...prev.interface, connectionTimeout: parseInt(e.target.value, 10) || 0 },
+                        }))
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
@@ -535,10 +573,12 @@ const Settings: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={settings.interface.simulationMode}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        interface: { ...settings.interface, simulationMode: e.target.checked }
-                      })}
+                      onChange={(e) =>
+                        setSettings((prev) => ({
+                          ...prev,
+                          interface: { ...prev.interface, simulationMode: e.target.checked },
+                        }))
+                      }
                       className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                     />
                     <span className="ml-2 text-sm text-gray-700">Enable simulation mode (for development)</span>
@@ -548,116 +588,22 @@ const Settings: React.FC = () => {
             </div>
           )}
 
-          {/* Monitoring Settings */}
-          {activeTab === 'monitoring' && (
-            <div className="space-y-6">
-              <h3 className="text-lg font-medium text-gray-900">Monitoring Configuration</h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Tank Poll Interval (seconds)
-                  </label>
-                  <input
-                    type="number"
-                    min="5"
-                    max="300"
-                    value={settings.monitoring.tankPollInterval}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, tankPollInterval: parseInt(e.target.value) }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">How often to read tank levels</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Transaction Poll Interval (seconds)
-                  </label>
-                  <input
-                    type="number"
-                    min="30"
-                    max="3600"
-                    value={settings.monitoring.transactionPollInterval}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, transactionPollInterval: parseInt(e.target.value) }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">How often to check for new transactions</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Anomaly Threshold (Liters)
-                  </label>
-                  <input
-                    type="number"
-                    min="10"
-                    max="1000"
-                    value={settings.monitoring.anomalyThreshold}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, anomalyThreshold: parseInt(e.target.value) }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Volume decrease threshold for anomaly detection</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Refill Threshold (Liters)
-                  </label>
-                  <input
-                    type="number"
-                    min="100"
-                    max="5000"
-                    value={settings.monitoring.refillThreshold}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, refillThreshold: parseInt(e.target.value) }
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Volume increase threshold for refill detection</p>
-                </div>
-              </div>
-
-              <div>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={settings.monitoring.enableAnomalyDetection}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      monitoring: { ...settings.monitoring, enableAnomalyDetection: e.target.checked }
-                    })}
-                    className="rounded border-gray-300 text-red-600 focus:ring-red-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Enable automatic anomaly detection</span>
-                </label>
-              </div>
-            </div>
-          )}
-
           {/* Notifications Settings */}
           {activeTab === 'notifications' && (
             <div className="space-y-6">
               <h3 className="text-lg font-medium text-gray-900">Notification Settings</h3>
-              
+
               <div className="space-y-4">
                 <label className="flex items-center">
                   <input
                     type="checkbox"
                     checked={settings.notifications.emailEnabled}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      notifications: { ...settings.notifications, emailEnabled: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        notifications: { ...prev.notifications, emailEnabled: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Enable email notifications</span>
@@ -667,10 +613,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.notifications.smsEnabled}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      notifications: { ...settings.notifications, smsEnabled: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        notifications: { ...prev.notifications, smsEnabled: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Enable SMS notifications</span>
@@ -680,10 +628,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.notifications.lowLevelAlerts}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      notifications: { ...settings.notifications, lowLevelAlerts: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        notifications: { ...prev.notifications, lowLevelAlerts: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Low fuel level alerts</span>
@@ -693,10 +643,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.notifications.anomalyAlerts}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      notifications: { ...settings.notifications, anomalyAlerts: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        notifications: { ...prev.notifications, anomalyAlerts: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Anomaly detection alerts</span>
@@ -706,10 +658,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.notifications.systemAlerts}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      notifications: { ...settings.notifications, systemAlerts: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        notifications: { ...prev.notifications, systemAlerts: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">System status alerts</span>
@@ -722,36 +676,36 @@ const Settings: React.FC = () => {
           {activeTab === 'backup' && (
             <div className="space-y-6">
               <h3 className="text-lg font-medium text-gray-900">Backup & Security Settings</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Backup Time
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Backup Time</label>
                   <input
                     type="time"
                     value={settings.backup.backupTime}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      backup: { ...settings.backup, backupTime: e.target.value }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        backup: { ...prev.backup, backupTime: e.target.value },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Retention Period (days)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Retention Period (days)</label>
                   <input
                     type="number"
                     min="7"
                     max="365"
                     value={settings.backup.retentionDays}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      backup: { ...settings.backup, retentionDays: parseInt(e.target.value) }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        backup: { ...prev.backup, retentionDays: parseInt(e.target.value, 10) || 0 },
+                      }))
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
@@ -762,10 +716,12 @@ const Settings: React.FC = () => {
                   <input
                     type="checkbox"
                     checked={settings.backup.autoBackup}
-                    onChange={(e) => setSettings({
-                      ...settings,
-                      backup: { ...settings.backup, autoBackup: e.target.checked }
-                    })}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        backup: { ...prev.backup, autoBackup: e.target.checked },
+                      }))
+                    }
                     className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Enable automatic daily backups</span>

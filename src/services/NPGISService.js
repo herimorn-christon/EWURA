@@ -17,27 +17,23 @@ class ATGDelimiterParser extends DelimiterParser {
 export class NPGISService extends BaseInterfaceService {
   constructor(stationId = null) {
     super('NPGIS', stationId);
-    this.simulationMode = process.env.NODE_ENV !== 'production';
-    // Add flags to control different simulation aspects
-    this.simulateTanks = false; // disabled by default
+    this.simulationMode = false; // Disable transaction simulation
+    this.simulateTanks = true; // Enable tank simulation
     this.monitoringInterval = null;
     this.hourlyStorageInterval = null;
   }
 
   async initialize() {
     try {
-      if (this.simulationMode) {
-        logger.info(`[${this.interfaceCode}] Initialized in simulation mode`);
-        await this.startSimulation();
-        return;
+      if (!this.simulationMode) {
+        logger.info(`[${this.interfaceCode}] Transaction simulation is disabled. Real transaction data will be processed.`);
       }
 
       await this.connect();
       logger.info(`[${this.interfaceCode}] Initialized successfully`);
     } catch (error) {
-      logger.warn(`[${this.interfaceCode}] Hardware not available, running in simulation mode`);
-      this.simulationMode = true;
-      await this.startSimulation();
+      logger.error(`[${this.interfaceCode}] Initialization failed:`, error);
+      throw error;
     }
   }
 
@@ -101,17 +97,25 @@ export class NPGISService extends BaseInterfaceService {
     try {
       logger.debug(`[${this.interfaceCode}] Processing ATG data...`);
       const tanks = await this.processTankData(dataPart);
-      
+
       // Store latest data for each tank
+      let newDataAdded = false;
       tanks.forEach(tank => {
         if (tank.status === 'online') {
           this.latestTankData.set(tank.tankNumber, tank);
+          newDataAdded = true;
         }
       });
 
+      // Restart hourly storage if new data is added
+      if (newDataAdded && !this.hourlyStorageInterval) {
+        logger.info(`[${this.interfaceCode}] New tank data received. Restarting storage interval.`);
+        this.startHourlyStorage();
+      }
+
       // Emit real-time data
       this.emitRealTimeData('tankData', { tanks });
-      
+
       logger.debug(`[${this.interfaceCode}] Processed ${tanks.filter(t => t.status === 'online').length} online tanks`);
     } catch (error) {
       logger.error(`[${this.interfaceCode}] Error handling ATG data:`, error);
@@ -228,75 +232,7 @@ export class NPGISService extends BaseInterfaceService {
   }
 
   async startSimulation() {
-    if (this.simulationMode && !this.isMonitoring) {
-      this.isMonitoring = true;
-      logger.info(`[${this.interfaceCode}] Starting simulation mode...`);
-
-      // inject 5 transactions ONCE at simulation start
-      try {
-        const txs = this._generateSimulatedTransactions(5, null);
-        await this.receiveTransactionData({ transactions: txs });
-        logger.info(`[${this.interfaceCode}] Injected ${txs.length} simulated transactions on start`);
-      } catch (err) {
-        logger.error(`[${this.interfaceCode}] Failed to inject simulated transactions on start:`, err);
-      }
-
-      // Only start tank simulation if enabled
-      if (this.simulateTanks) {
-        // Real-time simulation - tank data only
-        this.monitoringInterval = setInterval(async () => {
-          const simulatedData = this.generateSimulatedTankData();
-          simulatedData.forEach(tank => {
-            this.latestTankData.set(tank.tankNumber, tank);
-          });
-          this.emitRealTimeData('tankData', { tanks: simulatedData });
-        }, this.commandInterval);
-        
-        // Hourly storage - tank data only
-        this.hourlyStorageInterval = setInterval(() => {
-          this.storeLatestReadings();
-        }, this.storageInterval);
-        
-        // Store initial reading
-        setTimeout(() => {
-          this.storeLatestReadings();
-        }, 5000);
-      }
-    }
-  }
-
-  generateSimulatedTankData() {
-    const tanks = [];
-    const baseTime = new Date();
-    
-    for (let i = 1; i <= 3; i++) {
-      const tankNumber = i.toString().padStart(2, '0');
-      const baseVolume = 5000 + (i * 1000);
-      const variation = (Math.random() - 0.5) * 100;
-      
-      tanks.push({
-        timestamp: baseTime.toISOString().replace('T', ' ').slice(0, 19),
-        tankNumber,
-        tank_number: tankNumber,
-        totalVolume: Math.round((baseVolume + variation) * 10) / 10,
-        total_volume: Math.round((baseVolume + variation) * 10) / 10,
-        tcVolume: Math.round((baseVolume + variation - 50) * 10) / 10,
-        tc_volume: Math.round((baseVolume + variation - 50) * 10) / 10,
-        ullage: Math.round((10000 - baseVolume - variation) * 10) / 10,
-        oilHeight: Math.round((1200 + Math.random() * 100) * 10) / 10,
-        oil_height: Math.round((1200 + Math.random() * 100) * 10) / 10,
-        waterHeight: Math.round((Math.random() * 20) * 10) / 10,
-        water_height: Math.round((Math.random() * 20) * 10) / 10,
-        temperature: Math.round((25 + Math.random() * 10) * 10) / 10,
-        waterVolume: Math.round((Math.random() * 50) * 10) / 10,
-        water_volume: Math.round((Math.random() * 50) * 10) / 10,
-        oilVolume: Math.round((baseVolume + variation - Math.random() * 50) * 10) / 10,
-        oil_volume: Math.round((baseVolume + variation - Math.random() * 50) * 10) / 10,
-        status: 'online'
-      });
-    }
-    
-    return tanks;
+    logger.warn(`[${this.interfaceCode}] Simulation mode is disabled. Skipping simulation.`);
   }
 
   async startMonitoring() {
@@ -304,21 +240,41 @@ export class NPGISService extends BaseInterfaceService {
 
     logger.info(`[${this.interfaceCode}] Starting monitoring...`);
 
-    if (this.simulationMode) {
-      await this.startSimulation();
-    } else {
-      this.isMonitoring = true;
-      
-      // Real-time monitoring
-      this.monitoringInterval = setInterval(async () => {
-        await this.sendCommand();
-      }, this.commandInterval);
-      
-      // Hourly storage
-      this.hourlyStorageInterval = setInterval(() => {
-        this.storeLatestReadings();
-      }, this.storageInterval);
+    if (this.simulateTanks) {
+      logger.info(`[${this.interfaceCode}] Tank simulation is enabled.`);
+      this.startTankSimulation();
     }
+
+    this.isMonitoring = true;
+
+    // Real-time monitoring for tanks
+    this.monitoringInterval = setInterval(async () => {
+      await this.sendCommand();
+    }, this.commandInterval);
+
+    // Hourly storage for tanks
+    this.startHourlyStorage();
+  }
+
+  startHourlyStorage() {
+    if (this.hourlyStorageInterval) {
+      clearInterval(this.hourlyStorageInterval);
+    }
+
+    this.hourlyStorageInterval = setInterval(() => {
+      if (this.latestTankData.size > 0) {
+        this.storeLatestReadings();
+      } else {
+        logger.warn(`[${this.interfaceCode}] No tank data available. Stopping storage interval.`);
+        clearInterval(this.hourlyStorageInterval); // Stop the interval when no data is available
+        this.hourlyStorageInterval = null;
+      }
+    }, this.storageInterval);
+  }
+
+  async startTankSimulation() {
+    logger.info(`[${this.interfaceCode}] Starting tank simulation...`);
+    // Add logic for simulating tank data here
   }
 
   /**
@@ -328,129 +284,149 @@ export class NPGISService extends BaseInterfaceService {
 
   
   async receiveTransactionData(transactionData, station = null, providedApiKey = null) {
+    console.log('the receivedTransactionData:', transactionData);
+    console.log('Received API Key:', providedApiKey); // Log the API key
+
     try {
-      logger.info(`[${this.interfaceCode}] Processing transaction data for station ${station?.code || 'UNKNOWN'}`);
+      logger.info(`[${this.interfaceCode}] Processing transaction data...`);
 
-      const apiKey = providedApiKey || null;
-
-      // If no station passed, resolve one:
-      if (!station) {
-        // 1) Try to find non-admin station by provided api key
-        if (apiKey) {
-          const byKey = await DatabaseManager.query(`
-            SELECT s.* 
-            FROM stations s
-            LEFT JOIN users u ON s.id = u.station_id
-            LEFT JOIN user_roles r ON u.user_role_id = r.id
-            WHERE s.api_key = $1 
-            AND s.is_active = true
-            AND NOT EXISTS (
-              SELECT 1 FROM users u2 
-              JOIN user_roles r2 ON u2.user_role_id = r2.id
-              WHERE u2.station_id = s.id 
-              AND r2.code = 'ADMIN'
-            )
-            LIMIT 1
-          `, [apiKey]);
-
-          if (byKey?.rows?.[0]) {
-            station = byKey.rows[0];
-            logger.info(`[${this.interfaceCode}] Resolved non-admin station by api_key: ${station.code}`);
-          }
-        }
-
-        // 2) Fallback to first active non-admin station
-        if (!station) {
-          const nonAdminStation = await DatabaseManager.query(`
-            SELECT s.* 
-            FROM stations s
-            WHERE s.is_active = true 
-            AND NOT EXISTS (
-              SELECT 1 FROM users u 
-              JOIN user_roles r ON u.user_role_id = r.id
-              WHERE u.station_id = s.id 
-              AND r.code = 'ADMIN'
-            )
-            ORDER BY s.created_at 
-            LIMIT 1
-          `);
-
-          if (nonAdminStation?.rows?.[0]) {
-            station = nonAdminStation.rows[0];
-            logger.info(`[${this.interfaceCode}] Using first active non-admin station: ${station.code}`);
-          }
-        }
-      } else {
-        // Verify provided station is not an admin station
-        const adminCheck = await DatabaseManager.query(`
-          SELECT 1
-          FROM users u
-          JOIN user_roles r ON u.user_role_id = r.id
-          WHERE u.station_id = $1 
-          AND r.code = 'ADMIN'
-        `, [station.id]);
-
-        if (adminCheck?.rows?.length > 0) {
-          logger.warn(`[${this.interfaceCode}] Skipping admin station ${station.code}`);
-          return { count: 0 };
-        }
+      if (!providedApiKey) {
+        const response = {
+          status: false,
+          message: "The header information was missing Api-Key",
+          data: null
+        };
+        console.log('Response to module:', response);
+        return response;
       }
 
-      if (!station) {
-        logger.warn(`[${this.interfaceCode}] No non-admin station could be resolved for incoming transaction`);
-        return { count: 0 };
+      // Resolve station directly using the API Key
+      const stationQuery = await DatabaseManager.query(`
+        SELECT s.*, i.code as interface_code
+        FROM stations s
+        LEFT JOIN interface_types i ON s.interface_type_id = i.id
+        WHERE s.api_key = $1 AND s.is_active = true
+        LIMIT 1
+      `, [providedApiKey]);
+
+      if (!stationQuery?.rows?.[0]) {
+        const response = {
+          status: false,
+          message: "License number is not recognized or API key mismatch.",
+          data: null
+        };
+        console.log('Response to module:', response);
+        return response;
+      }
+
+      station = stationQuery.rows[0];
+      logger.info(`[${this.interfaceCode}] Resolved station: ${station.code}`);
+
+      // Validate EwuraLicenseNo
+      if (!transactionData.EwuraLicenseNo || !/^PRL-\d{4}-\d{3}$/.test(transactionData.EwuraLicenseNo)) {
+        const response = {
+          status: false,
+          message: "Valid EwuraLicenseNo is required eg: PRL-2022-208",
+          data: null
+        };
+        console.log('Response to module:', response);
+        return response;
       }
 
       // Process transactions
-      let txs = Array.isArray(transactionData?.transactions) ? transactionData.transactions : [];
-      
+      const txs = Array.isArray(transactionData?.transactions) ? transactionData.transactions : [];
       if (!txs || txs.length === 0) {
-        logger.info(`[${this.interfaceCode}] No transactions to process`);
-        return { count: 0 };
+        const response = {
+          status: false,
+          message: "No transactions to process",
+          data: null
+        };
+        console.log('Response to module:', response);
+        return response;
       }
 
-      // Format transactions
-      const formattedTransactions = txs.map(tx => ({
-        station_id: station.id,
-        transaction_id: tx.Transaction || tx.transaction_id || `SIM-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        pump_id: null,
-        volume: parseFloat(tx.Volume || tx.volume || 0),
-        unit_price: parseFloat(tx.Price || tx.price || 0),
-        total_amount: parseFloat(tx.Amount || tx.amount || 0),
-        transaction_date: tx.transaction_date || new Date().toISOString().split('T')[0],
-        transaction_time: tx.transaction_time || new Date().toTimeString().split(' ')[0],
-        interface_source: this.simulationMode ? 'NPGIS_SIM' : this.interfaceCode,
-        customer_name: tx.CustomerName || tx.customer_name || null,
-        fuel_grade_name: tx.FuelGradeName || tx.fuel_grade_name || null,
-        efd_serial_number: tx.EfdSerialNumber || tx.efd_serial_number || null,
-        tc_volume: parseFloat(tx.TCVolume || tx.tc_volume || 0),
-        discount_amount: parseFloat(tx.DiscountAmount || tx.discount_amount || 0)
-      }));
+      const transactionIds = [];
+      const errors = [];
 
       // Save transactions
-      for (const tx of formattedTransactions) {
+      for (const tx of txs) {
         try {
+          // Check if the transaction already exists
+          const existingTransaction = await DatabaseManager.query(`
+            SELECT id FROM sales_transactions
+            WHERE transaction_id = $1 AND station_id = $2
+          `, [tx.Transaction, station.id]);
+
+          if (existingTransaction?.rows?.length > 0) {
+            const errorMessage = `Transaction ${tx.Transaction} already exists.`;
+            logger.warn(`[${this.interfaceCode}] ${errorMessage}`);
+            errors.push(errorMessage);
+            continue;
+          }
+
+          // Validate EFD serial number
+          if (!tx.EfdSerialNumber) {
+            const errorMessage = `EFD serial number: ${tx.EfdSerialNumber || 'undefined'} is not recognized`;
+            logger.warn(`[${this.interfaceCode}] ${errorMessage}`);
+            errors.push(errorMessage);
+            continue;
+          }
+
+          // Validate FuelGradeName
+          if (!['DIESEL', 'KEROSENE', 'UNLEADED'].includes(tx.FuelGradeName)) {
+            const errorMessage = `Tank with product name ${tx.FuelGradeName} does not exist`;
+            logger.warn(`[${this.interfaceCode}] ${errorMessage}`);
+            errors.push(errorMessage);
+            continue;
+          }
+
+          // Save the transaction
           const savedId = await this.saveTransaction(tx, station.id);
-          logger.info(`[${this.interfaceCode}] Saved transaction ${tx.transaction_id} with id=${savedId}`);
+          logger.info(`[${this.interfaceCode}] Saved transaction ${tx.Transaction} with id=${savedId}`);
+          transactionIds.push(tx.Transaction);
         } catch (err) {
-          logger.error(`[${this.interfaceCode}] Failed to save transaction ${tx.transaction_id}:`, err);
+          const errorMessage = `Failed to save transaction ${tx.Transaction}: ${err.message}`;
+          logger.error(`[${this.interfaceCode}] ${errorMessage}`);
+          errors.push(errorMessage);
         }
       }
 
-      // Emit real-time data
-      this.emitRealTimeData('transactions', {
-        station: { id: station.id, code: station.code },
-        transactions: formattedTransactions,
-        count: formattedTransactions.length
-      });
+      // Return success response
+      if (transactionIds.length > 0) {
+        const response = {
+          status: true,
+          message: "Transactions received",
+          data: {
+            transactionIds
+          }
+        };
+        console.log('Response to module:', response);
+        return response;
+      }
 
-      return { count: formattedTransactions.length };
+      // Return error response if no transactions were accepted
+      const response = {
+        status: false,
+        message: "No valid transactions to process",
+        data: null
+      };
+      console.log('Response to module:', response);
+      return response;
     } catch (error) {
       logger.error(`[${this.interfaceCode}] Transaction processing error:`, error);
-      throw error;
+      const response = {
+        status: false,
+        message: "An unexpected error occurred while processing transactions",
+        data: null
+      };
+      console.log('Response to module:', response);
+      return response;
     }
   }
 
+
+
+  
 
 
   
@@ -529,12 +505,12 @@ export class NPGISService extends BaseInterfaceService {
 
   async storeLatestReadings() {
     try {
-      logger.info(`[${this.interfaceCode}] Storing latest tank readings...`);
-      
       if (this.latestTankData.size === 0) {
-        logger.warn(`[${this.interfaceCode}] No tank data available for storage`);
-        return;
+        logger.warn(`[${this.interfaceCode}] No tank data available for storage. Skipping storage process.`);
+        return; // Skip storage if no tank data is available
       }
+
+      logger.info(`[${this.interfaceCode}] Storing latest tank readings...`);
 
       for (const [tankNumber, tankData] of this.latestTankData) {
         if (tankData.status === 'online') {
